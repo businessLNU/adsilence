@@ -1,0 +1,26 @@
+{
+"carrefour.com.br":[
+{"wahl":".sc-bczRLJ","text":"Publicidade"},
+{"wahl":".vtex-flex-layout-0-x-flexColChild","text":"Publicidade"}
+],
+"climatempo.com.br":[
+{"wahl":".card.-no-bottom._flex._space-between._align-center","text":"Cupons de desconto"}
+],
+"imovirtual.com":[
+{"wahl":"[data-cy=\"listing-item\"]","text":"Destacado"}
+],
+"mercadolivre.com.br":[
+{"wahl":"[class^=\"ui-recommendations-carousel-wrapper\"]","text":"Patrocinado"}
+],
+"mundi.com.br":[
+{"wahl":"[class*=\"pres-default\"]","text":"Ad"},
+{"wahl":"#resultWrapper [role=\"group\"]","text":"Anúncio"}
+],
+"saocarlosagora.com.br":[
+{"wahl":".container_16","text":"Vitrine"}
+],
+"standvirtual.com":[
+{"wahl":"[data-testid=\"search-results\"] article[data-orientation=\"horizontal\"]","text":"Promovido"},
+{"wahl":"article[data-id]","text":"Destacado"}
+]
+}

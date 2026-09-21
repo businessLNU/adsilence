@@ -1,0 +1,273 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "short_name": "AdSilence",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_title": "__MSG_extName__",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "options_ui": {
+    "page": "optionen/index.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "declarativeNetRequest",
+    "storage",
+    "alarms",
+    "scripting",
+    "webNavigation",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/kosmetik.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/schatten.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/fingerabdruck.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/warnung.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false,
+      "match_about_blank": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/cookies.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false,
+      "match_about_blank": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["attrappen/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "eigenschutz",
+        "enabled": true,
+        "path": "rules/eigenschutz.json"
+      },
+      {
+        "id": "basis",
+        "enabled": true,
+        "path": "rules/basis.json"
+      },
+      {
+        "id": "privatsphaere",
+        "enabled": true,
+        "path": "rules/privatsphaere.json"
+      },
+      {
+        "id": "hosts",
+        "enabled": true,
+        "path": "rules/hosts.json"
+      },
+      {
+        "id": "tarnung",
+        "enabled": true,
+        "path": "rules/tarnung.json"
+      },
+      {
+        "id": "ublock",
+        "enabled": true,
+        "path": "rules/ublock.json"
+      },
+      {
+        "id": "ublock-privatsphaere",
+        "enabled": true,
+        "path": "rules/ublock-privatsphaere.json"
+      },
+      {
+        "id": "ublock-schadsoftware",
+        "enabled": true,
+        "path": "rules/ublock-schadsoftware.json"
+      },
+      {
+        "id": "urlhaus",
+        "enabled": true,
+        "path": "rules/urlhaus.json"
+      },
+      {
+        "id": "heimnetz",
+        "enabled": true,
+        "path": "rules/heimnetz.json"
+      },
+      {
+        "id": "ublock-eilig",
+        "enabled": true,
+        "path": "rules/ublock-eilig.json"
+      },
+      {
+        "id": "ublock-reparatur",
+        "enabled": true,
+        "path": "rules/ublock-reparatur.json"
+      },
+      {
+        "id": "antiadblock",
+        "enabled": true,
+        "path": "rules/antiadblock.json"
+      },
+      {
+        "id": "cookies",
+        "enabled": true,
+        "path": "rules/cookies.json"
+      },
+      {
+        "id": "laestig",
+        "enabled": true,
+        "path": "rules/laestig.json"
+      },
+      {
+        "id": "regional-de",
+        "enabled": false,
+        "path": "rules/regional-de.json"
+      },
+      {
+        "id": "regional-fr",
+        "enabled": false,
+        "path": "rules/regional-fr.json"
+      },
+      {
+        "id": "regional-it",
+        "enabled": false,
+        "path": "rules/regional-it.json"
+      },
+      {
+        "id": "regional-nl",
+        "enabled": false,
+        "path": "rules/regional-nl.json"
+      },
+      {
+        "id": "regional-es",
+        "enabled": false,
+        "path": "rules/regional-es.json"
+      },
+      {
+        "id": "regional-zh",
+        "enabled": false,
+        "path": "rules/regional-zh.json"
+      },
+      {
+        "id": "regional-ru",
+        "enabled": false,
+        "path": "rules/regional-ru.json"
+      },
+      {
+        "id": "regional-pl",
+        "enabled": false,
+        "path": "rules/regional-pl.json"
+      },
+      {
+        "id": "regional-pt",
+        "enabled": false,
+        "path": "rules/regional-pt.json"
+      },
+      {
+        "id": "regional-ja",
+        "enabled": false,
+        "path": "rules/regional-ja.json"
+      },
+      {
+        "id": "regional-ko",
+        "enabled": false,
+        "path": "rules/regional-ko.json"
+      },
+      {
+        "id": "regional-tr",
+        "enabled": false,
+        "path": "rules/regional-tr.json"
+      },
+      {
+        "id": "regional-vi",
+        "enabled": false,
+        "path": "rules/regional-vi.json"
+      },
+      {
+        "id": "regional-id",
+        "enabled": false,
+        "path": "rules/regional-id.json"
+      },
+      {
+        "id": "regional-ar",
+        "enabled": false,
+        "path": "rules/regional-ar.json"
+      },
+      {
+        "id": "regional-sv",
+        "enabled": false,
+        "path": "rules/regional-sv.json"
+      },
+      {
+        "id": "regional-fa",
+        "enabled": false,
+        "path": "rules/regional-fa.json"
+      },
+      {
+        "id": "regional-hi",
+        "enabled": false,
+        "path": "rules/regional-hi.json"
+      }
+    ]
+  }
+}

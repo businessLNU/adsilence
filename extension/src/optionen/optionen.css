@@ -1,0 +1,492 @@
+/**
+ * Masse der Optionsseite: 880 px Inhaltsbreite, Reiter oben, darunter ein
+ * Bereich. Unter 720 px rollen die Reiter waagerecht statt umzubrechen.
+ */
+.seite {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--abstand-8) var(--abstand-6) 80px;
+}
+
+.seite__kopf {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-3);
+  margin-bottom: var(--abstand-6);
+}
+.seite__bild {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-feld);
+  display: block;
+}
+
+.nav {
+  display: flex;
+  gap: var(--abstand-1);
+  padding: var(--abstand-1);
+  margin-bottom: var(--abstand-6);
+  background: var(--marke-feld);
+  border-radius: var(--radius-knopf);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar {
+  display: none;
+}
+.nav__eintrag {
+  flex: 1 0 auto;
+  min-height: 34px;
+  padding: 0 var(--abstand-4);
+  border: 0;
+  border-radius: var(--radius-feld);
+  background: transparent;
+  color: var(--marke-schwach);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.nav__eintrag[aria-current='page'] {
+  background: var(--marke-flaeche);
+  color: var(--marke-text);
+  box-shadow: var(--schatten-knopf);
+}
+
+.bereich {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-5);
+}
+.bereich__kopf {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-1);
+  max-width: 65ch;
+}
+.bereich__kopf p {
+  color: var(--marke-schwach);
+}
+
+/* Listen: Zeilen mit einer Haarlinie dazwischen, keine Karten je Zeile. */
+.liste {
+  display: flex;
+  flex-direction: column;
+  background: var(--marke-flaeche);
+  border-radius: var(--radius-karte);
+  box-shadow: var(--schatten-karte);
+  padding: var(--abstand-1) 0;
+}
+.liste > * + * {
+  border-top: 1px solid var(--marke-linie);
+}
+.liste__zeile {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-4);
+  padding: var(--abstand-3) var(--abstand-4);
+}
+.liste__leer {
+  padding: var(--abstand-6) var(--abstand-4);
+  text-align: center;
+  color: var(--marke-schwach);
+}
+.liste__name {
+  font-weight: 500;
+  /* Bezug fuer den Tipp: er haengt ueber dem NAMEN, nicht ueber dem „i". */
+  position: relative;
+}
+.liste__nebentext {
+  font-size: 12px;
+  color: var(--marke-schwach);
+}
+
+/**
+ * Das „i" hinter einem Namen und der Text, den es zeigt.
+ *
+ * Der Tipp haengt am Namen und nicht am Symbol: Am Symbol muesste er mittig
+ * darunter stehen und ragte je nach Sprache links oder rechts aus der Karte -
+ * die Namen sind verschieden lang, das Symbol steht also mal weiter links,
+ * mal weiter rechts. Am Namen beginnt er immer an derselben Fluchtlinie und
+ * bleibt mit `max-width` in der Spalte.
+ *
+ * OBERHALB und nicht unterhalb: Die Zeile ist die letzte der Karte; ein Tipp
+ * darunter stuende ueber dem Rand hinaus.
+ *
+ * Nur `opacity` und `pointer-events`, nie `display` oder `visibility`: Der
+ * Text haengt ueber `aria-describedby` am Schalter und muss deshalb im
+ * Baum bleiben, auch wenn ihn niemand sieht. `visibility: hidden` haette ihn
+ * auch fuer die Vorleseanwendung entfernt - und dann stuende die Erklaerung
+ * nur noch fuer Sehende da.
+ */
+.tipp {
+  display: inline-flex;
+  vertical-align: -2px;
+  margin-inline-start: 6px;
+}
+.tipp__knopf {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--marke-platzhalter);
+}
+/* Nur der echte Knopf ist anfassbar; ohne Premium steht hier ein `<span>`. */
+button.tipp__knopf {
+  cursor: help;
+}
+button.tipp__knopf:focus-visible {
+  color: var(--marke-text);
+  outline: 2px solid var(--marke-akzent);
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+.tipp__text {
+  position: absolute;
+  z-index: 5;
+  inset-inline-start: 0;
+  bottom: calc(100% + 8px);
+  width: max-content;
+  max-width: min(320px, 100%);
+  padding: 8px 10px;
+  border-radius: var(--radius-klein);
+  background: var(--marke-text);
+  color: var(--marke-flaeche);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.45;
+  box-shadow: var(--schatten-karte);
+  opacity: 0;
+  pointer-events: none;
+}
+.tipp__knopf:focus-visible ~ .tipp__text {
+  opacity: 1;
+}
+/*
+ * Hover nur bei echtem Zeiger (wie in `bewegung.css`): Auf einem Touchgeraet
+ * bliebe der Tipp nach der Beruehrung stehen, bis irgendwo anders getippt
+ * wird.
+ */
+@media (hover: hover) {
+  .tipp:hover .tipp__text {
+    opacity: 1;
+  }
+  button.tipp__knopf:hover {
+    color: var(--marke-text);
+  }
+}
+
+/**
+ * Eine Zeile, hinter der Premium steht: als Ganzes ein Knopf zum Kauffenster.
+ *
+ * Der Zeiger ist ein Zeiger, nicht der Text-Cursor - sonst sieht die Zeile
+ * aus wie Text und verhaelt sich wie ein Knopf. Der Fokusrahmen liegt aussen
+ * (`outline-offset` negativ waere in der Zeilenmulde nicht zu sehen).
+ */
+.liste__zeile--kauf {
+  cursor: pointer;
+  border-radius: var(--radius-klein);
+}
+.liste__zeile--kauf:hover {
+  background: color-mix(in srgb, var(--marke-text) 4%, transparent);
+}
+.liste__zeile--kauf:focus-visible {
+  outline: 2px solid var(--marke-akzent);
+  outline-offset: 2px;
+}
+
+/**
+ * Ein Regler und eine Auswahl, die nur so aussehen. Beide sind `aria-hidden`
+ * und nehmen keinen Klick an - der gehoert der Zeile darum.
+ */
+.schalter--attrappe,
+.zeilenwahl--attrappe {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.schalter--attrappe {
+  display: inline-flex;
+  align-items: center;
+}
+.zeilenwahl--attrappe {
+  display: inline-flex;
+  align-items: center;
+  color: var(--marke-schwach);
+}
+.liste__zahl {
+  font-variant-numeric: tabular-nums;
+  color: var(--marke-schwach);
+  font-size: 13px;
+  white-space: nowrap;
+}
+/**
+ * Das Schloss an einer Premium-Zeile: eine VOLLE Kugel im Markenverlauf,
+ * dieselbe Flaeche wie der Hauptknopf (`.knopf--primaer`), mit demselben
+ * kleinen Schatten.
+ *
+ * Es war grau (`--marke-schwach`) und sah damit aus wie ein abgeschalteter
+ * Regler: Grau heisst in dieser Oberflaeche „aus", das Schloss heisst aber
+ * „dafuer gibt es etwas zu kaufen". Die Zwischenstufe - blasse Flaeche mit
+ * duennem Rand, wie die Hakenkugel im Kauffenster - war richtig gedacht und
+ * zu leise: Zwischen einer weissen Zeile und einem grauen Regler ging ein
+ * 10-Prozent-Orange unter.
+ *
+ * Das Symbol steht in `--marke-akzent-schrift` und NICHT in Weiss. Auf diesem
+ * Orange steht Weiss bei 3,6:1, der dunkle Ton bei 5,4:1 - die Begruendung
+ * steht an den Marken in `tokens.css` und gilt hier genauso.
+ */
+.liste__schloss {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  inline-size: 26px;
+  block-size: 26px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--marke-von), var(--marke-bis));
+  color: var(--marke-akzent-schrift);
+  box-shadow: var(--schatten-knopf);
+}
+/* 18 px Symbol in 26 px Kreis liesse keinen Rand uebrig. */
+.liste__schloss svg {
+  inline-size: 15px;
+  block-size: 15px;
+}
+
+/* Verbindungscode: gross, monospaziert, in einer Karte. */
+.code {
+  font-family: var(--schrift-mono);
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: center;
+  padding: var(--abstand-4) 0;
+}
+
+.zwei-spalten {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--abstand-4);
+}
+@media (max-width: 720px) {
+  .seite {
+    padding: var(--abstand-5) var(--abstand-4) 60px;
+  }
+  .zwei-spalten {
+    grid-template-columns: 1fr;
+  }
+  .nav__eintrag {
+    flex: 0 0 auto;
+  }
+}
+
+/*
+ * Die Zeile, in der etwas EINGETRAGEN wird - „Ausnahmen" und „Eigene Regeln".
+ * Derselbe Bau wie jede andere Listenzeile: Name links, Erklaerung darunter,
+ * Bedienelement rechts. Nur ist das Bedienelement hier ein Feld und ein
+ * Knopf statt eines Schalters.
+ *
+ * `.formzeile` stand hier bis zum 07.09.2026 und war ein eigener Bau: Label
+ * UEBER dem Feld, Knopf daneben, das Ganze nackt auf dem Grau ueber der
+ * Karte. Es brauchte ein `marginBottom: 22` im JSX, damit der Knopf auf der
+ * Hoehe des Feldes stand - eine Zahl, die niemand nachzieht.
+ */
+.liste__zeile--eingabe {
+  flex-wrap: wrap;
+}
+
+/**
+ * Die Ueberschrift der zweiten Gruppe im Reiter Filterlisten. Abstand nach
+ * oben, damit sie zur Liste darunter gehoert und nicht zwischen beiden
+ * schwebt.
+ */
+.bereich__kopf--zweit {
+  margin-top: 28px;
+}
+
+/**
+ * Die aufklappbare Zeile („Sprache und Region").
+ *
+ * Sie sieht aus wie eine Schalterzeile, traegt aber statt eines Schalters
+ * einen Pfeil — das ist der Unterschied zwischen „schaltet etwas" und
+ * „zeigt mehr", und er muss sichtbar sein, bevor jemand klickt.
+ *
+ * Der ganze Kopf ist der Knopf, nicht nur der Pfeil: Ein 12 Pixel grosses
+ * Ziel am rechten Rand trifft niemand zuverlaessig, und der Text daneben
+ * sieht ohnehin aus, als koennte man ihn anklicken.
+ */
+/*
+ * Die Aufklappzeile sitzt seit dem 07.09.2026 IN der Listenkarte und nicht
+ * mehr in einer Karte mit eigenem Innenrand. Sie traegt den waagerechten
+ * Rand deshalb selbst - sonst begaenne ihr Text vier Pixel weiter links als
+ * der der Zeilen darueber, und genau solche Versaetze lassen einen
+ * Bildschirm zusammengewuerfelt aussehen.
+ */
+.aufklapper {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-3);
+  width: 100%;
+  padding: var(--abstand-3) var(--abstand-4);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.aufklapper__titel {
+  display: block;
+  font-weight: 500;
+}
+.aufklapper__stand {
+  display: block;
+  font-size: 12.5px;
+  color: var(--marke-schwach);
+}
+/**
+ * Ein gedrehtes Quadrat statt eines Zeichens: Ein „›" haengt in jeder Schrift
+ * anders in der Zeile, dieses Dreieck sitzt ueberall gleich.
+ *
+ * ── Die Richtungen, und warum genau diese ─────────────────────────────────
+ * Zwei sichtbare Kanten (rechts und unten) bilden eine Ecke. Bei 45 Grad
+ * zeigt sie nach UNTEN (v) und heisst „hier geht etwas auf"; bei -135 Grad
+ * nach OBEN (^) und heisst „zuklappen".
+ *
+ * Der erste Anlauf hatte -45 (nach rechts) und 45 (nach unten). Aufgeklappt
+ * zeigte der Pfeil damit nach unten — dieselbe Richtung, die sonst „mehr
+ * anzeigen" bedeutet. Der Knopf war da, er war anklickbar, und trotzdem
+ * meldete der erste Leser, es gebe „kein Feld mehr zum Einklappen": Er hat
+ * ihn nicht als Weg zurueck gelesen. Eine Pfeilrichtung ist keine Deko.
+ */
+.aufklapper__pfeil {
+  inline-size: 8px;
+  block-size: 8px;
+  flex: none;
+  border-inline-end: 2px solid var(--marke-schwach);
+  border-block-end: 2px solid var(--marke-schwach);
+  /* Der Pfeil sitzt zwei Pixel hoeher, als die Mitte es verlangt: Ein
+     gedrehtes Quadrat hat seinen optischen Schwerpunkt nicht in der Mitte
+     seines Kastens. */
+  margin-block-end: 3px;
+  transform: rotate(45deg);
+  transition: transform 180ms var(--kurve, cubic-bezier(0.32, 0.72, 0, 1));
+}
+.aufklapper[aria-expanded='true'] .aufklapper__pfeil {
+  transform: rotate(-135deg);
+  margin-block-end: -3px;
+}
+
+/*
+ * Aufgeklappt bleibt die Zeile sichtbar der Kopf ihres Bereichs: eine feine
+ * Linie darunter und der Titel in voller Farbe. Ohne das steht sie als
+ * gewoehnliche Zeile ueber einem Block, zu dem sie nicht zu gehoeren scheint.
+ */
+.aufklapper[aria-expanded='true'] {
+  border-block-end: 1px solid var(--marke-linie);
+  margin-block-end: var(--abstand-3);
+}
+@media (hover: hover) and (pointer: fine) {
+  .aufklapper:hover .aufklapper__pfeil {
+    border-color: var(--marke-text);
+  }
+}
+.aufklapper__inhalt {
+  display: grid;
+  gap: var(--abstand-3);
+  padding: 0 var(--abstand-4) var(--abstand-3);
+}
+/*
+ * Keine Haarlinie zwischen einer Aufklappzeile und dem, was sie aufklappt.
+ *
+ * `.liste > * + *` zieht eine Linie zwischen je zwei Kindern, und das ist bei
+ * Zeilen richtig. Der aufgeklappte Inhalt ist aber kein Nachbar der Zeile,
+ * sondern ihr Innenleben - eine Linie dazwischen liesse ihn wie eine eigene
+ * Zeile aussehen, die zufaellig darunter steht.
+ */
+.liste > .aufklapper__inhalt {
+  border-top: 0;
+}
+/*
+ * Keine Karte in der Karte. Im aufgeklappten Teil steht wieder eine `.liste`
+ * (die Sprachen), und die bringt Flaeche, Rundung und Schatten mit - in einer
+ * Karte, die selbst schon weiss ist, ergibt das Weiss auf Weiss mit einem
+ * Schatten dazwischen. Die Haarlinien zwischen den Zeilen bleiben; sie sind
+ * es, die die Liste zur Liste machen.
+ */
+.aufklapper__inhalt .liste {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  border-top: 1px solid var(--marke-linie);
+}
+.aufklapper__inhalt .liste .liste__zeile {
+  padding-inline: 0;
+}
+.aufklapper__inhalt > p {
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .aufklapper__pfeil {
+    transition: none;
+  }
+}
+
+.suchfeld {
+  min-height: 32px;
+  font-size: 13px;
+}
+.suchfeld--breit {
+  width: 100%;
+}
+/* Das Kreuz zum Leeren gehoert dem Browser; in Safari ist es unsichtbar, in
+   Chromium grau. Beide sind recht, hier wird nichts nachgebaut. */
+.suchfeld::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+
+.bereich__kopf--zweit h3 {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/**
+ * Eine Auswahl AM ZEILENENDE, dort wo sonst ein Schalter sitzt.
+ *
+ * Sie ist schmal und nimmt nur ihre Breite: Ein Feld ueber die halbe Zeile
+ * saehe aus wie ein Formular mitten in einer Liste. Die Mindestbreite haelt
+ * sie stabil, wenn die laengste Option kuerzer ist als die Zeile daneben.
+ */
+.zeilenwahl {
+  width: auto;
+  min-width: 132px;
+  min-height: 32px;
+  font-size: 13px;
+  flex: none;
+}
+
+/**
+ * Ein Knopf, der wie Text aussieht — fuer „jetzt aktualisieren" mitten im
+ * Nebentext.
+ *
+ * `<button>` und nicht `<a>`: Er fuehrt nirgendwohin, er stoesst etwas an.
+ * Ohne die Ruecksetzung von Rand und Grund bringt jeder Browser seinen
+ * eigenen Kasten mit, und der sitzt in einer Textzeile schief.
+ */
+.textknopf {
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: var(--marke-akzent-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.textknopf:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

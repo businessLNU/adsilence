@@ -1,0 +1,9 @@
+{
+"hosts":[
+"2k19.nl",
+"go2.go2cloud.org"
+],
+"ausnahmen":[
+"adserver.hollandcasino.nl"
+]
+}

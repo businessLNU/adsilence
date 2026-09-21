@@ -1,0 +1,15 @@
+{
+  "id": "ublock",
+  "name": "uBlock filters",
+  "url": "https://ublockorigin.github.io/uAssets/filters/filters.txt",
+  "geholtAm": "2026-09-03T19:21:36.569Z",
+  "bytes": 471784,
+  "zeilen": 10903,
+  "sha256": "e94de35660bd8e90260320dabb6d457a360a1af2188808abb386ae27c8678ef6",
+  "titel": "uBlock filters",
+  "version": null,
+  "zuletztGeaendert": "Wed, 02 Sep 2026 04:25:33 +0000",
+  "lizenz": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+  "etag": "W/\"6a99be2e-732e8\"",
+  "ausDatei": null
+}

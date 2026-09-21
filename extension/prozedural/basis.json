@@ -1,0 +1,738 @@
+{
+"2fa.live":[
+{"wahl":"p","text":"Advertising"}
+],
+"404media.co":[
+{"wahl":".post__content > p","text":"This segment is a paid ad"}
+],
+"4wank.com":[
+{"wahl":".video-holder > center >","text":"/^Advertisement$/"}
+],
+"acmemarkets.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"advocate.com":[
+{"wahl":".component.module-headline","text":"FROM OUR SPONSORS"}
+],
+"albertsons.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"alibaba.com":[
+{"wahl":".J-offer-wrapper","text":"Top sponsor listing"},
+{"wahl":"div[data-search-floor] [data-supplier-card]","text":"Ad"}
+],
+"amusingplanet.com":[
+{"wahl":".blockTitle","text":"Advertisement"}
+],
+"androidauthority.com":[
+{"wahl":"div[class=\"e_Qi\"]","text":"Trending Tech Deals"},
+{"wahl":"div[class=\"e_Rc e_d\"]","text":"Affiliate links on Android Authority may earn us a commission"},
+{"wahl":"div[class=\"e_ei\"]","text":"Trending Tech Deals"},
+{"wahl":"div[class=\"e_ic e_d\"]","text":"Affiliate links on Android Authority may earn us a commission"}
+],
+"andronicos.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"anfieldindex.com":[
+{"wahl":"aside[data-animation-event]","text":"PARTNERS"}
+],
+"animalfunfacts.net":[
+{"wahl":"center","text":"ADVERT"}
+],
+"app.daily.dev":[
+{"wahl":"article","text":"Promoted"}
+],
+"appleinsider.com":[
+{"wahl":"div.main-art","text":"Sponsored Content"}
+],
+"argos.co.uk":[
+{"wahl":".ds-c-grid-item","text":"Sponsored"},
+{"wahl":"[data-test^=\"component-slider-slide-\"]","text":"SPONSORED"}
+],
+"atlanticsuperstore.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"}
+],
+"autoevolution.com":[
+{"wahl":".mgtop_20.nxart","text":"#ad"}
+],
+"autotrader.com":[
+{"wahl":".inventory-listing","text":"Sponsored"},
+{"wahl":"[data-cmp=\"PremiumSpotlightContainer\"]","text":"Sponsored"},
+{"wahl":"[data-cmp=\"delayedImpressionWaypoint\"]","text":"SPONSORED"}
+],
+"backpack.tf":[
+{"wahl":".panel","text":"createAd"}
+],
+"backpacktf.com":[
+{"wahl":".panel","text":"createAd"}
+],
+"bayequest.com":[
+{"wahl":".elementor-section","text":"Advertisement"}
+],
+"beaumontenterprise.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"beincrypto.com":[
+{"wahl":".before-author-block-bio","text":"Sponsored"}
+],
+"belloflostsouls.net":[
+{"wahl":"span.text-secondary","text":"Advertisement"}
+],
+"bestbuy.com":[
+{"wahl":".plp-ninja-carousel","text":"Sponsored"}
+],
+"bing.com":[
+{"wahl":".ta_c","text":"Sponsored"}
+],
+"bitchute.com":[
+{"wahl":".row.justify-center","text":"Advertisement"}
+],
+"bitcoinsensus.com":[
+{"wahl":".e-con-inner","text":"Our Favourite Trading Platforms"}
+],
+"bjs.com":[
+{"wahl":"[data-cnstrc-recommendations]","text":"Sponsored Products"}
+],
+"bleepingcomputer.com":[
+{"wahl":".bc-heading","text":"ponsor Posts"},
+{"wahl":".cz-line-heading","text":"Sponsor Posts"},
+{"wahl":".post_wrap","text":"AdBot"},
+{"wahl":"ul#bc-home-news-main-wrap > li","text":"Sponsored"}
+],
+"blockchair.com":[
+{"wahl":".fs-sm.flow","text":"Sponsored"}
+],
+"boatnews.com":[
+{"wahl":"div.p","text":"Advertising"}
+],
+"bolnews.com":[
+{"wahl":"[style*=\"center\"]","text":"Ad"}
+],
+"boots.com":[
+{"wahl":".oct-listers-hits__item","text":"Sponsored"}
+],
+"businessday.co.za":[
+{"wahl":".content-list-block","text":"News & insights from our commercial partners"}
+],
+"capwages.com":[
+{"wahl":".gap-1.items-center.flex-col.flex","text":"Remove Ads"}
+],
+"carrsqc.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"character.ai":[
+{"wahl":".space-y-4 > .w-full","text":"Advertisement"}
+],
+"chatgpt.com":[
+{"wahl":".opacity-100.transition-opacity.ease-out","text":"Sponsored options"}
+],
+"chron.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"cjleo.com":[
+{"wahl":".alt-widget-title","text":"advertisement"}
+],
+"cleantechnica.com":[
+{"wahl":".zox-side-widget","text":"/^Advertis/"}
+],
+"coincarp.com":[
+{"wahl":".border-bottom","text":"Sponsored"}
+],
+"cointelegraph.com":[
+{"wahl":"li.group-\\[\\.inline\\]\\:mb-8","text":"Ad"}
+],
+"comfig.app":[
+{"wahl":".card","text":"Partnered"}
+],
+"costco.com":[
+{"wahl":"[data-testid=\"shoppable-list-container\"]","text":"Spons"}
+],
+"crocotube.com":[
+{"wahl":".ct-related-videos-title","text":"Advertisement"},
+{"wahl":".ct-related-videos-title","text":"You may also like"}
+],
+"cruisecritic.co.uk":[
+{"wahl":"div[role=\"group\"]","text":"Sponsored"}
+],
+"cruisecritic.com":[
+{"wahl":"div[role=\"group\"]","text":"Sponsored"}
+],
+"ctinsider.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"ctpost.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"deccanherald.com":[
+{"wahl":"div#container-text","text":"ADVERTISEMENT"},
+{"wahl":"span.container-text","text":"ADVERTISEMENT"}
+],
+"decrypt.co":[
+{"wahl":"span","text":"AD"}
+],
+"defkey.com":[
+{"wahl":".visible-lg","text":"Advertisement"}
+],
+"deviantart.com":[
+{"wahl":"[role=\"complementary\"] ._ern3r","text":"Promoted"}
+],
+"dexscreener.com":[
+{"wahl":".chakra-link","text":"Advertise"}
+],
+"dictionary.com":[
+{"wahl":"[class] > p","text":"Advertisement"}
+],
+"docs.openwebui.com":[
+{"wahl":".markdown > .w-full","text":"Sponsored"},
+{"wahl":".pb-4 > .mb-2","text":"Sponsored"}
+],
+"dotesports.com":[
+{"wahl":".wp-block-gamurs-article-tile","text":"Sponsored"}
+],
+"downforeveryoneorjustme.com":[
+{"wahl":".relative.bg-white","text":"PolyBuzz"}
+],
+"downornot.net":[
+{"wahl":".border-blue-500\\/20","text":"Special offer"}
+],
+"dropstab.com":[
+{"wahl":".bg-slate-100","text":"Ad"},
+{"wahl":".bottom-0.gap-2","text":"/Stake Now|Invest Now/"}
+],
+"engadget.com":[
+{"wahl":".justify-center","text":"Advertisement"}
+],
+"english.mathrubhumi.com":[
+{"wahl":".psd\\:px-0.px-\\[10px\\]","text":"To advertise here"}
+],
+"etherscan.io":[
+{"wahl":"section.container-xxl > .py-4","text":"Sponsored"}
+],
+"euronews.com":[
+{"wahl":".the-media-object--has-sponsored","text":"/In partnership with|In collaborazione con|En partenariat avec|Mit Unterstützung von|En colaboración con|Em parceria com|We współpracy z|Совместно с|ile birlikte|Σε συνεργασία με|Együttműködésben a|با همکاری|با همکاری/"}
+],
+"expressnews.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"eztv.tf":[
+{"wahl":"tbody","text":"WARNING! Use a"}
+],
+"eztv.yt":[
+{"wahl":"tbody","text":"WARNING! Use a"}
+],
+"fdiintelligence.com":[
+{"wahl":".undefined","text":"Advertisement"}
+],
+"findagrave.com":[
+{"wahl":".rounded-pill","text":"Remove Ads"}
+],
+"fiverr.com":[
+{"wahl":".gig-card-layout","text":"Ad by"}
+],
+"flipkart.com":[
+{"wahl":".fWi7J_","text":"Brands In Spotlight"}
+],
+"foobar2000.org":[
+{"wahl":"caption","text":"advertisement"}
+],
+"foodlion.com":[
+{"wahl":".product-grid-cell","text":"Sponsored"}
+],
+"fortinos.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"}
+],
+"freeuseporn.com":[
+{"wahl":"section","text":"Sponsor"}
+],
+"freshdirect.com":[
+{"wahl":".swiper-slide","text":"Sponsored"}
+],
+"fxempire.com":[
+{"wahl":"span[display=\"inline-block\"]","text":"Advertisement"}
+],
+"gamepadla.com":[
+{"wahl":".pMain","text":"Partner"},
+{"wahl":".sliderBlock","text":"ADS"}
+],
+"gamersnexus.net":[
+{"wahl":".moduleContent","text":"Advertisement"}
+],
+"ganjapreneur.com":[
+{"wahl":".has-background","text":"Featured whitepaper"}
+],
+"getyarn.io":[
+{"wahl":".pt3p > div > div","text":"Advertisement"}
+],
+"giantfood.com":[
+{"wahl":".pdl-generic-content_full","text":"Sponsored"},
+{"wahl":"[data-product-id]","text":"Sponsored"}
+],
+"giantfoodstores.com":[
+{"wahl":".pdl-generic-content_full","text":"Sponsored"},
+{"wahl":"[data-product-id]","text":"Sponsored"}
+],
+"globalchinaev.com":[
+{"wahl":"p.content-center","text":"ADVERTISEMENT"}
+],
+"greenwichtime.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"gsmarena.com":[
+{"wahl":"#subHeader3","text":"daily deals"}
+],
+"haggen.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"hannaford.com":[
+{"wahl":".header-2","text":"Sponsored Suggestions"}
+],
+"haveibeenpwned.com":[
+{"wahl":".card-glow","text":"Sponsored"}
+],
+"health.harvard.edu":[
+{"wahl":".border-t","text":"You might also be interested in"}
+],
+"historic-uk.com":[
+{"wahl":".article-sidebar","text":"Advertisement"}
+],
+"hotmovs.com":[
+{"wahl":".block_label--last","text":"Advertisement"}
+],
+"houstonchronicle.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"inc.com":[
+{"wahl":".pr-\\[25px\\].py-\\[27px\\]","text":"Apply Now"}
+],
+"infographicjournal.com":[
+{"wahl":".et_pb_module","text":"Partners"},
+{"wahl":".et_pb_widget","text":"Partners"}
+],
+"interestingengineering.com":[
+{"wahl":".overline-small","text":"advertisement"}
+],
+"jewelosco.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"kids-in-mind.com":[
+{"wahl":".et_pb_code_inner","text":"advertisement"}
+],
+"kijiji.ca":[
+{"wahl":"[data-testid^=\"listing-card-list-item-\"]","text":"TOP AD"}
+],
+"kingsfoodmarkets.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"kogan.com":[
+{"wahl":"._2EeeR","text":"Sponsored"},
+{"wahl":".rs-infinite-scroll > div","text":"Sponsored"},
+{"wahl":".slider-slide","text":"Sponsored"}
+],
+"kohls.com":[
+{"wahl":"[component-export=\"KmnMarqueeBannerWrapper\"]","text":"Sponsored"},
+{"wahl":"[id^=\"kmn-leaderboard-\"]","text":"Sponsored"}
+],
+"kslnewsradio.com":[
+{"wahl":".wrapper","text":"Sponsored Articles"}
+],
+"ksltv.com":[
+{"wahl":".wrapper","text":"Sponsored Articles"}
+],
+"ktar.com":[
+{"wahl":".wrapper","text":"Sponsored Articles"}
+],
+"leadership.ng":[
+{"wahl":".jeg_postblock","text":"SPONSORED"}
+],
+"linkedin.com":[
+{"wahl":".msg-overlay-list-bubble__conversations-list","text":"/Anzeige|Sponsored|Promoted|Dipromosikan|Propagováno|Promoveret|Gesponsert|Promocionado|促銷內容|Post sponsorisé|프로모션|Post sponsorizzato|广告|プロモーション|Treść promowana|Patrocinado|Promovat|Продвигается|Marknadsfört|Nai-promote|ได้รับการโปรโมท|Öne çıkarılan içerik|Gepromoot|الترويج/"},
+{"wahl":"[componentkey*=\"MAIN_FEED_RECENT\"] > [data-display-contents]","text":"/Anzeige|Sponsored|Promoted|Dipromosikan|Propagováno|Promoveret|Gesponsert|Promocionado|促銷內容|Post sponsorisé|프로모션|Post sponsorizzato|广告|プロモーション|Treść promowana|Patrocinado|Promovat|Продвигается|Marknadsfört|Nai-promote|ได้รับการโปรโมท|Öne çıkarılan içerik|Gepromoot|الترويج/"},
+{"wahl":"[componentkey*=\"MAIN_FEED_RECENT\"] > div[role=\"listitem\"] > [data-display-contents]","text":"/Anzeige|Sponsored|Promoted|Dipromosikan|Propagováno|Promoveret|Gesponsert|Promocionado|促銷內容|Post sponsorisé|프로모션|Post sponsorizzato|广告|プロモーション|Treść promowana|Patrocinado|Promovat|Продвигается|Marknadsfört|Nai-promote|ได้รับการโปรโมท|Öne çıkarılan içerik|Gepromoot|الترويج/"},
+{"wahl":"[componentkey*=\"MAIN_FEED_RELEVANCE\"] > [data-display-contents]","text":"/Anzeige|Sponsored|Promoted|Dipromosikan|Propagováno|Promoveret|Gesponsert|Promocionado|促銷內容|Post sponsorisé|프로모션|Post sponsorizzato|广告|プロモーション|Treść promowana|Patrocinado|Promovat|Продвигается|Marknadsfört|Nai-promote|ได้รับการโปรโมท|Öne çıkarılan içerik|Gepromoot|الترويج/"},
+{"wahl":"[componentkey*=\"MAIN_FEED_RELEVANCE\"]> div[role=\"listitem\"] > [data-display-contents]","text":"/Anzeige|Sponsored|Promoted|Dipromosikan|Propagováno|Promoveret|Gesponsert|Promocionado|促銷內容|Post sponsorisé|프로모션|Post sponsorizzato|广告|プロモーション|Treść promowana|Patrocinado|Promovat|Продвигается|Marknadsfört|Nai-promote|ได้รับการโปรโมท|Öne çıkarılan içerik|Gepromoot|الترويج/"}
+],
+"livpost.co.uk":[
+{"wahl":".kg-cta-link-accent","text":"SPONSORED"}
+],
+"lmtonline.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"loblaws.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"product-grid\"]>div","text":"Sponsored"},
+{"wahl":".chakra-container","text":"Featured Items"}
+],
+"lovenovels.net":[
+{"wahl":"center","text":"Advertisement"}
+],
+"lyngsat.com":[
+{"wahl":"font > [href] > font","text":"Advertisements"}
+],
+"magazine.raspberrypi.com":[
+{"wahl":".bg-rpi-grey-100","text":"Advertisement"}
+],
+"manisteenews.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"mapchart.net":[
+{"wahl":".row","text":"Advertisement"}
+],
+"mapquest.co.uk":[
+{"wahl":".z-10.justify-center","text":"Advertisement"}
+],
+"martinsfoods.com":[
+{"wahl":".pdl-generic-content_full","text":"Sponsored"},
+{"wahl":"[data-product-id]","text":"Sponsored"}
+],
+"maxi.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"}
+],
+"michigansthumb.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"middletownpress.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"mobalytics.gg":[
+{"wahl":"aside > [class]","text":"Advertisement"}
+],
+"motortrend.com":[
+{"wahl":".lg\\:p-8.p-6","text":"ADVERTISEMENT"}
+],
+"moviebite.cc":[
+{"wahl":".transition-all.overflow-hidden.w-full","text":"Advertisement"}
+],
+"mrt.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"myjournalcourier.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"myplainview.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"mysanantonio.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"neowin.net":[
+{"wahl":".ipsColumns_collapsePhone.classes","text":"Our Sponsors"}
+],
+"nerdwallet.com":[
+{"wahl":"._3JhNDX","text":"Advertisement"}
+],
+"netflixjunkie.com":[
+{"wahl":"[style=\"text-align:center\"]","text":"ADVERTISEMENT"}
+],
+"newegg.com":[
+{"wahl":".product-banner","text":"Sponsored"}
+],
+"newfoundlandgrocerystores.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"}
+],
+"news.yahoo.com":[
+{"wahl":"div.md\\:block","text":"Advertisement"}
+],
+"newstimes.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"nextdoor.com":[
+{"wahl":"[data-testid*=\"searchFeedItem\"]","text":"Sponsored by"}
+],
+"nhregister.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"nofrills.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"}
+],
+"noon.com":[
+{"wahl":".swiper-slide","text":"Sponsored"}
+],
+"nordstrom.com":[
+{"wahl":"ul[style^=\"padding: 0px; position: relative;\"] > li[class]","text":"Sponsored"}
+],
+"nzherald.co.nz":[
+{"wahl":"section.section-chain--triple-image","text":"Property news from OneRoof"},
+{"wahl":"section","text":"Partner content"}
+],
+"okxxx1.com":[
+{"wahl":".bn-title","text":"Advertising"}
+],
+"ourmidland.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"out.com":[
+{"wahl":".component.module-headline","text":"FROM OUR SPONSORS"}
+],
+"pavilions.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"perplexity.ai":[
+{"wahl":".py-sm.group","text":"Sponsored"}
+],
+"pexels.com":[
+{"wahl":"[data-testid=\"column\"] [data-testid=\"item\"]","text":"Sponsored"}
+],
+"porn-w.org":[
+{"wahl":".row","text":"Promotion Bot"}
+],
+"pornhub.com":[
+{"wahl":".noBottom","text":"Remove Ads"}
+],
+"pride.com":[
+{"wahl":".component.module-headline","text":"FROM OUR SPONSORS"}
+],
+"producthunt.com":[
+{"wahl":".cursor-pointer","text":"Promoted"},
+{"wahl":".text-12","text":"Promoted"},
+{"wahl":"div[class=\"flex cursor-pointer items-start gap-4 rounded-lg bg-gray-50 p-4\"]","text":"Promoted"}
+],
+"property24.com":[
+{"wahl":".p24_tileContainer","text":"Sponsored"}
+],
+"provigo.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"},
+{"wahl":".chakra-container","text":"Featured Items"},
+{"wahl":".css-1nhzth8","text":"/sponsorisé|sponsored/"}
+],
+"psprices.com":[
+{"wahl":".creative","text":"remove advertising"}
+],
+"pushsquare.com":[
+{"wahl":"span","text":"or Subscribe"}
+],
+"qvc.com":[
+{"wahl":".qModule","text":"Sponsored"}
+],
+"randalls.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"realcanadiansuperstore.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"}
+],
+"reddxxx.com":[
+{"wahl":".items-center","text":"/^ad$/"},
+{"wahl":"[role=\"gridcell\"]","text":"/^AD$/"}
+],
+"regex101.com":[
+{"wahl":"div > header + div > div + div","text":"Sponsors"}
+],
+"registercitizen.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"rome2rio.com":[
+{"wahl":"#hotel-list-wrapper li","text":"Ad"},
+{"wahl":"[data-testid=\"hotel-list-item\"]","text":"Ad"},
+{"wahl":"div[aria-labelledby=\"schedules-header\"] > div > div","text":"Ad"}
+],
+"safeway.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"sainsburys.co.uk":[
+{"wahl":"section header[data-test=\"c006-container-wrapper\"]","text":"Sponsored"}
+],
+"salon.com":[
+{"wahl":".title","text":"Advertisement"}
+],
+"samsclub.com":[
+{"wahl":"li[data-slide]","text":"Sponsored"}
+],
+"scamwarners.com":[
+{"wahl":"center","text":"Advertisement"}
+],
+"sciencenews.org":[
+{"wahl":"p","text":"Sponsor Message"}
+],
+"seattleweekly.com":[
+{"wahl":".marketplace-row","text":"Sponsored"}
+],
+"sfchronicle.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"sfgate.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"}
+],
+"sfyimby.com":[
+{"wahl":".textwidget","text":"ADVERTISEMENT"}
+],
+"shaws.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"shipt.com":[
+{"wahl":"div.swiper-slide","text":"Sponsored"},
+{"wahl":"li[class]","text":"Sponsored"}
+],
+"slashdot.org":[
+{"wahl":".fhitem-story.fhitem","text":"Sponsored Content"},
+{"wahl":".grid_24","text":"Featured Content"}
+],
+"songbpm.com":[
+{"wahl":"div.mb-6","text":"Advertisement"}
+],
+"sourceforge.net":[
+{"wahl":"aside.m-sidebar-widget > .as-header","text":"Featured"}
+],
+"sowetan.co.za":[
+{"wahl":".content-list-block","text":"News & insights from our commercial partners"}
+],
+"spigotmc.org":[
+{"wahl":"[style=\"text-align: center\"]","text":"sponsored"}
+],
+"stamfordadvocate.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"staples.com":[
+{"wahl":".side-by-side-carousel__carousel_container","text":"Sponsored Products"}
+],
+"star-history.com":[
+{"wahl":".items-start.sidebar-sticky","text":"Featured Products"}
+],
+"starmarket.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"stocktwits.com":[
+{"wahl":".is-visible","text":"Remove ads"},
+{"wahl":".leading-\\[16px\\]","text":"Advertisement"}
+],
+"target.com":[
+{"wahl":"[class*=\"styledCarouselItem\"]","text":"Sponsored"},
+{"wahl":"[data-test=\"ProductCardVariantRecommendation\"]","text":"Sponsored"},
+{"wahl":"[data-test=\"productCardVariantRecommendation\"]","text":"Sponsored"},
+{"wahl":"div[data-test=\"@web/ProductCard/ProductCardVariantAisle\"]","text":"Sponsored"},
+{"wahl":"div[data-test=\"@web/site-top-of-funnel/ProductCardWrapper\"]","text":"sponsored"}
+],
+"techonthenet.com":[
+{"wahl":"div[class] > p","text":"Advertisements"}
+],
+"temu.com":[
+{"wahl":".EKDT7a3v","text":"AD"},
+{"wahl":".goods-container","text":"AD"},
+{"wahl":".splide__slide","text":"AD"}
+],
+"theblock.co":[
+{"wahl":".py-4.my-6","text":"Advertisement"}
+],
+"thedailywtf.com":[
+{"wahl":".article-body > div","text":"[Advertisement]"}
+],
+"thehour.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"theintelligencer.com":[
+{"wahl":".mb32.b-gray300","text":"Advertisement"},
+{"wahl":".b-gray300","text":"Advertisement"}
+],
+"theregister.com":[
+{"wahl":"article.large-12","text":"SPONSORED FEATURE"}
+],
+"thesaurus.com":[
+{"wahl":"[class] > p","text":"Advertisement"}
+],
+"thingiverse.com":[
+{"wahl":".item-card-container","text":"/^Ad$/"}
+],
+"timeslive.co.za":[
+{"wahl":".content-list-block","text":"News & insights from our commercial partners"}
+],
+"tlgrm.eu":[
+{"wahl":".cfeed-card","text":"Promoted post"}
+],
+"tomthumb.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"tossinggames.com":[
+{"wahl":"tbody","text":"Please visit our below advertisers"}
+],
+"tripadvisor.com":[
+{"wahl":".tkvEM","text":"Sponsored"},
+{"wahl":"[aria-label=\"Map marker\"]","text":"Sponsored"},
+{"wahl":"[data-test=\"SL_list_item\"]","text":"Sponsored"}
+],
+"tumlook.com":[
+{"wahl":"article","text":"Sponsored"}
+],
+"twitter.com":[
+{"wahl":"h2[role=\"heading\"]","text":"/Promoted|Gesponsert|Promocionado|Sponsorisé|Sponsorizzato|Promowane|Promovido|Реклама|Uitgelicht|Sponsorlu|Promotert|Promoveret|Sponsrad|Mainostettu|Sponzorováno|Promovat|Ajánlott|Προωθημένο|Dipromosikan|Được quảng bá|推廣|推广|推薦|推荐|プロモーション|프로모션|ประชาสมพนธ|परचरत|বজঞপত|تشہیر شدہ|مروج|تبلیغی|מקודם/"}
+],
+"valumart.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"},
+{"wahl":".chakra-container","text":"Featured Items"}
+],
+"vons.com":[
+{"wahl":".product-card-col","text":"Sponsored"}
+],
+"vpforums.org":[
+{"wahl":".ipsSideBlock.clearfix","text":"Affiliates"}
+],
+"weather.com":[
+{"wahl":".bg-gray-100","text":"Advertisement"}
+],
+"winaero.com":[
+{"wahl":"#qcihrbv5 > p","text":"Tip"}
+],
+"wings.io":[
+{"wahl":".form-group center","text":"Advertisement"}
+],
+"wltreport.com":[
+{"wahl":".code-block","text":"ADVERTISEMENT"}
+],
+"woolworths.com.au":[
+{"wahl":"div[class^=\"recipe-card_component_recipe-card-container-\"]","text":"Sponsored"}
+],
+"woot.com":[
+{"wahl":"[dir=\"auto\"]","text":"ADVERTISEMENT"}
+],
+"www.yahoo.com":[
+{"wahl":".uppercase.text-xs","text":"Advertisement"}
+],
+"x.com":[
+{"wahl":"h2[role=\"heading\"]","text":"/Promoted|Gesponsert|Promocionado|Sponsorisé|Sponsorizzato|Promowane|Promovido|Реклама|Uitgelicht|Sponsorlu|Promotert|Promoveret|Sponsrad|Mainostettu|Sponzorováno|Promovat|Ajánlott|Προωθημένο|Dipromosikan|Được quảng bá|推廣|推广|推薦|推荐|プロモーション|프로모션|ประชาสมพนธ|परचरत|বজঞপত|تشہیر شدہ|مروج|تبلیغی|מקודם/"}
+],
+"yahoo.com":[
+{"wahl":".leading-3","text":"Advertisement"},
+{"wahl":".md\\:block.dark\\:bg-ramones","text":"Advertisement"},
+{"wahl":"div.md\\:block.pb-5","text":"Advertisement"}
+],
+"yourindependentgrocer.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"},
+{"wahl":".chakra-container","text":"Featured Items"}
+],
+"yourstory.com":[
+{"wahl":"[width]","text":"ADVERTISEMENT"}
+],
+"zehrs.ca":[
+{"wahl":".product-tile-group__list__item","text":"Sponsored"},
+{"wahl":"[data-testid=\"card\"]","text":"sponsored"},
+{"wahl":".chakra-container","text":"Featured Items"}
+]
+}

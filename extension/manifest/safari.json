@@ -1,0 +1,42 @@
+{
+  "background": {
+    "scripts": [
+      "hintergrund/index.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/kosmetik.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/warnung.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false,
+      "match_about_blank": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inhalt/cookies.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false,
+      "match_about_blank": false
+    }
+  ]
+}

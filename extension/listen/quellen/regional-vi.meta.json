@@ -1,0 +1,15 @@
+{
+  "id": "regional-vi",
+  "name": "ABPVN List",
+  "url": "https://raw.githubusercontent.com/abpvn/abpvn/master/filter/abpvn.txt",
+  "geholtAm": "2026-09-03T19:21:40.504Z",
+  "bytes": 44548,
+  "zeilen": 1103,
+  "sha256": "9b42568e079c9aecc59972fbd73888823c0a1e68e8e401b999d59d77f218e4fd",
+  "titel": "ABPVN List",
+  "version": "20260904021441880",
+  "zuletztGeaendert": "04 Sep 2026 02:14:41 UTC+7",
+  "lizenz": "GPLv3 (https://github.com/abpvn/abpvn/blob/master/LICENSE)",
+  "etag": "W/\"a1616e0a210707ecb62fb1cf88f58f3f1735379220a911ca57bed208f4d3a7fd\"",
+  "ausDatei": null
+}

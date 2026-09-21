@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Erkennungsprobe</title>
+
+<!--
+  DAS ERSTE SKRIPT DER SEITE. Es muss das erste bleiben.
+
+  Hier wird gemessen, worauf es ankommt: War das Scriptlet schon da, als das
+  erste Seitenskript lief? Ein Scriptlet, das eine Millisekunde spaeter greift,
+  ist wirkungslos - der Detektor hat dann schon gelesen, was er lesen wollte,
+  und das Overlay steht.
+
+  `set-constant, blockAdBlock, trueFunc` gilt fuer diese Domain
+  (uBlock filters, scriptlets/ublock.json). Ist es rechtzeitig gelaufen, ist
+  window.blockAdBlock hier bereits eine Funktion.
+-->
+<script>
+  window.__probe = {
+    // Der Kern: zum Zeitpunkt des ersten Seitenskripts.
+    scriptletVorher: typeof window.blockAdBlock === 'function',
+    zeitErstesSkript: performance.now(),
+    detektoren: {},
+  };
+</script>
+
+<!--
+  DETEKTOR 1 - Koederelement.
+  Der Klassiker: ein Element mit werbetypischen Klassen. Ist es nach dem Laden
+  0 Pixel hoch oder display:none, schliesst der Detektor auf einen Blocker.
+  Gemessen wird spaeter, ob die Seite das MERKT - nicht, ob wir es verstecken.
+-->
+<div class="ad ads adsbox ad-placement banner-ad" id="koeder"
+     style="width:300px;height:250px;position:absolute;left:-9999px">&nbsp;</div>
+
+<!--
+  DETEKTOR 2 - Skript, das nicht laden darf.
+  Ein Blocker verhindert das Laden; `onerror` feuert. Ohne Blocker feuert
+  `onload`. Der Pfad sieht aus wie ein Werbeskript und wird von den Listen
+  geblockt.
+-->
+<script src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        onerror="window.__probe.detektoren.skriptFehler = true"
+        onload="window.__probe.detektoren.skriptFehler = false"></script>
+</head>
+<body>
+<h1>Erkennungsprobe</h1>
+<p id="stand">wird gemessen …</p>
+
+<script>
+(function () {
+  var p = window.__probe;
+
+  // DETEKTOR 1 auswerten: Hoehe des Koeders.
+  var koeder = document.getElementById('koeder');
+  var stil = koeder ? getComputedStyle(koeder) : null;
+  p.detektoren.koederVersteckt =
+    !koeder ||
+    !stil ||
+    stil.display === 'none' ||
+    stil.visibility === 'hidden' ||
+    koeder.offsetHeight === 0 ||
+    koeder.offsetParent === null;
+
+  // DETEKTOR 3 - fetch auf eine Werbeadresse. Ein Blocker laesst sie
+  // scheitern; die Seite liest daraus, dass jemand blockt.
+  p.detektoren.fetchFehler = null;
+  try {
+    fetch('//www.google-analytics.com/analytics.js', { mode: 'no-cors' })
+      .then(function () { p.detektoren.fetchFehler = false; })
+      .catch(function () { p.detektoren.fetchFehler = true; });
+  } catch (e) {
+    p.detektoren.fetchFehler = true;
+  }
+
+  // DETEKTOR 4 - die Falle selbst. Ein Detektor, der `blockAdBlock` benutzt,
+  // erwartet ein Objekt mit `check`. `set-constant … trueFunc` gibt ihm eine
+  // Funktion, die immer true liefert - der Detektor haelt sich fuer bedient
+  // und schweigt. Gemessen wird, ob die Falle steht.
+  p.detektoren.falleSteht = typeof window.blockAdBlock === 'function';
+
+  /*
+    Zwei spaete Messungen, weil "greift gar nicht" und "greift zu spaet" zwei
+    verschiedene Fehler sind und verschiedene Ursachen haben.
+
+    GEMESSEN am 08.09.2026 mit dem executeScript-Weg: beim ersten Skript nicht
+    da, nach 400 ms nicht da, nach 2 s da. Wer nur einmal am Ende misst, haelt
+    das fuer einen Erfolg.
+  */
+  setTimeout(function () {
+    p.detektoren.falleNach400ms = typeof window.blockAdBlock === 'function';
+    p.fertig = true;
+    document.getElementById('stand').textContent = 'gemessen';
+  }, 400);
+
+  setTimeout(function () {
+    p.detektoren.falleNach2s = typeof window.blockAdBlock === 'function';
+    p.spaetFertig = true;
+  }, 2000);
+})();
+</script>
+</body>
+</html>

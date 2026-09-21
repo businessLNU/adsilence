@@ -1,0 +1,286 @@
+[
+  {
+    "id": "basis",
+    "name": "EasyList",
+    "url": "https://easylist.to/easylist/easylist.txt",
+    "datei": "easylist.txt",
+    "budget": 20000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "privatsphaere",
+    "name": "EasyPrivacy",
+    "url": "https://easylist.to/easylist/easyprivacy.txt",
+    "datei": "easyprivacy.txt",
+    "budget": 8000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "hosts",
+    "name": "Peter Lowe's List",
+    "url": "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext",
+    "budget": 4500,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "tarnung",
+    "name": "AdSilence Tarnung",
+    "datei": "tarnung.txt",
+    "eigen": true,
+    "budget": 200,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "ublock",
+    "name": "uBlock filters",
+    "url": "https://ublockorigin.github.io/uAssets/filters/filters.txt",
+    "budget": 4000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "ublock-privatsphaere",
+    "name": "uBlock filters - Privacy",
+    "url": "https://ublockorigin.github.io/uAssets/filters/privacy.txt",
+    "budget": 3000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "ublock-schadsoftware",
+    "name": "uBlock filters - Badware risks",
+    "url": "https://ublockorigin.github.io/uAssets/filters/badware.txt",
+    "budget": 2000,
+    "premium": false,
+    "standard": true,
+    "blocktNavigation": true
+  },
+  {
+    "id": "urlhaus",
+    "name": "Online Malicious URL Blocklist",
+    "url": "https://malware-filter.gitlab.io/malware-filter/urlhaus-filter-online.txt",
+    "budget": 3200,
+    "premium": false,
+    "standard": true,
+    "blocktNavigation": true,
+    "nackteHosts": true,
+    "warum": "Budget am 09.09.2026 von 12000 auf 3200 gesenkt. Der Zweck ist Platz fuer die Regionallisten: Sie stehen abschaltbar in den Optionen, und mit 145 freien Regeln liess sich keine einzige einschalten - eine Funktion, die es nur auf dem Bildschirm gab. 3200 laesst 6479 frei, also die groesste (regional-zh, 6011) plus Luft. 4000 waeren 332 Regeln zu wenig gewesen, gemessen. Gekuerzt werden nur Pfadmuster - zuDnr schreibt Hostregeln zuerst -, also die kurzlebigsten Eintraege einer ohnehin taeglich rotierenden Liste; die 1696 Hosts und IPs bleiben vollstaendig. Den Rest traegt der Nachschub unter /api/adsilence/listen/delta.",
+    "nachschubAnteil": 0.33
+  },
+  {
+    "id": "heimnetz",
+    "name": "Block Outsider Intrusion into LAN",
+    "url": "https://ublockorigin.github.io/uAssets/filters/lan-block.txt",
+    "budget": 200,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "ublock-eilig",
+    "name": "uBlock filters - Quick fixes",
+    "url": "https://ublockorigin.github.io/uAssets/filters/quick-fixes.txt",
+    "budget": 2000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "ublock-reparatur",
+    "name": "uBlock filters - Unbreak",
+    "url": "https://ublockorigin.github.io/uAssets/filters/unbreak.txt",
+    "budget": 2000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "antiadblock",
+    "name": "Adblock Warning Removal List",
+    "url": "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt",
+    "budget": 1000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "cookies",
+    "name": "EasyList Cookie",
+    "url": "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
+    "budget": 8000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "laestig",
+    "name": "Fanboy's Annoyances",
+    "url": "https://secure.fanboy.co.nz/fanboy-annoyance.txt",
+    "datei": "fanboy-annoyance.txt",
+    "budget": 9000,
+    "premium": false,
+    "standard": true
+  },
+  {
+    "id": "regional-de",
+    "name": "EasyList Germany",
+    "url": "https://easylist.to/easylistgermany/easylistgermany.txt",
+    "datei": "easylistgermany.txt",
+    "budget": 5000,
+    "premium": false,
+    "standard": false,
+    "sprache": "de"
+  },
+  {
+    "id": "regional-fr",
+    "name": "Liste FR",
+    "url": "https://easylist-downloads.adblockplus.org/liste_fr.txt",
+    "budget": 6000,
+    "premium": false,
+    "standard": false,
+    "sprache": "fr"
+  },
+  {
+    "id": "regional-it",
+    "name": "EasyList Italy",
+    "url": "https://easylist-downloads.adblockplus.org/easylistitaly.txt",
+    "budget": 4000,
+    "premium": false,
+    "standard": false,
+    "sprache": "it"
+  },
+  {
+    "id": "regional-nl",
+    "name": "EasyList Dutch",
+    "url": "https://easylist-downloads.adblockplus.org/easylistdutch.txt",
+    "budget": 3000,
+    "premium": false,
+    "standard": false,
+    "sprache": "nl"
+  },
+  {
+    "id": "regional-es",
+    "name": "EasyList Spanish",
+    "url": "https://easylist-downloads.adblockplus.org/easylistspanish.txt",
+    "budget": 3000,
+    "premium": false,
+    "standard": false,
+    "sprache": "es"
+  },
+  {
+    "id": "regional-zh",
+    "name": "EasyList China",
+    "url": "https://easylist-downloads.adblockplus.org/easylistchina.txt",
+    "budget": 8000,
+    "premium": false,
+    "standard": false,
+    "sprache": "zh"
+  },
+  {
+    "id": "regional-ru",
+    "name": "RU AdList",
+    "url": "https://easylist-downloads.adblockplus.org/advblock.txt",
+    "budget": 8000,
+    "premium": false,
+    "standard": false,
+    "sprache": "ru"
+  },
+  {
+    "id": "regional-pl",
+    "name": "EasyList Polish",
+    "url": "https://easylist-downloads.adblockplus.org/easylistpolish.txt",
+    "budget": 3000,
+    "premium": false,
+    "standard": false,
+    "sprache": "pl"
+  },
+  {
+    "id": "regional-pt",
+    "name": "EasyList Portuguese",
+    "url": "https://easylist-downloads.adblockplus.org/easylistportuguese.txt",
+    "budget": 3000,
+    "premium": false,
+    "standard": false,
+    "sprache": "pt"
+  },
+  {
+    "id": "regional-ja",
+    "name": "ABP Japanese filters",
+    "url": "https://raw.githubusercontent.com/k2jp/abp-japanese-filters/master/abpjf.txt",
+    "budget": 6000,
+    "premium": false,
+    "standard": false,
+    "sprache": "ja"
+  },
+  {
+    "id": "regional-ko",
+    "name": "YousList",
+    "url": "https://raw.githubusercontent.com/yous/YousList/master/youslist.txt",
+    "budget": 4000,
+    "premium": false,
+    "standard": false,
+    "sprache": "ko"
+  },
+  {
+    "id": "regional-tr",
+    "name": "Turkish Filters",
+    "url": "https://easylist-downloads.adblockplus.org/turkish-filters.txt",
+    "budget": 2000,
+    "premium": false,
+    "standard": false,
+    "sprache": "tr"
+  },
+  {
+    "id": "regional-vi",
+    "name": "ABPVN List",
+    "url": "https://raw.githubusercontent.com/abpvn/abpvn/master/filter/abpvn.txt",
+    "budget": 2000,
+    "premium": false,
+    "standard": false,
+    "sprache": "vi"
+  },
+  {
+    "id": "regional-id",
+    "name": "ABPindo",
+    "url": "https://raw.githubusercontent.com/ABPindo/indonesianadblockrules/master/subscriptions/abpindo.txt",
+    "budget": 5000,
+    "premium": false,
+    "standard": false,
+    "sprache": "id"
+  },
+  {
+    "id": "regional-ar",
+    "name": "Liste AR",
+    "url": "https://easylist-downloads.adblockplus.org/Liste_AR.txt",
+    "budget": 2000,
+    "premium": false,
+    "standard": false,
+    "sprache": "ar"
+  },
+  {
+    "id": "regional-sv",
+    "name": "Frellwits Swedish Filter",
+    "url": "https://raw.githubusercontent.com/lassekongo83/Frellwits-filter-lists/master/Frellwits-Swedish-Filter.txt",
+    "budget": 3000,
+    "premium": false,
+    "standard": false,
+    "sprache": "sv"
+  },
+  {
+    "id": "regional-fa",
+    "name": "Adblock Iran",
+    "url": "https://raw.githubusercontent.com/farrokhi/adblock-iran/master/filter.txt",
+    "budget": 2000,
+    "premium": false,
+    "standard": false,
+    "sprache": "fa"
+  },
+  {
+    "id": "regional-hi",
+    "name": "IndianList",
+    "url": "https://easylist-downloads.adblockplus.org/indianlist.txt",
+    "budget": 5000,
+    "premium": false,
+    "standard": false,
+    "sprache": "hi"
+  }
+]

@@ -1,0 +1,86 @@
+{
+"apfeltalk.de":[
+{"wahl":"div.wpb_text_column","text":"Werbung"}
+],
+"baur.de":[
+{"wahl":"span","text":"Gesponserte Artikel"}
+],
+"beobachter.ch":[
+{"wahl":"#content-aside-item-0","text":"Partnerinhalte"}
+],
+"chip.de":[
+{"wahl":".download-item","text":"Anzeige"}
+],
+"finanzfluss.de":[
+{"wahl":".component.card.white.has-shadow","text":"Anzеigе"},
+{"wahl":".component.linked-card.hero-card","text":"Anzеigе"}
+],
+"focus.de":[
+{"wahl":"article[id^=\"teaser-\"][data-placement]","text":"Anzeige"}
+],
+"gofeminin.de":[
+{"wahl":".af-block-native","text":"Anzeige"},
+{"wahl":".af-block-native","text":"Sponsored Post"}
+],
+"handelszeitung.ch":[
+{"wahl":".teaser-m-default","text":"Native Advertising"},
+{"wahl":".teaser-m-default","text":"Publireportage"}
+],
+"heise.de":[
+{"wahl":"p","text":"=== Anzeige / Sponsorenhinweis ==="},
+{"wahl":"p","text":"=== Anzeige / Sponsorenhinweis ende==="}
+],
+"knuspr.de":[
+{"wahl":"div[data-test=\"whisperer-product-wrapper\"]","text":"Gesponsert"}
+],
+"koeln.de":[
+{"wahl":".gb-container","text":"Anzeige"}
+],
+"kurier.at":[
+{"wahl":".gridContainer","text":"Sponsored Content"}
+],
+"lausitz-tv.de":[
+{"wahl":".small-12.column","text":"Anzeige"}
+],
+"marbacher-zeitung.de":[
+{"wahl":".appetizer","text":"Anzeige"}
+],
+"meissen-fernsehen.de":[
+{"wahl":".text-center","text":"- Werbung -"}
+],
+"mobile.de":[
+{"wahl":"[data-testid=\"home-brand-portal-section-container\"]","text":"Gesponsert"}
+],
+"notebookcheck.com":[
+{"wahl":".introa_news","text":"Anzeige"}
+],
+"o-sport.de":[
+{"wahl":".card-body","text":"Sponsoren"}
+],
+"onvista.de":[
+{"wahl":".ov-carousel__item","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class*=\"Styles_ov-content-item-list__item\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class=\"bg-neutral-2 p-0 shadow-md rounded-2xl border-1 border-neutral-4 mb-0\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class=\"bg-neutral-2 p-0 shadow-md rounded-2xl border-1 border-neutral-4 mb-4\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class=\"bg-neutral-2 shadow-md rounded-2xl border-1 border-neutral-4 mb-4 p-0\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class=\"col col--md-3 col--sm-4 col--lg-4 col--xl-4\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class=\"col py-0\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class=\"flex justify-between mb-4 border-b-1 border-b-grey-100 pb-2 dark:border-b-grey-700\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"},
+{"wahl":"div[class=\"md:col-span-3 lg:col-span-4\"]","text":"/Werbung|gnubreW|gnubreW|gnubreW|g​n​u​b​r​e​W|W​e​r​b​u​n​g/"}
+],
+"pollenflug.de":[
+{"wahl":".services-item","text":"bei Amazon"}
+],
+"queer.de":[
+{"wahl":".liste","text":"Top-Hotels (Anzeige)"}
+],
+"radiowaf.de":[
+{"wahl":".csc-frame.csc-frame-default","text":"Anzeige"}
+],
+"redcare-apotheke.ch":[
+{"wahl":"[data-qa-id=\"result-list-entry\"]","text":"Gesponsert"}
+],
+"wasbitcoinbringt.com":[
+{"wahl":".kg-card","text":"Herzlichen Dank an unsere Partner!"}
+]
+}

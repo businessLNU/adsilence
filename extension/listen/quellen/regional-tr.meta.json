@@ -1,0 +1,15 @@
+{
+  "id": "regional-tr",
+  "name": "Turkish Filters",
+  "url": "https://easylist-downloads.adblockplus.org/turkish-filters.txt",
+  "geholtAm": "2026-09-03T19:21:40.465Z",
+  "bytes": 25362,
+  "zeilen": 619,
+  "sha256": "f666a96700e748a6786565d80e215c341587a94a1b665cca4d5a5d63e0cc55f9",
+  "titel": "Turkish Filters",
+  "version": "202609031912",
+  "zuletztGeaendert": "03 Sep 2026 19:12 UTC",
+  "lizenz": "https://gitlab.com/eyeo/filterlists/turkishfilters/-/blob/main/LICENSE",
+  "etag": "\"10c7c5850b2b9b5b8e77e7035d5f743c:1788463088.280479\"",
+  "ausDatei": null
+}

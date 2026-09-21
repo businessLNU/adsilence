@@ -1,0 +1,253 @@
+/**
+ * Nur die Masse des Popups. Farben und Bauteile kommen aus `basis.css`.
+ * 360 px breit, Hoehe nach Inhalt, hoechstens 560 px (dann rollt der Inhalt).
+ */
+html,
+body {
+  width: 360px;
+  overflow-x: hidden;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+  padding: var(--abstand-3);
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+.kopf {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-2);
+  padding: 0 var(--abstand-1);
+}
+.kopf__marke {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-2);
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+}
+.kopf__bild {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-klein);
+  display: block;
+}
+
+.site {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+}
+.site__kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-3);
+}
+.site__host {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.site__zeile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-3);
+}
+.site__zaehler {
+  font-size: 13px;
+  color: var(--marke-schwach);
+}
+.site__zaehler strong {
+  color: var(--marke-text);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.premium__titel {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-2);
+  font-weight: 600;
+}
+.premium__titel .marke-punkt {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--marke-gut);
+}
+
+.fuss {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--abstand-2);
+  padding: 0 var(--abstand-1);
+}
+
+/* Skeleton in Kartenform: gleiche Hoehen wie der fertige Inhalt. */
+.skelett-karte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+}
+
+/**
+ * Die Kontozeile unter der Premium-Karte: E-Mail links, „Trennen" rechts.
+ *
+ * Die E-Mail darf schrumpfen und abschneiden (`min-width: 0` erlaubt das
+ * innerhalb eines Flexboxkindes), der Knopf nicht: Eine lange Adresse soll
+ * den Knopf nicht aus der Karte schieben.
+ */
+.kontozeile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kontozeile > span {
+  min-width: 0;
+}
+
+.kontozeile > .knopf {
+  flex: none;
+}
+
+/**
+ * „Details" hinter dem Zaehler: ein Knopf, der wie ein Link aussieht. Kein
+ * `<a>`, denn er fuehrt nirgendwohin - er klappt eine Liste auf, und das ist
+ * die Aufgabe eines Knopfes. `aria-expanded` sagt es dem Screenreader.
+ */
+.site__mehr {
+  border: 0;
+  padding: 0;
+  background: none;
+  font: inherit;
+  color: var(--marke-akzent-text, #b03f06);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.site__mehr:hover {
+  text-decoration-thickness: 2px;
+}
+
+/** Die Aufschluesselung je Liste: Name links, Zahl rechts. */
+.site__listen {
+  margin: 8px 0 0;
+  padding: 8px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--marke-linie, rgba(0, 0, 0, 0.08));
+  display: grid;
+  gap: 4px;
+}
+
+/**
+ * Nur die AEUSSEREN Eintraege - `> li`, nicht ` li`.
+ *
+ * Hier stand `.site__listen li`, aus der Zeit, als ein Eintrag nur aus Name
+ * und Zahl bestand. Seit die Regeln darunter haengen, hat der aeussere `li`
+ * ZWEI Kinder: den Kopf und die Regelliste. Mit `display: flex` legte die
+ * Regel beide NEBENEINANDER statt untereinander - Listenname und Summe
+ * links, die Domains rechts danebengequetscht, und die Trefferzahl der
+ * letzten Spalte stand ausserhalb der Karte. Den Kopf macht jetzt
+ * `.site__listenkopf` selbst zur Zeile; der Eintrag ist nur der Behaelter
+ * darum und bleibt ein Block.
+ */
+.site__listen > li {
+  font-size: 12px;
+  color: var(--marke-schwach, #5b6472);
+}
+
+/**
+ * Der globale Schalter sitzt in derselben Karte wie der Seitenschalter, durch
+ * eine Linie getrennt. Der Abstand oben ist groesser als unten: Die Linie soll
+ * zur unteren Zeile gehoeren, nicht zwischen zwei gleich weit entfernten
+ * Bloecken schweben.
+ */
+.site__global {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--marke-linie, rgba(0, 0, 0, 0.08));
+}
+
+/** Listenname und Summe; die Regeln darunter sind eingerückt. */
+.site__listenkopf {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--marke-text, #14181f);
+}
+
+/**
+ * Die Domains innerhalb einer Liste. Kleiner und blasser als der Listenname:
+ * Wer die Details aufklappt, sucht zuerst die Liste und dann die Zeile darin.
+ */
+.site__regeln {
+  margin: 2px 0 6px;
+  padding: 0 0 0 10px;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  border-left: 2px solid var(--marke-linie, rgba(0, 0, 0, 0.08));
+}
+
+.site__regeln li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 11px;
+}
+
+.site__rest {
+  font-style: italic;
+}
+
+/**
+ * Premium: eine FASSUNG um die Karte, keine andere Fuellfarbe.
+ *
+ * Dasselbe Mittel wie beim gebuchten Tarif auf der Website
+ * (`.tarife .karte.gebucht` in `demo/src/stil.css`): `outline` mit Abstand.
+ * Eine andere Hintergrundfarbe waere hier eine zweite Bedeutung neben „das
+ * ist der Schalter" -- und wer bezahlt hat, will es sehen, nicht erklaert
+ * bekommen.
+ *
+ * Bewusst statisch und nicht pulsierend: Das Popup geht am Tag zwanzigmal
+ * auf. Etwas, das jedes Mal blinkt, ist beim dritten Mal ein Fehler und beim
+ * zehnten ein Grund, die Erweiterung zu deinstallieren.
+ */
+.site--premium {
+  outline: 2px solid var(--marke-von);
+  outline-offset: 3px;
+}
+
+/** Das Wort „Premium" neben dem Markennamen -- die einzige Farbe im Kopf. */
+.kopf__premium {
+  margin-inline-start: 8px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--marke-akzent-flaeche);
+  color: var(--marke-akzent-text);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}

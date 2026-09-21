@@ -1,0 +1,15 @@
+{
+  "id": "heimnetz",
+  "name": "Block Outsider Intrusion into LAN",
+  "url": "https://ublockorigin.github.io/uAssets/filters/lan-block.txt",
+  "geholtAm": "2026-09-04T00:17:33.457Z",
+  "bytes": 10855,
+  "zeilen": 195,
+  "sha256": "05149d97c29054ce0fc1890fe7a14fc88775f0c5e48d9dbba5629ffe86e7e55e",
+  "titel": "Block Outsider Intrusion into LAN",
+  "version": null,
+  "zuletztGeaendert": "Fri, 08 May 2026 06:16:10 +0000",
+  "lizenz": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+  "etag": "W/\"6a9a0393-2a6a\"",
+  "ausDatei": null
+}

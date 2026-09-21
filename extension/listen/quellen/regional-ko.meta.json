@@ -1,0 +1,15 @@
+{
+  "id": "regional-ko",
+  "name": "YousList",
+  "url": "https://raw.githubusercontent.com/yous/YousList/master/youslist.txt",
+  "geholtAm": "2026-09-03T19:21:40.080Z",
+  "bytes": 361207,
+  "zeilen": 7838,
+  "sha256": "b55ab93d890d72cf1fa30c7ee977efe5888ef6213004c5d6ecc9e82fe6f315f1",
+  "titel": "YousList",
+  "version": "20260818",
+  "zuletztGeaendert": null,
+  "lizenz": "https://github.com/yous/YousList#license",
+  "etag": "W/\"fa6f50bd1871651fdb56b5276fe9460ccff97fb2f2ade44af27573fea6fb5704\"",
+  "ausDatei": null
+}

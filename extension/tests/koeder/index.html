@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Koederseite</title>
+    <style>
+      body { font: 14px system-ui, sans-serif; margin: 24px; }
+      .kasten { border: 1px solid #ccc; padding: 8px; margin: 8px 0; }
+      #AdBar, #ad-banner-1, #AD_300, [id^='div-gpt-ad'] { min-height: 60px; background: #fee; }
+    </style>
+  </head>
+  <body>
+    <h1>Koederseite</h1>
+
+    <!-- 1. Netzwerk: ein Werbeskript. Der Zaehler des Testservers darf nicht hochgehen. -->
+    <script src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!-- 2. Netzwerk: ein Zaehlpixel. -->
+    <img id="pixel" src="http://www.google-analytics.com/collect?v=1&t=pageview" width="1" height="1" alt="" />
+    <script src="http://www.google-analytics.com/analytics.js"></script>
+
+    <!-- 3. Kosmetik: die drei haeufigsten generischen Koeder im Licht-DOM. -->
+    <div id="AdBar" class="kasten">AdBar (echter EasyList-Selektor)</div>
+    <div id="ad-banner-1" class="kasten">ad-banner-1 (echter EasyList-Selektor)</div>
+    <div id="AD_300" class="kasten">AD_300 (echter EasyList-Selektor)</div>
+
+    <!-- 4. Kosmetik im Shadow DOM (offen). -->
+    <koeder-offen></koeder-offen>
+
+    <!-- 5. Kosmetik im Shadow DOM (geschlossen). -->
+    <koeder-zu></koeder-zu>
+
+    <!-- 6. Anti-Adblock: die Seite prueft einen Koeder und meldet Erkennung. -->
+    <div id="erkennung" class="kasten">Erkennung: <b id="erkennungswert">unbekannt</b></div>
+
+    <!-- 7. Einwilligungsfenster (Premium-Funktion blendet es aus). -->
+    <div class="cookie-banner kasten">Wir verwenden Cookies.</div>
+
+    <script>
+      // Shadow-Roots erst nach dem Parsen anlegen: so entsteht mindestens eine
+      // Root NACH dem Start der Erweiterung und eine so frueh wie moeglich.
+      class KoederOffen extends HTMLElement {
+        constructor() {
+          super();
+          const wurzel = this.attachShadow({ mode: 'open' });
+          wurzel.innerHTML = '<div id="AdBar" style="min-height:40px">shadow offen</div>';
+          window.__koederOffen = wurzel;
+        }
+      }
+      class KoederZu extends HTMLElement {
+        constructor() {
+          super();
+          const wurzel = this.attachShadow({ mode: 'closed' });
+          wurzel.innerHTML = '<div id="AdBar" style="min-height:40px">shadow zu</div>';
+          // Fuer den Test zugaenglich machen; eine echte Seite taete das nicht.
+          window.__koederZu = wurzel;
+        }
+      }
+      customElements.define('koeder-offen', KoederOffen);
+      customElements.define('koeder-zu', KoederZu);
+
+      // Der klassische Anti-Adblock-Koeder: eine Variable, die ein Werbeskript
+      // setzen wuerde. Ist sie nicht wahr, gilt der Besucher als Blocker-Nutzer.
+      // Ein Scriptlet (set-constant canRunAds true) muss VOR dieser Zeile
+      // gelaufen sein, sonst steht hier "erkannt".
+      const erkannt = window.canRunAds !== true;
+      document.getElementById('erkennungswert').textContent = erkannt ? 'erkannt' : 'nicht erkannt';
+      document.body.dataset.adblock = erkannt ? 'erkannt' : 'nicht-erkannt';
+    </script>
+  </body>
+</html>

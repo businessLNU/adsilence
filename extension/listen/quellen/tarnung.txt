@@ -1,0 +1,94 @@
+[Adblock Plus 2.0]
+! Title: AdSilence Tarnung
+! Homepage: -
+! Expires: never (wird von Hand gepflegt, nicht aus dem Netz geholt)
+!
+! Hier steht NUR, was keine der 27 gepflegten Listen abdeckt und was an einer
+! echten Seite gemessen wurde. Jeder Eintrag nennt das Datum, die Seite und
+! warum die Regel nichts kaputtmacht. Ohne diese drei Angaben kommt nichts
+! hinein: Eine Regel, deren Grund niemand mehr kennt, wird nie wieder
+! entfernt, auch wenn sie laengst schadet.
+!
+! ---------------------------------------------------------------------------
+! Googles First-Party-Modus (Tag Gateway)
+! ---------------------------------------------------------------------------
+! Gemessen am 04.09.2026 an rework.live. Die Seite laesst ihr Google-Analytics
+! ueber bandholm.rework.live laufen - eine eigene Subdomain, die per CNAME auf
+! eug.stape.io zeigt (server-seitiges GTM-Hosting). Fuer den Browser ist das
+! die eigene Domain der Seite; ein Adblocker sieht den CNAME nicht.
+!
+! Der Transport darueber ist gedeckt: /gtag/js, /gtm.js, /g/collect und
+! ?v=2&tid=G- sind hostlose Regeln in EasyPrivacy und greifen auf JEDER Domain.
+! Nicht gedeckt war der Rahmen, den Google fuer den First-Party-Modus laedt:
+! ein verstecktes iframe, das einen Service Worker auf der Seiten-Domain
+! anmeldet und die Zaehlanfragen aus dessen Kontext stellt. Gemessen: laedt
+! mit Erweiterung durch.
+!
+! Der Pfad kommt aus Googles eigenem Abbild, nicht vom Seitenbetreiber - er
+! ist ueberall gleich, auch wenn der Betreiber seine uebrigen Pfade wuerfeln
+! laesst. Deshalb greift die Regel dort, wo Zufall nicht hinkommt.
+!
+! Was dabei NICHT kaputtgeht: Der Worker traegt ausschliesslich Zaehldaten. Er
+! bedient keinen Inhalt, keine Anmeldung, keinen Warenkorb. Faellt er weg,
+! versucht Analytics den gewoehnlichen Weg - und der ist geblockt.
+/_/service_worker/*/sw_iframe.html
+/_/service_worker/*/sw.js
+
+! ---------------------------------------------------------------------------
+! Zaehl-Buckets, die wie Cloud-Infrastruktur aussehen
+! ---------------------------------------------------------------------------
+! Gemessen am 04.09.2026 an adblock.turtlecute.org. Zwei S3-Buckets liefen
+! durch, waehrend die uebrigen Werbe-Buckets derselben Seite (adtago,
+! advice-ads) laengst in EasyList stehen.
+!
+! Die Tarnung liegt im Namen: Der Host heisst nach dem Cloud-Anbieter, nicht
+! nach dem Zaehldienst. Wer die Anfrage sieht, liest "amazonaws.com" und hakt
+! sie als Infrastruktur ab.
+!
+! Eng genug ist es: S3-Bucketnamen sind weltweit eindeutig, ein Bucket gehoert
+! genau einem. Geblockt wird dieser eine, nicht s3.amazonaws.com - eine Regel
+! auf den Anbieter wuerde halbe Websites mitnehmen.
+!
+! Was dabei NICHT kaputtgeht: Beide Buckets liefern ausschliesslich
+! Zaehlskripte. Sie tragen keine Bilder, keine Downloads, keinen Inhalt.
+||analytics.s3.amazonaws.com^
+||analyticsengine.s3.amazonaws.com^
+
+! ---------------------------------------------------------------------------
+! vidmoly.biz — „AdBlock Erkannt"
+! ---------------------------------------------------------------------------
+! Gemessen am 09.09.2026 an vidmoly.biz/embed-vdo32t6p9sb8.html: Ohne
+! Erweiterung laeuft die Seite, mit Erweiterung legt sich eine schwarze Karte
+! (`#x-adb-root`) ueber den Player. Der Quelltext der Seite zeigt ZWEI
+! Pruefungen in einem Inline-Skript:
+!
+!   1. ein Koeder-`div` mit den Klassen `pub_300x250 … text-ad textAd …`,
+!      gemessen wird `offsetHeight === 0` bzw. `display: none` - unsere
+!      generische Kosmetik versteckt genau diese Klassen;
+!   2. `fetch('https://googleads.g.doubleclick.net/pagead/id', {method:'HEAD',
+!      mode:'no-cors'})` - schlaegt der fehl, gilt der Blocker als erkannt.
+!
+! Beide einzeln zu entschaerfen genuegt nicht (gemessen: Koeder sichtbar
+! machen allein liess die Karte stehen, `window.adsbygoogle` setzen ebenso -
+! die Variable fragt die Seite gar nicht ab). Deshalb wird das Skript selbst
+! abgebrochen, sobald es sich zu erkennen gibt: `document.createElement` ist
+! der erste Zugriff des Skripts, `x-adb-root` steht in seinem Text.
+!
+! Warum das nichts kaputtmacht: Getroffen wird nur ein Skript, dessen Text
+! `x-adb-root` enthaelt - die Sperrkarte selbst. Der Player laeuft in einem
+! anderen Skript.
+vidmoly.biz##+js(acs, document.createElement, x-adb-root)
+
+! ---------------------------------------------------------------------------
+! Die Anfrage, an der Erkennungsskripte messen
+! ---------------------------------------------------------------------------
+! `googleads.g.doubleclick.net/pagead/id` ist keine Werbung, sondern eine
+! Kennungs-Abfrage - und der Standardgriff, mit dem Seiten einen Blocker
+! erkennen: Sie schicken sie per `fetch` und werten den FEHLER aus. Geblockt
+! verraet sie uns also; durchgelassen traegt sie eine Kennung nach draussen.
+!
+! Die Attrappe loest beides: Chrome beantwortet die Anfrage aus dem Paket mit
+! einer leeren Datei, es geht nichts ins Netz, und der `fetch` schlaegt nicht
+! fehl. Gilt fuer alle Seiten, nicht nur fuer eine - der Griff ist ueberall
+! derselbe (gemessen am 09.09.2026 an vidmoly.biz).
+||googleads.g.doubleclick.net/pagead/id$xmlhttprequest,redirect=nooptext

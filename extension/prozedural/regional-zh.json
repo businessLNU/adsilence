@@ -1,0 +1,14 @@
+{
+"141jj.com":[
+{"wahl":"li","text":"/贊助|推廣/"}
+],
+"copyfuture.com":[
+{"wahl":".tabbable > div","text":"宝红"}
+],
+"news.sohu.com":[
+{"wahl":".list16 > ul > li","text":"广告"}
+],
+"www.sohu.com":[
+{"wahl":".list16 > ul > li","text":"广告"}
+]
+}

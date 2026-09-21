@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="AdSilence">
+  <!--
+    Die kleine optische Groesse, fuer 16 und 32 Pixel.
+
+    Dieselbe Silhouette wie die grosse Fassung — gleicher Ring, gleiche
+    Augenstellung, gleiche Bandneigung — aber ohne Gewebe, Wellenkanten,
+    Licht- und Schattenstreifen. Was bei 128 px als Material liest, ist bei
+    16 px ein Pixel Grau, und ein Pixel Grau ist Schmutz, kein Detail.
+
+    Die Augen stehen bei r=7,5 statt 7 und das Band reicht von 48 bis 69 statt
+    49 bis 68: Feine Formen fallen beim Herunterrechnen zuerst weg, also
+    bekommen sie hier etwas mehr Masse. Die Neigung von -8 Grad bleibt — sie
+    ist der Unterschied zwischen einem Klebeband und einem Balken.
+  -->
+  <defs>
+    <linearGradient id="grund" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6821f"/>
+      <stop offset="1" stop-color="#e65909"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#grund)"/>
+  <g transform="translate(16.13 16.13) scale(0.957)">
+    <!-- Dasselbe Dunkel wie auf der Website, nicht Weiss: Auf der orangen
+         Kachel steht es bei 5,4:1 gegen #e65909 und 7,5:1 gegen #f6821f,
+         und es ist Zeichen fuer Zeichen dieselbe Marke wie im Seitenkopf.
+         Das Klebeband bleibt grau — es ist Material, keine Marke. -->
+    <g fill="#10131b">
+      <path d="M 88.03 77.62 A 47 47 0 1 1 95.55 61.60 L 79.07 57.40 A 30 30 0 1 0 74.27 67.63 Z"/>
+      <circle cx="38" cy="39" r="7.5"/>
+      <circle cx="62" cy="39" r="7.5"/>
+    </g>
+    <!-- Dieselben Bandkanten wie in der grossen Fassung: dort reicht das
+         gestreckte Band von -2,9 bis 105,6, hier steht das als runde Zahl. -->
+    <g transform="rotate(-8 50 58.5)">
+      <rect x="-2.9" y="48" width="108.5" height="21" fill="#d2d5da"/>
+      <rect x="-2.9" y="48" width="108.5" height="2.6" fill="#e8eaed"/>
+      <rect x="-2.9" y="66.4" width="108.5" height="2.6" fill="#b9bdc5"/>
+    </g>
+  </g>
+</svg>

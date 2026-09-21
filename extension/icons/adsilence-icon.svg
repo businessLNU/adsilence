@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="AdSilence">
+  <!--
+    Das App-Symbol der Erweiterung: dasselbe Zeichen wie auf der Website, auf
+    der Kachel, die ein Browser in der Leiste zeigt.
+
+    ── Warum es aus `demo/public/adsilence-icon.svg` UEBERNOMMEN ist ─────────
+    Hier stand bis zum 05.09.2026 eine eigene Fassung mit anderen Massen: Ring
+    43/27,5 statt 47/30, Augen bei (53|52) und (75|52) statt (38|39) und
+    (62|39). Sie stammte aus einem frueheren Anlauf und ist mit dem Zeichen der
+    Website nie mitgewandert — nebeneinander gestellt waren es zwei Gesichter.
+    Wer das Zeichen aendert, aendert es dort und kopiert den Block hierher; die
+    Begruendung zu jedem Mass steht in jener Datei und wird hier nicht
+    wiederholt.
+
+    ── Die Kachel ───────────────────────────────────────────────────────────
+    Verlauf von hell nach dunkel, dieselben zwei Werte wie `BRAND_GRADIENT_*`
+    (#f6821f und #e65909). Sie stehen hier als Zahl und nicht als Variable: Ein
+    SVG in einem Erweiterungspaket sieht keine `.env` und keine CSS-Variable
+    der Seite — es wird vom Browser gerendert, lange bevor irgendetwas von uns
+    laeuft. Wer die Marke umstellt, stellt diese beiden Werte mit um.
+
+    Das Zeichen liegt in seinem eigenen Koordinatenfeld (-6 bis 106) und wird
+    mit `scale(0.957)` so eingesetzt, dass der Ring einen Durchmesser von 90
+    von 128 Punkten bekommt — knapp 70 %, die uebliche Kachelaufteilung. Der
+    Versatz 16,13 setzt den Ringmittelpunkt (50|50) auf (64|64), also genau in
+    die Mitte.
+  -->
+  <defs>
+    <linearGradient id="grund" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6821f"/>
+      <stop offset="1" stop-color="#e65909"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#grund)"/>
+  <g transform="translate(16.13 16.13) scale(0.957)">
+    <!-- Dasselbe Dunkel wie auf der Website, nicht Weiss: Auf der orangen
+         Kachel steht es bei 5,4:1 gegen #e65909 und 7,5:1 gegen #f6821f,
+         und es ist Zeichen fuer Zeichen dieselbe Marke wie im Seitenkopf.
+         Das Klebeband bleibt grau — es ist Material, keine Marke. -->
+    <g fill="#10131b">
+    <path d="M 88.03 77.62 A 47 47 0 1 1 95.55 61.60 L 79.07 57.40 A 30 30 0 1 0 74.27 67.63 Z"/>
+    <circle cx="38" cy="39" r="7"/>
+    <circle cx="62" cy="39" r="7"/>
+    </g>
+    <pattern id="gewebe" width="4.2" height="1" patternUnits="userSpaceOnUse">
+    <rect width="0.5" height="1" fill="#b9bdc5" opacity=".28"/>
+    </pattern>
+    <g transform="rotate(-8 50 58.5) translate(51.38 0) scale(1.08 1) translate(-51.38 0)">
+    <path d="M 2.44 49.27 L 5.69 49.05 L 8.94 49.10 L 12.19 48.66 L 15.44 49.03 L 18.69 48.99 L 21.94 49.32 L 25.19 48.91 L 28.43 48.91 L 31.68 48.78 L 34.93 49.12 L 38.18 49.18 L 41.43 49.08 L 44.68 48.87 L 47.93 48.77 L 51.18 49.09 L 54.43 49.10 L 57.68 49.23 L 60.93 48.77 L 64.18 48.93 L 67.43 48.83 L 70.68 49.31 L 73.93 49.03 L 77.17 49.07 L 80.42 48.69 L 83.67 49.00 L 86.92 49.07 L 90.17 49.24 L 93.42 48.97 L 96.67 48.81 L 99.92 48.89 L 99.52 48.89 L 100.62 55.37 L 99.72 61.85 L 100.82 68.34 L 99.92 68.34 L 96.67 67.96 L 93.42 67.98 L 90.17 67.71 L 86.92 68.09 L 83.67 68.12 L 80.42 68.18 L 77.17 67.89 L 73.93 67.79 L 70.68 67.98 L 67.43 68.11 L 64.18 68.25 L 60.93 67.86 L 57.68 67.91 L 54.43 67.77 L 51.18 68.26 L 47.93 68.06 L 44.68 68.15 L 41.43 67.69 L 38.18 67.97 L 34.93 67.97 L 31.68 68.29 L 28.43 68.01 L 25.19 67.89 L 21.94 67.80 L 18.69 68.02 L 15.44 68.23 L 12.19 68.06 L 8.94 67.97 L 5.69 67.70 L 2.44 68.08 L 1.94 68.08 L 3.04 61.81 L 2.14 55.54 L 3.54 49.27 Z" fill="#d2d5da"/>
+    <path d="M 2.44 49.27 L 5.69 49.05 L 8.94 49.10 L 12.19 48.66 L 15.44 49.03 L 18.69 48.99 L 21.94 49.32 L 25.19 48.91 L 28.43 48.91 L 31.68 48.78 L 34.93 49.12 L 38.18 49.18 L 41.43 49.08 L 44.68 48.87 L 47.93 48.77 L 51.18 49.09 L 54.43 49.10 L 57.68 49.23 L 60.93 48.77 L 64.18 48.93 L 67.43 48.83 L 70.68 49.31 L 73.93 49.03 L 77.17 49.07 L 80.42 48.69 L 83.67 49.00 L 86.92 49.07 L 90.17 49.24 L 93.42 48.97 L 96.67 48.81 L 99.92 48.89 L 99.52 48.89 L 100.62 55.37 L 99.72 61.85 L 100.82 68.34 L 99.92 68.34 L 96.67 67.96 L 93.42 67.98 L 90.17 67.71 L 86.92 68.09 L 83.67 68.12 L 80.42 68.18 L 77.17 67.89 L 73.93 67.79 L 70.68 67.98 L 67.43 68.11 L 64.18 68.25 L 60.93 67.86 L 57.68 67.91 L 54.43 67.77 L 51.18 68.26 L 47.93 68.06 L 44.68 68.15 L 41.43 67.69 L 38.18 67.97 L 34.93 67.97 L 31.68 68.29 L 28.43 68.01 L 25.19 67.89 L 21.94 67.80 L 18.69 68.02 L 15.44 68.23 L 12.19 68.06 L 8.94 67.97 L 5.69 67.70 L 2.44 68.08 L 1.94 68.08 L 3.04 61.81 L 2.14 55.54 L 3.54 49.27 Z" fill="url(#gewebe)"/>
+    <path d="M 3.61 50.78 L 6.78 50.71 L 9.95 50.54 L 13.12 50.32 L 16.30 50.65 L 19.47 50.64 L 22.64 50.91 L 25.81 50.44 L 28.98 50.53 L 32.15 50.36 L 35.32 50.79 L 38.49 50.74 L 41.67 50.69 L 44.84 50.45 L 48.01 50.38 L 51.18 50.69 L 54.35 50.70 L 57.52 50.85 L 60.69 50.38 L 63.87 50.53 L 67.04 50.40 L 70.21 50.87 L 73.38 50.69 L 76.55 50.66 L 79.72 50.37 L 82.89 50.47 L 86.06 50.71 L 89.24 50.74 L 92.41 50.76 L 95.58 50.34 L 98.75 50.54 L 98.75 52.54 L 95.58 52.34 L 92.41 52.76 L 89.24 52.74 L 86.06 52.71 L 82.89 52.47 L 79.72 52.37 L 76.55 52.66 L 73.38 52.69 L 70.21 52.87 L 67.04 52.40 L 63.87 52.53 L 60.69 52.38 L 57.52 52.85 L 54.35 52.70 L 51.18 52.69 L 48.01 52.38 L 44.84 52.45 L 41.67 52.69 L 38.49 52.74 L 35.32 52.79 L 32.15 52.36 L 28.98 52.53 L 25.81 52.44 L 22.64 52.91 L 19.47 52.64 L 16.30 52.65 L 13.12 52.32 L 9.95 52.54 L 6.78 52.71 L 3.61 52.78 Z" fill="#e8eaed"/>
+    <path d="M 3.61 64.41 L 6.78 64.07 L 9.95 64.50 L 13.12 64.44 L 16.30 64.69 L 19.47 64.27 L 22.64 64.27 L 25.81 64.25 L 28.98 64.51 L 32.15 64.64 L 35.32 64.38 L 38.49 64.33 L 41.67 64.11 L 44.84 64.56 L 48.01 64.46 L 51.18 64.66 L 54.35 64.18 L 57.52 64.30 L 60.69 64.27 L 63.87 64.60 L 67.04 64.57 L 70.21 64.35 L 73.38 64.26 L 76.55 64.18 L 79.72 64.61 L 82.89 64.48 L 86.06 64.60 L 89.24 64.11 L 92.41 64.34 L 95.58 64.31 L 98.75 64.68 L 98.75 66.48 L 95.58 66.11 L 92.41 66.14 L 89.24 65.91 L 86.06 66.40 L 82.89 66.28 L 79.72 66.41 L 76.55 65.98 L 73.38 66.06 L 70.21 66.15 L 67.04 66.37 L 63.87 66.40 L 60.69 66.07 L 57.52 66.10 L 54.35 65.98 L 51.18 66.46 L 48.01 66.26 L 44.84 66.36 L 41.67 65.91 L 38.49 66.13 L 35.32 66.18 L 32.15 66.44 L 28.98 66.31 L 25.81 66.05 L 22.64 66.07 L 19.47 66.07 L 16.30 66.49 L 13.12 66.24 L 9.95 66.30 L 6.78 65.87 L 3.61 66.21 Z" fill="#b9bdc5"/>
+    </g>
+  </g>
+</svg>

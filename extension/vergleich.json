@@ -1,0 +1,79 @@
+{
+  "gemessenAm": "2026-09-05T14:34:59.553Z",
+  "messwerkzeug": "https://adblock-tester.com/",
+  "umfang": "11 Dienste, 22 Prüfungen",
+  "laeufeJeEintrag": 3,
+  "hinweis": "Gemessen wird die WERKSEINSTELLUNG jeder Erweiterung — was ein Kunde nach der Installation bekommt, ohne eine Liste dazuzuschalten. AdGuard etwa bringt 53 Regelsätze mit und liefert einen davon eingeschaltet aus.",
+  "browser": "Google Chrome for Testing 148.0.7778.96",
+  "ergebnisse": [
+    {
+      "name": "ohne Erweiterung",
+      "version": "—",
+      "punkte": 43,
+      "von": 43,
+      "bis": 43,
+      "werte": [
+        43,
+        43,
+        43
+      ],
+      "bereit": true
+    },
+    {
+      "name": "AdSilence",
+      "version": "1.0.0",
+      "punkte": 100,
+      "von": 100,
+      "bis": 100,
+      "werte": [
+        100,
+        100,
+        100
+      ],
+      "bereit": true,
+      "profilVorbereitet": false
+    },
+    {
+      "name": "uBlock Origin Lite",
+      "version": "2026.901.1442",
+      "punkte": 91,
+      "von": 91,
+      "bis": 91,
+      "werte": [
+        91,
+        91,
+        91
+      ],
+      "bereit": true,
+      "profilVorbereitet": false
+    },
+    {
+      "name": "AdGuard AdBlocker",
+      "version": "5.5.2.17",
+      "punkte": 77,
+      "von": 77,
+      "bis": 77,
+      "werte": [
+        77,
+        77,
+        77
+      ],
+      "bereit": true,
+      "profilVorbereitet": false
+    },
+    {
+      "name": "Ghostery",
+      "version": "10.6.0",
+      "punkte": 96,
+      "von": 96,
+      "bis": 96,
+      "werte": [
+        96,
+        96,
+        96
+      ],
+      "bereit": true,
+      "profilVorbereitet": false
+    }
+  ]
+}

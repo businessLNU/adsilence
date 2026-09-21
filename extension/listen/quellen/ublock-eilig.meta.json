@@ -1,0 +1,15 @@
+{
+  "id": "ublock-eilig",
+  "name": "uBlock filters - Quick fixes",
+  "url": "https://ublockorigin.github.io/uAssets/filters/quick-fixes.txt",
+  "geholtAm": "2026-09-03T19:21:36.732Z",
+  "bytes": 74285,
+  "zeilen": 528,
+  "sha256": "bbd358b90677203ef0082ac303d8887d7b9195642b4dd0e3474d33aeb0dbb70e",
+  "titel": "uBlock₀ filters – Quick fixes",
+  "version": null,
+  "zuletztGeaendert": "Wed, 02 Sep 2026 13:38:45 +0000",
+  "lizenz": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+  "etag": "W/\"6a99be2e-1222d\"",
+  "ausDatei": null
+}

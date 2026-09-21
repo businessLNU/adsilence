@@ -1,0 +1,15 @@
+{
+  "id": "antiadblock",
+  "name": "Adblock Warning Removal List",
+  "url": "https://easylist-downloads.adblockplus.org/antiadblockfilters.txt",
+  "geholtAm": "2026-09-08T14:46:33.153Z",
+  "bytes": 72661,
+  "zeilen": 3025,
+  "sha256": "0e509852240dd3d69ea3f8662a48b0df6e5bc9a6f47eaa70b3f4dc490e2d712a",
+  "titel": "Adblock Warning Removal List",
+  "version": "202609081432",
+  "zuletztGeaendert": "08 Sep 2026 14:32 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "\"56098306f39450d7e1a6cdfe16c6b85e:1788878388.740267\"",
+  "ausDatei": null
+}

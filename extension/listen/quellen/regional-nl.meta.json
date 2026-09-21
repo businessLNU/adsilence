@@ -1,0 +1,15 @@
+{
+  "id": "regional-nl",
+  "name": "EasyList Dutch",
+  "url": "https://easylist-downloads.adblockplus.org/easylistdutch.txt",
+  "geholtAm": "2026-09-03T19:21:38.352Z",
+  "bytes": 69004,
+  "zeilen": 1576,
+  "sha256": "5b74165dacda26b1256c59890088a788a5ff79444352fd554e227cf958cca998",
+  "titel": "EasyList Dutch",
+  "version": "202609031912",
+  "zuletztGeaendert": "03 Sep 2026 19:12 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "\"9bd1913a4227e3d22d78b77877d11d2c:1788463084.676501\"",
+  "ausDatei": null
+}

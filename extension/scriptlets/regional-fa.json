@@ -1,0 +1,9 @@
+{
+"blogfa.com":[
+{"name":"set-constant","args":["disableselect","true"]},
+{"name":"set-constant","args":["showbanner","noopFunc"]}
+],
+"soft98.ir":[
+{"name":"set-constant","args":["Object.prototype.checkAdBlocker","noopFunc"]}
+]
+}

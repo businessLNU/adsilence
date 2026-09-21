@@ -1,0 +1,11 @@
+div[style^="height:    250px; width:    300px;"],
+div[style^="width:    160px; height:    600px; margin: 0px auto; min-width: 160px; min-height: 600px;"],
+div[style^="width:    300px; height:    250px;"],
+img[height="   250"][width="   300"],
+img[height="   90"][width="   728"],
+ins[style$="height:    90px; width:    728px;"],
+amp-img[height="   120"],
+amp-img[width="   300"],
+amp-img[width="   336"],
+div[id][class][style^="display"][style*="hidden"][style*="width:   "],
+ins[id][style*="--gn-ov-ad-height"]{display:none!important}

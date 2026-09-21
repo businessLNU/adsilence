@@ -1,0 +1,15 @@
+{
+  "id": "regional-de",
+  "name": "EasyList Germany",
+  "url": "https://easylist.to/easylistgermany/easylistgermany.txt",
+  "geholtAm": "2026-09-03T19:21:37.791Z",
+  "bytes": 276357,
+  "zeilen": 6025,
+  "sha256": "53b813ccd999f259d9a9ab0afe7ba29d904785b4424cca8e7991776ff3b79aa8",
+  "titel": "EasyList Germany",
+  "version": "202609031749",
+  "zuletztGeaendert": "03 Sep 2026 17:49 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "W/\"6a99b356-43785\"",
+  "ausDatei": null
+}

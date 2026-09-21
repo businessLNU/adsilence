@@ -1,0 +1,15 @@
+{
+  "id": "hosts",
+  "name": "Peter Lowe's List",
+  "url": "https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=0&mimetype=plaintext",
+  "geholtAm": "2026-09-03T22:35:55.144Z",
+  "bytes": 70145,
+  "zeilen": 3565,
+  "sha256": "5d8e65598ac93060110d3f44f06d793b9d52392f872e8d2ffec21504519f2a48",
+  "titel": null,
+  "version": null,
+  "zuletztGeaendert": "Thu, 03 Sep 2026 10:11:09 GMT",
+  "lizenz": null,
+  "etag": null,
+  "ausDatei": null
+}

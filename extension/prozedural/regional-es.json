@@ -1,0 +1,44 @@
+{
+"atlantico.net":[
+{"wahl":".recirculation","text":"Contenido patrocinado"}
+],
+"eldiariony.com":[
+{"wahl":".module--external","text":"Contenido Patrocinado"}
+],
+"elquindiano.com":[
+{"wahl":"span","text":"PUBLICIDAD"}
+],
+"eltiempo.es":[
+{"wahl":".container","text":"Ofrecido por"}
+],
+"falabella.com":[
+{"wahl":".products-carousel-wrapper","text":"Patrocinado"}
+],
+"hoy.com.do":[
+{"wahl":"span","text":"Publicidad"}
+],
+"laboyanos.com":[
+{"wahl":"span","text":"PUBLICIDAD"}
+],
+"laopinion.com":[
+{"wahl":".module--external","text":"Contenido Patrocinado"}
+],
+"laraza.com":[
+{"wahl":".module--external","text":"Contenido Patrocinado"}
+],
+"laregion.es":[
+{"wahl":".recirculation","text":"Contenido patrocinado"}
+],
+"larepublica.co":[
+{"wahl":".row.H_Img_V_Title_Center.mb-3","text":"Contenido Patrocinado"}
+],
+"mediamarkt.es":[
+{"wahl":"[data-test=\"mms-search-main\"] aside","text":"Patrocinado"}
+],
+"recetasfacilescocina.com":[
+{"wahl":"section > h3","text":"Publicidad"}
+],
+"walmart.com.mx":[
+{"wahl":"[data-testid=\"item-stack\"] > div","text":"Patrocinado"}
+]
+}

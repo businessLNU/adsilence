@@ -1,0 +1,15 @@
+{
+  "id": "regional-fa",
+  "name": "Adblock Iran",
+  "url": "https://raw.githubusercontent.com/farrokhi/adblock-iran/master/filter.txt",
+  "geholtAm": "2026-09-03T19:21:41.117Z",
+  "bytes": 48053,
+  "zeilen": 1361,
+  "sha256": "51b358c8c20f02835fd1d7454e81e63c92f3dcdcfea8baf01f2a1d686397e12a",
+  "titel": "Adblock-Iran",
+  "version": "182",
+  "zuletztGeaendert": null,
+  "lizenz": "BSD Simplified",
+  "etag": "W/\"de0738a928f7e0102f4a07d11f3b12bc75aca3c70f207bac508d3df320e207f2\"",
+  "ausDatei": null
+}

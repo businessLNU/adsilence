@@ -1,0 +1,336 @@
+{
+"24boxing.com.ua":[
+{"wahl":"article > h2","text":"/реклама/i"},
+{"wahl":"article > h3","text":"/реклама|партнер|яндекс/i"}
+],
+"2gis.by":[
+{"wahl":"span","text":"/реклама/i"}
+],
+"2gis.kz":[
+{"wahl":"span","text":"/реклама/i"}
+],
+"2gis.ru":[
+{"wahl":"span","text":"/реклама/i"}
+],
+"433175.ru":[
+{"wahl":".post-footer > span","text":"Реклама на сайте"}
+],
+"allboxing.ru":[
+{"wahl":".voting > .block_title","text":"Новости партнеров"}
+],
+"amic.ru":[
+{"wahl":".grid__title","text":"Новости партнеров"}
+],
+"apostrophe.ua":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"arbatmedia.kz":[
+{"wahl":"h2","text":"/^новости партн|^новини партн/i"}
+],
+"auto62rus.ru":[
+{"wahl":".text-center","text":"/ДВИГАТЕЛЬ ТОРГОВЛИ|И еще немного рекламы|новости партнеров/i"}
+],
+"benzin-price.ru":[
+{"wahl":"p > strong","text":"реклама"}
+],
+"bibe.ru":[
+{"wahl":"h4","text":"Реклама :"},
+{"wahl":"p","text":"Реклама :"}
+],
+"cnews.ru":[
+{"wahl":"a[href^=\"https://www.cnews.ru/redirect.php\"]","text":"Дзен"}
+],
+"compromat.group":[
+{"wahl":".side_block > .side_header","text":"Новости партнеров"}
+],
+"dachnye-sovety.ru":[
+{"wahl":"h6","text":"РЕКОМЕНДУЕМ ПОЧИТАТЬ:"}
+],
+"day.kyiv.ua":[
+{"wahl":"h2","text":"/^новости партн|^новини партн/i"}
+],
+"dokumental.ru":[
+{"wahl":"h2","text":"/^реклама/i"}
+],
+"drive2.com":[
+{"wahl":".c-header","text":"/Ads|Реклама/"}
+],
+"drive2.ru":[
+{"wahl":".c-header","text":"/Ads|Реклама/"}
+],
+"drivenn.ru":[
+{"wahl":"main > h3","text":"/Новости партнёров|Популярное в сети/"}
+],
+"efxi.ru":[
+{"wahl":".container > .footer","text":"реклама"}
+],
+"fishki.net":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"football-ukraine.com":[
+{"wahl":".site-section-header","text":"РЕКЛАМА"}
+],
+"forum.materinstvo.ru":[
+{"wahl":".maintitlecollapse","text":"Реклама"}
+],
+"frankmedia.ru":[
+{"wahl":".checkboxes > .label","text":"Frank Partners"}
+],
+"fukushima-news.ru":[
+{"wahl":".sidebar > .block-title","text":"/^реклама/i"}
+],
+"gsett.ru":[
+{"wahl":"p","text":"Комплектующие предоставлены"}
+],
+"headinsider.net":[
+{"wahl":"span","text":"Интересные новости"}
+],
+"hvylya.net":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"igrigo.net":[
+{"wahl":"[class*=\"navi_title\"]","text":"/браузер|партнеры/i"}
+],
+"informator.ua":[
+{"wahl":"div[id^=\"brid-player\"] ~ p","text":"AdBlock"}
+],
+"infosmi.net":[
+{"wahl":".mvp-widget-home-title","text":"Реклама"}
+],
+"infox.ru":[
+{"wahl":".stlt","text":"Реклама"},
+{"wahl":"h2","text":"/^реклама/i"}
+],
+"ixbt.com":[
+{"wahl":".b-article > h4","text":"Справочник по ценам"}
+],
+"kavkaz-uzel.eu":[
+{"wahl":"article div","text":"/^Реклама$/"}
+],
+"kino-archive.ru":[
+{"wahl":"[class$=\"title\"]","text":"/предложения/i"}
+],
+"life.ru":[
+{"wahl":"[class^=\"styles_title_\"]","text":"Новости партнеров"}
+],
+"lion-tv.org":[
+{"wahl":"#rightside > div","text":"На правах рекламы"}
+],
+"mignews.com":[
+{"wahl":"h6","text":"/новости партнеров|знакомства/i"}
+],
+"mirknig.su":[
+{"wahl":"td[width=\"240\"] > table[width=\"240\"] ~ table[width=\"240\"]","text":"Реклама"}
+],
+"molbuk.ua":[
+{"wahl":".mid_col > b","text":"РЕКЛАМА"}
+],
+"mymirknig.ru":[
+{"wahl":"td[width=\"240\"] > table[width=\"240\"] ~ table[width=\"240\"]","text":"Реклама"}
+],
+"myshared.ru":[
+{"wahl":"span","text":"Advertisements"}
+],
+"myshows.me":[
+{"wahl":".AsideHeading","text":"/kinopoisk|кинопоиск/i"}
+],
+"nashamama.com":[
+{"wahl":"p > b","text":"каво також:"}
+],
+"newsomsk.ru":[
+{"wahl":"[style*=\"font\"]","text":"Новости партнеров"}
+],
+"newstudio.tv":[
+{"wahl":".post_wrap span[class^=\"post\"]","text":"/при поддержке/i"}
+],
+"novate.ru":[
+{"wahl":"#right > h2","text":"Рекомендуем"}
+],
+"novorosinform.org":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"nsn.fm":[
+{"wahl":"h4","text":"партнеры"}
+],
+"oko-planet.su":[
+{"wahl":".bltitle","text":"Реклама"}
+],
+"old.myshows.me":[
+{"wahl":".container > .marginBottomBase","text":"/Смотри на КиноПоиск HD|Watch on KinoPoisk HD/"}
+],
+"onliner.by":[
+{"wahl":"em","text":"нож блокировщику"},
+{"wahl":"strong","text":"нож блокировщику"}
+],
+"pkzsk.info":[
+{"wahl":".widget-title","text":"Новости партнёров"}
+],
+"pogoda.ru":[
+{"wahl":"body > h3","text":"/^Новости/"},
+{"wahl":"tr > th","text":"Реклама на Погода.ру"}
+],
+"pravdanews.info":[
+{"wahl":"[class*=\"_title\"]","text":"/ партн|реклама/i"}
+],
+"primpogoda.ru":[
+{"wahl":"h4","text":"Смотрите также"}
+],
+"procherk.info":[
+{"wahl":".module-title > .title","text":"/ПАРТНЕРІВ/i"}
+],
+"profootball.ua":[
+{"wahl":".widget_custom_html","text":"/^новости партн|^новини партнер|^реклама/i"}
+],
+"programmersforum.ru":[
+{"wahl":"a[href*=\"://clck.ru/\"] ~ *","text":"https://"},
+{"wahl":"a[href*=\"://slurm.club/\"] ~ *","text":"https://"}
+],
+"provladimir.ru":[
+{"wahl":".stream-item-widget","text":"Реклама"}
+],
+"radiorecord.fm":[
+{"wahl":"h2","text":"/^реклама/i"}
+],
+"rambler.ru":[
+{"wahl":"div:has(> div[style^=\"min-height:\"]) > p ~ div","text":"Продолжение истории после рекламы"}
+],
+"remontka.pro":[
+{"wahl":"span","text":"Реклама"}
+],
+"respawn.media":[
+{"wahl":".content-table p","text":"Где продается"},
+{"wahl":"b","text":"Где купить"},
+{"wahl":"h2","text":"Где купить модель из топа"},
+{"wahl":"p","text":"Где купить"}
+],
+"ria-m.tv":[
+{"wahl":"h2","text":"/^реклама/i"}
+],
+"ruspravda.info":[
+{"wahl":"[class*=\"_title\"]","text":"/ партн|реклама/i"}
+],
+"seo-master.org":[
+{"wahl":"span[class]","text":"Это может быть интересно"}
+],
+"seosprint.net":[
+{"wahl":"span[class]","text":"Это может быть интересно"}
+],
+"sharknews.ru":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"sho.org.ua":[
+{"wahl":".sample-posts > h2","text":"/партнер/i"}
+],
+"sntch.com":[
+{"wahl":"article > p","text":"/отключите блокировку рекламы!$/"}
+],
+"sovetromantica.com":[
+{"wahl":".header--text","text":"Реклама"}
+],
+"sovsport.ru":[
+{"wahl":"h2","text":"/получайте бонусы| ставки на/i"},
+{"wahl":"h3","text":"/получайте бонусы| ставки на/i"}
+],
+"spbit.ru":[
+{"wahl":".blue > .header","text":"партнеры"}
+],
+"sport-kr.com.ua":[
+{"wahl":".widget > .widgettitle","text":"Реклама"}
+],
+"sport.tut.by":[
+{"wahl":".sport-table tr > th ~ th","text":"Ставка"},
+{"wahl":"span > small","text":"Приведённые букмекерские коэффициенты"},
+{"wahl":"th > .tooltip-item","text":"К"}
+],
+"sport24.ru":[
+{"wahl":"div[aria-expanded=\"false\"]","text":"Реклама"}
+],
+"sports.ru":[
+{"wahl":".rightPart > div","text":"Реклама 18+"}
+],
+"stopgame.ru":[
+{"wahl":"[class^=\"_content\"] > div[class^=\"_video-wrapper\"] ~ [class] b","text":"/скидка|скидки|промокод|партнёр/i"}
+],
+"stravy.net":[
+{"wahl":".widget-title","text":"Реклама"}
+],
+"superhumor.ru":[
+{"wahl":"aside > .sidetitle","text":"Партнеры"}
+],
+"syl.ru":[
+{"wahl":".featured_articles > .header","text":"/^Новости партнеров|^Также читайте/"}
+],
+"te.ua":[
+{"wahl":".textwidget","text":"adrotate_ad"}
+],
+"tehnowar.ru":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"thg.ru":[
+{"wahl":"p","text":"Erid:"}
+],
+"tochka.net":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"topdaynews.ru":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"tut.by":[
+{"wahl":"#utm_article_block > div > #article_body > p > strong","text":"/^Ниже/"}
+],
+"unian.net":[
+{"wahl":".title-without-border","text":"Новини партнерів"}
+],
+"unian.ua":[
+{"wahl":".title-without-border","text":"Новини партнерів"}
+],
+"ura.news":[
+{"wahl":"div[style^=\"font-size:\"][style*=\"16px\"] div:only-child > div","text":"Продолжение после рекламы"}
+],
+"utro.ru":[
+{"wahl":"[class*=\"title\"]","text":"/новости партнеров/i"}
+],
+"vip-prom.net":[
+{"wahl":"span[class]","text":"Это может быть интересно"}
+],
+"vkfaces.com":[
+{"wahl":".card-separator__title","text":"реклама"}
+],
+"vmgu.ru":[
+{"wahl":"span.articles_info > b","text":"Реклама:"}
+],
+"voffka.com":[
+{"wahl":"aside > .sidetitle","text":"Партнеры"}
+],
+"vokrug.tv":[
+{"wahl":".sidebar .h3","text":"За кадром"}
+],
+"vomske.ru":[
+{"wahl":".hr","text":"/Яндекс.Директ ВОмске|Другие новости/"}
+],
+"vsplanet.net":[
+{"wahl":".column.c-center > h2","text":"Реклама"}
+],
+"world-knigi.ru":[
+{"wahl":".module","text":"Реклама"}
+],
+"wotsite.net":[
+{"wahl":".article-right > div","text":"Реклама"},
+{"wahl":".container-mat p","text":"Реклама"}
+],
+"wworld.com.ua":[
+{"wahl":"h3","text":"/^нов.+партн.+р.в$/i"}
+],
+"yandex.ru":[
+{"wahl":".page__result .typo","text":"/^новости партн/i"}
+],
+"ytronews.ru":[
+{"wahl":"h4","text":"Новости партн"}
+],
+"zanmsk.ru":[
+{"wahl":"aside > h2","text":"/наши партн/i"}
+],
+"zhenskoe-mnenie.ru":[
+{"wahl":"div[style^=\"font-size\"]","text":"Также узнайте..."}
+]
+}

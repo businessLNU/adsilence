@@ -1,0 +1,15 @@
+{
+  "id": "regional-sv",
+  "name": "Frellwits Swedish Filter",
+  "url": "https://raw.githubusercontent.com/lassekongo83/Frellwits-filter-lists/master/Frellwits-Swedish-Filter.txt",
+  "geholtAm": "2026-09-03T19:21:40.916Z",
+  "bytes": 230603,
+  "zeilen": 3756,
+  "sha256": "fe09811f1e1a99a8a24eb94c7755667f0ae99a6c4b1c7a263cc6327885ebfcf3",
+  "titel": "Frellwit's Swedish Filter",
+  "version": null,
+  "zuletztGeaendert": "2026-09-03 09:45:07 CEST",
+  "lizenz": "GPL3 - https://github.com/lassekongo83/Frellwits-filter-lists/blob/master/LICENSE",
+  "etag": "W/\"121ce58a42a0c3339d1da7fc7dd75cf71c045355ee029c3ce4140ee2629ff8a2\"",
+  "ausDatei": null
+}

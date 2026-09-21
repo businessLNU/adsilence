@@ -1,0 +1,15 @@
+{
+  "id": "regional-id",
+  "name": "ABPindo",
+  "url": "https://raw.githubusercontent.com/ABPindo/indonesianadblockrules/master/subscriptions/abpindo.txt",
+  "geholtAm": "2026-09-03T19:21:40.552Z",
+  "bytes": 313601,
+  "zeilen": 10281,
+  "sha256": "40163072a0b7b95b3ac40001efe3558f0ec908761a5cc20c9fc586adde7cbe70",
+  "titel": "ABPindo",
+  "version": "202609012231",
+  "zuletztGeaendert": "01 Sep 2026 22:31 UTC",
+  "lizenz": "https://raw.githubusercontent.com/ABPindo/indonesianadblockrules/master/LICENSE",
+  "etag": "W/\"959ea43b04cb5785213aab5f0207cfc2971f53687c189a29c737516829441521\"",
+  "ausDatei": null
+}

@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fingerabdruck-Probe</title>
+    <script>
+      // Die Referenz, die eine Seite VOR dem Sitzungsereignis sichern kann.
+      //
+      // html2canvas und aehnliche Bibliotheken tun genau das beim Laden:
+      // `const echt = HTMLCanvasElement.prototype.toDataURL`. Das
+      // Hauptwelt-Skript der Erweiterung laeuft bei document_start und damit
+      // VOR dieser Zeile, gesichert wird also schon die Huelle. Was hier
+      // nachgewiesen werden soll: Auf einer freigegebenen Seite liefert AUCH
+      // diese Referenz den unveraenderten Wert. Die Huelle bleibt stehen und
+      // reicht nur noch durch; ein Rueckbau ueber defineProperty erreichte
+      // eine so gesicherte Referenz ohnehin nie.
+      window.__gesichert = {
+        toDataURL: HTMLCanvasElement.prototype.toDataURL,
+        getImageData: CanvasRenderingContext2D.prototype.getImageData,
+      };
+
+      // Die Faelschung, wie ein Seitenskript sie versuchen wuerde: SYNCHRON
+      // im head, also nach document_start und VOR der Antwort des
+      // Hintergrunds. Drei Angriffe: (a) ein eigenes "aus" mit dem Namen
+      // des Kanals, (b) ein Fremdereignis, das einen einmaligen Lauscher
+      // verbrauchen wuerde, (c) eine Handschlag-Frage, um das Geheimnis zu
+      // erfahren. Nur mit `?faelschung` in der Adresse, damit die uebrigen
+      // Messungen unberuehrt bleiben. Was ankommt, steht in __faelschung.
+      window.__faelschung = null;
+      if (location.search.includes('faelschung')) {
+        const f = { antwortAufFrage: null, ereignisseGesehen: 0 };
+        window.addEventListener('adsilence:handschlag-antwort', (e) => { f.antwortAufFrage = String(e.detail); }, true);
+        window.addEventListener('adsilence:fingerabdruck', () => { f.ereignisseGesehen++; }, true);
+        document.dispatchEvent(new CustomEvent('adsilence:handschlag'));
+        document.dispatchEvent(new CustomEvent('adsilence:fingerabdruck', { detail: 'x' }));
+        document.dispatchEvent(new CustomEvent('adsilence:fingerabdruck', { detail: '0' }));
+        window.dispatchEvent(new CustomEvent('adsilence:fingerabdruck', { detail: '0' }));
+        window.__faelschung = f;
+      }
+    </script>
+    <style>
+      body { font: 14px system-ui, sans-serif; margin: 24px; }
+      pre { background: #f4f4f4; padding: 8px; white-space: pre-wrap; }
+    </style>
+  </head>
+  <body>
+    <h1>Fingerabdruck-Probe</h1>
+    <p>
+      Diese Seite misst ohne fremde Bibliothek, was ein Fingerabdruck-Skript
+      messen wuerde. Aufgerufen wird sie von
+      <code>tests/laufzeit/fingerabdruck-probe.mjs</code>; von Hand geoeffnet
+      zeigt sie das Ergebnis unten.
+    </p>
+    <pre id="ausgabe">noch nichts gemessen</pre>
+
+    <script>
+      /*
+       * Alles in einer Funktion `window.__messe()`, die NICHT beim Laden
+       * laeuft. Der Grund: Die Erweiterung bekommt ihr Sitzungs-Token erst,
+       * wenn der Hintergrund geantwortet hat. Faesst die Seite vorher ein
+       * Canvas oder einen AudioBuffer an, legt die Huelle einen zufaelligen
+       * Seed fest, und die Messung „zwei Tabs, dieselbe Summe" ginge daneben,
+       * ohne dass an der Erweiterung etwas falsch waere. Die Probe wartet
+       * deshalb nach dem Laden und ruft dann erst auf.
+       */
+
+      // ── Hash ──────────────────────────────────────────────────────────────
+      // FNV-1a, 32 Bit, synchron. Nicht crypto.subtle: Das waere eine
+      // Promise-Kette, und die Seite soll ohne await messen koennen, damit
+      // jede Messung an genau EINEM Aufruf haengt. 127.0.0.1 ist ein sicherer
+      // Kontext, crypto.subtle gaebe es also.
+      function hashText(text) {
+        let h = 0x811c9dc5;
+        for (let i = 0; i < text.length; i++) {
+          h ^= text.charCodeAt(i);
+          h = Math.imul(h, 0x01000193);
+        }
+        return (h >>> 0).toString(16).padStart(8, '0');
+      }
+      function hashBytes(bytes) {
+        let h = 0x811c9dc5;
+        for (let i = 0; i < bytes.length; i++) {
+          h ^= bytes[i];
+          h = Math.imul(h, 0x01000193);
+        }
+        return (h >>> 0).toString(16).padStart(8, '0');
+      }
+
+      // ── Das Bild, das FingerprintJS malt ──────────────────────────────────
+      // Text mit Emoji (Schriftdarstellung liefert die Entropie), Farbverlauf,
+      // Boegen mit evenodd-Winding. Auf DECKENDEM Grund: Ohne das fillRect
+      // zuerst misst die Bruchprobe die native Verlustrechnung halbtransparenter
+      // Pixel (vormultipliziertes Alpha), die auch ohne Erweiterung
+      // Abweichungen bis 255 liefert.
+      function zeichneText(ctx, w, h) {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+        ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = '#f60';
+        ctx.fillRect(100, 1, 62, 20);
+        ctx.fillStyle = '#069';
+        ctx.font = '11pt "Times New Roman"';
+        const text = 'Cwm fjordbank gly ' + String.fromCharCode(55357, 56835);
+        ctx.fillText(text, 2, 15);
+        ctx.fillStyle = 'rgba(102, 204, 0, 0.2)';
+        ctx.font = '18pt Arial';
+        ctx.fillText(text, 4, 45);
+        zeichneGeometrieDarauf(ctx, w, h);
+      }
+      function zeichneGeometrieDarauf(ctx, w, h) {
+        const verlauf = ctx.createLinearGradient(0, 0, w, h);
+        verlauf.addColorStop(0, '#0af');
+        verlauf.addColorStop(1, '#fa0');
+        ctx.fillStyle = verlauf;
+        ctx.globalCompositeOperation = 'multiply';
+        ctx.fillRect(w - 40, 5, 30, 30);
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = '#f0f';
+        ctx.beginPath();
+        ctx.arc(50, 50, 20, 0, Math.PI * 2, true);
+        ctx.arc(50, 50, 10, 0, Math.PI * 2, true);
+        ctx.fill('evenodd');
+      }
+      // Nur Geometrie, kein Text: Die Textregel der Erweiterung laesst dieses
+      // Canvas unangetastet, sein Hash muss dem Grundwert gleichen.
+      function zeichneOhneText(ctx, w, h) {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = '#f60';
+        ctx.fillRect(100, 1, 62, 20);
+        zeichneGeometrieDarauf(ctx, w, h);
+      }
+
+      const B = 240;
+      const H = 60;
+
+      function neuesCanvas(dok, b, h) {
+        const c = dok.createElement('canvas');
+        c.width = b;
+        c.height = h;
+        return c;
+      }
+
+      function canvasHash(zeichner, dok) {
+        const c = neuesCanvas(dok || document, B, H);
+        zeichner(c.getContext('2d'), B, H);
+        return hashText(c.toDataURL());
+      }
+
+      // ── Die Huellen, deren Text und Form geprueft werden ─────────────────
+      function eingehuellte() {
+        const liste = [];
+        const nimm = (name, fn) => {
+          if (typeof fn === 'function') liste.push([name, fn]);
+        };
+        nimm('HTMLCanvasElement.prototype.getContext', HTMLCanvasElement.prototype.getContext);
+        nimm('HTMLCanvasElement.prototype.toDataURL', HTMLCanvasElement.prototype.toDataURL);
+        nimm('HTMLCanvasElement.prototype.toBlob', HTMLCanvasElement.prototype.toBlob);
+        nimm('CanvasRenderingContext2D.prototype.getImageData', CanvasRenderingContext2D.prototype.getImageData);
+        nimm('CanvasRenderingContext2D.prototype.fillText', CanvasRenderingContext2D.prototype.fillText);
+        nimm('CanvasRenderingContext2D.prototype.strokeText', CanvasRenderingContext2D.prototype.strokeText);
+        if (typeof OffscreenCanvas !== 'undefined') {
+          nimm('OffscreenCanvas.prototype.convertToBlob', OffscreenCanvas.prototype.convertToBlob);
+        }
+        if (typeof OffscreenCanvasRenderingContext2D !== 'undefined') {
+          nimm('OffscreenCanvasRenderingContext2D.prototype.getImageData', OffscreenCanvasRenderingContext2D.prototype.getImageData);
+          nimm('OffscreenCanvasRenderingContext2D.prototype.fillText', OffscreenCanvasRenderingContext2D.prototype.fillText);
+          nimm('OffscreenCanvasRenderingContext2D.prototype.strokeText', OffscreenCanvasRenderingContext2D.prototype.strokeText);
+        }
+        nimm('AudioBuffer.prototype.getChannelData', AudioBuffer.prototype.getChannelData);
+        nimm('AudioBuffer.prototype.copyFromChannel', AudioBuffer.prototype.copyFromChannel);
+        nimm('Element.prototype.attachShadow', Element.prototype.attachShadow);
+        nimm('Function.prototype.toString', Function.prototype.toString);
+        // `plugins` und `mimeTypes` seit dem Nachtrag (Cover Your Tracks zaehlt
+        // die Plugin-Liste als eines von fuenf Merkmalen zwischen zwei Domains).
+        for (const eigenschaft of NAVIGATOR_GETTER) {
+          const d = Object.getOwnPropertyDescriptor(Navigator.prototype, eigenschaft);
+          if (d && typeof d.get === 'function') nimm('Navigator.prototype.' + eigenschaft + ' (get)', d.get);
+        }
+        return liste;
+      }
+      const NAVIGATOR_GETTER = ['hardwareConcurrency', 'deviceMemory', 'plugins', 'mimeTypes'];
+
+      function toStringTexte() {
+        const aus = {};
+        for (const [name, fn] of eingehuellte()) {
+          try {
+            aus[name] = Function.prototype.toString.call(fn);
+          } catch (e) {
+            aus[name] = 'WIRFT ' + String(e);
+          }
+        }
+        return aus;
+      }
+
+      // Was CreepJS und dieselbe Klasse von Tests in Turnstile, reCAPTCHA v3
+      // und DataDome pruefen: eine Huelle, die als `function` deklariert
+      // wurde, traegt `prototype`, laesst `new` zu und hat andere
+      // Eigenschaftsnamen als eine native Methode.
+      function luegendetektor() {
+        const aus = {};
+        for (const [name, fn] of eingehuellte()) {
+          let neuWirftTypeError = false;
+          try {
+            new fn();
+          } catch (e) {
+            neuWirftTypeError = e instanceof TypeError;
+          }
+          aus[name] = {
+            hatPrototype: 'prototype' in fn,
+            neuWirftTypeError,
+            eigenschaften: Object.getOwnPropertyNames(fn).join(','),
+          };
+        }
+        const getterFremdesThis = {};
+        for (const eigenschaft of NAVIGATOR_GETTER) {
+          const d = Object.getOwnPropertyDescriptor(Navigator.prototype, eigenschaft);
+          if (!d || typeof d.get !== 'function') continue;
+          try {
+            d.get.call({});
+            getterFremdesThis[eigenschaft] = 'kein Fehler';
+          } catch (e) {
+            getterFremdesThis[eigenschaft] = e instanceof TypeError ? 'TypeError' : String(e);
+          }
+        }
+        const aufzaehlbar = {
+          toDataURL: Object.keys(HTMLCanvasElement.prototype).includes('toDataURL'),
+          getImageData: Object.keys(CanvasRenderingContext2D.prototype).includes('getImageData'),
+          getChannelData: Object.keys(AudioBuffer.prototype).includes('getChannelData'),
+          attachShadow: Object.keys(Element.prototype).includes('attachShadow'),
+          toStringNichtAufzaehlbar: !Object.keys(Function.prototype).includes('toString'),
+        };
+        return { huellen: aus, getterFremdesThis, aufzaehlbar };
+      }
+
+      // Die Stack-Zeile mit der Erweiterungs-ID. Bekannt, kein Fehler: Die
+      // Typumwandlung des Arguments laeuft im nativen Aufruf, und der steht
+      // auf dem Rahmen der Huelle. Gemessen wird sie, damit der Katalog sie
+      // mit dem genauen Aufruf fuehrt.
+      function stackAbzug() {
+        const c = neuesCanvas(document, 4, 4);
+        const ctx = c.getContext('2d');
+        let stack = '';
+        try {
+          ctx.getImageData(
+            {
+              valueOf() {
+                stack = new Error().stack || '';
+                return 0;
+              },
+            },
+            0,
+            1,
+            1,
+          );
+        } catch (e) {
+          stack = 'WIRFT ' + String(e);
+        }
+        const zeile = stack.split('\n').find((z) => z.includes('-extension://')) || null;
+        return { erweiterungImStack: stack.includes('-extension://'), zeile };
+      }
+
+      // ── Schriftmessung wie Phaser 3 / PixiJS 7 ────────────────────────────
+      // MeasureText.js: roter Grund, schwarzer Text, von oben und unten die
+      // erste Zeile mit R !== 255 suchen. Mit gesetztem Bit im roten Grund
+      // war jede Zeile eine Textzeile (GEMESSEN 05.09.2026: 26px Arial
+      // ascent 24/descent 6 ohne, 30/14 mit Erweiterung).
+      function phaserMetrik(font) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        context.font = font;
+        const metricsString = '|\u00c9q\u00c5M';
+        const width = Math.ceil(context.measureText(metricsString).width);
+        let baseline = Math.ceil(context.measureText('M').width);
+        const height = Math.ceil(2.0 * baseline);
+        baseline = (baseline * 1.4) | 0;
+        canvas.width = width;
+        canvas.height = height;
+        context.fillStyle = '#f00';
+        context.fillRect(0, 0, width, height);
+        context.font = font;
+        context.textBaseline = 'alphabetic';
+        context.fillStyle = '#000';
+        context.fillText(metricsString, 0, baseline);
+        const d = context.getImageData(0, 0, width, height).data;
+        const line = width * 4;
+        let i = 0;
+        let idx = 0;
+        let stop = false;
+        for (i = 0; i < baseline; ++i) {
+          for (let j = 0; j < line; j += 4) {
+            if (d[idx + j] !== 255) { stop = true; break; }
+          }
+          if (!stop) idx += line; else break;
+        }
+        const ascent = baseline - i;
+        idx = d.length - line;
+        stop = false;
+        for (i = height; i > baseline; --i) {
+          for (let j = 0; j < line; j += 4) {
+            if (d[idx + j] !== 255) { stop = true; break; }
+          }
+          if (!stop) idx -= line; else break;
+        }
+        const descent = i - baseline;
+        return { ascent, descent, fontSize: ascent + descent };
+      }
+
+      // ── valueOf-Zaehlung ──────────────────────────────────────────────────
+      // Nativ wird ein Objekt-Argument genau einmal in eine Zahl gewandelt.
+      // Eine Huelle, die danach noch Number(arg) rechnet, ruft valueOf ein
+      // zweites Mal; das zaehlt ein Luegendetektor.
+      function valueOfZaehlung() {
+        const aus = {};
+        const c = neuesCanvas(document, 8, 8);
+        const ctx = c.getContext('2d');
+        ctx.fillText('x', 1, 6);
+        let n = 0;
+        ctx.getImageData({ valueOf() { n++; return 0; } }, 0, 1, 1);
+        aus.getImageData = n;
+        const actx = new OfflineAudioContext(1, 100, 44100);
+        const b = actx.createBuffer(1, 100, 44100);
+        let g = 0;
+        b.getChannelData({ valueOf() { g++; return 0; } });
+        aus.getChannelData = g;
+        let m = 0;
+        b.copyFromChannel(new Float32Array(10), { valueOf() { m++; return 0; } });
+        aus.copyFromChannel = m;
+        let t = 0;
+        b.copyToChannel(new Float32Array(10), { valueOf() { t++; return 0; } });
+        aus.copyToChannel = t;
+        return aus;
+      }
+
+      // ── AudioBuffer-Semantik ──────────────────────────────────────────────
+      // Ein frischer Puffer ist Stille, was die Seite hineinschreibt kommt
+      // bitgleich zurueck, und fuehrende Stille laesst sich abschneiden.
+      function audioPuffer() {
+        const ac = new OfflineAudioContext(1, 1000, 44100);
+        const b = ac.createBuffer(1, 1000, 44100);
+        const d = b.getChannelData(0);
+        let frischNichtNull = 0;
+        for (let i = 0; i < 1000; i++) if (d[i] !== 0) frischNichtNull++;
+        const b2 = ac.createBuffer(1, 1000, 44100);
+        const src = new Float32Array(1000);
+        for (let i = 0; i < 1000; i++) src[i] = Math.sin(i / 10) * 0.5;
+        b2.copyToChannel(src, 0);
+        const zurueck = b2.getChannelData(0);
+        let rueckleseAbweichend = 0;
+        for (let i = 0; i < 1000; i++) if (zurueck[i] !== src[i]) rueckleseAbweichend++;
+        const b3 = ac.createBuffer(1, 1000, 44100);
+        const d3 = b3.getChannelData(0);
+        for (let i = 500; i < 1000; i++) d3[i] = 0.3;
+        let trimStart = 0;
+        while (trimStart < 1000 && d3[trimStart] === 0) trimStart++;
+        return { frischNichtNull, rueckleseAbweichend, trimStart };
+      }
+
+      // ── Audio-Kosten ──────────────────────────────────────────────────────
+      // Ein dekodiertes Zehn-Minuten-Stueck: 26 Millionen Proben je Kanal.
+      // Gerendert statt dekodiert (kein Netz), gelesen mit getChannelData -
+      // die Messung, die PROBEN_BUDGET rechtfertigt.
+      const AUDIO_KOSTEN_PROBEN = 26000000;
+      async function audioKosten() {
+        const ctx = new OfflineAudioContext(1, AUDIO_KOSTEN_PROBEN, 44100);
+        const osz = ctx.createOscillator();
+        osz.frequency.value = 440;
+        osz.connect(ctx.destination);
+        osz.start(0);
+        const t0 = performance.now();
+        const buffer = await ctx.startRendering();
+        const renderMs = performance.now() - t0;
+        const t1 = performance.now();
+        const daten = buffer.getChannelData(0);
+        const getChannelDataMs = performance.now() - t1;
+        return { proben: daten.length, renderMs: Math.round(renderMs), getChannelDataMs: Math.round(getChannelDataMs * 10) / 10 };
+      }
+
+      // ── Fremder Realm ─────────────────────────────────────────────────────
+      // Ein same-origin about:blank-Rahmen bringt eigene Prototypen mit.
+      // Zwei Lesungen: SOFORT nach appendChild (Chrome injiziert dort
+      // asynchron, also noch nativ - bekannt) und nach einer Wartezeit.
+      // Gemessen wird (a) das native toString des Rahmens auf die Huellen
+      // des Elternfensters und (b) der Prototyp des Rahmens, angewandt auf
+      // ein Canvas des Elternfensters (Buchfuehrung je Realm - bekannt).
+      async function fremderRealm() {
+        const rahmen = document.createElement('iframe');
+        rahmen.style.display = 'none';
+        document.body.appendChild(rahmen);
+        const lies = () => {
+          const w = rahmen.contentWindow;
+          const ts = w.Function.prototype.toString;
+          const texte = {};
+          for (const [name, fn] of eingehuellte()) {
+            try {
+              texte[name] = ts.call(fn);
+            } catch (e) {
+              texte[name] = 'WIRFT ' + String(e);
+            }
+          }
+          return texte;
+        };
+        const sofort = lies();
+        await new Promise((f) => setTimeout(f, 800));
+        const spaeter = lies();
+        let prototypAufEigenem = 'FEHLER';
+        try {
+          const c = neuesCanvas(document, B, H);
+          zeichneText(c.getContext('2d'), B, H);
+          prototypAufEigenem = hashText(rahmen.contentWindow.HTMLCanvasElement.prototype.toDataURL.call(c));
+        } catch (e) {
+          prototypAufEigenem = 'FEHLER ' + String(e);
+        }
+        rahmen.remove();
+        return { sofort, spaeter, prototypAufEigenem };
+      }
+
+      // ── Bruchprobe ────────────────────────────────────────────────────────
+      // Lese-Schreib-Schleifen sind der Normalfall in p5.js (loadPixels/
+      // updatePixels je Frame), in Filterketten und Helligkeitsreglern. Ein
+      // additives Rauschen driftete dort bis zur Saettigung. Gemessen wird
+      // deshalb: die groesste Abweichung je Kanal gegenueber der ERSTEN Lesung
+      // (muss 0 sein, Idempotenz) und die erste Lesung selbst, damit die
+      // Probe sie gegen den Lauf ohne Erweiterung haelt (hoechstens 1).
+      const BRUCH_DURCHLAEUFE = 300;
+      function bruchprobe() {
+        const c = neuesCanvas(document, B, H);
+        const ctx = c.getContext('2d');
+        zeichneText(ctx, B, H);
+        const erste = ctx.getImageData(0, 0, B, H);
+        const referenz = new Uint8ClampedArray(erste.data);
+        let groessteAbweichung = 0;
+        let alphaVeraendert = false;
+        let letzte = erste;
+        for (let i = 0; i < BRUCH_DURCHLAEUFE; i++) {
+          ctx.putImageData(letzte, 0, 0);
+          letzte = ctx.getImageData(0, 0, B, H);
+          const d = letzte.data;
+          for (let p = 0; p < d.length; p += 4) {
+            for (let k = 0; k < 3; k++) {
+              const diff = Math.abs(d[p + k] - referenz[p + k]);
+              if (diff > groessteAbweichung) groessteAbweichung = diff;
+            }
+            if (d[p + 3] !== referenz[p + 3]) alphaVeraendert = true;
+          }
+        }
+        // Als Base64, damit die Probe die Pixel ohne 57 600 JSON-Zahlen
+        // hinueberbekommt und in Node gegen den Grundwert rechnen kann.
+        let bin = '';
+        for (let i = 0; i < referenz.length; i += 8192) {
+          bin += String.fromCharCode.apply(null, referenz.subarray(i, i + 8192));
+        }
+        return {
+          durchlaeufe: BRUCH_DURCHLAEUFE,
+          groessteAbweichungZurErstenLesung: groessteAbweichung,
+          alphaVeraendert,
+          ersteLesungBase64: btoa(bin),
+          breite: B,
+          hoehe: H,
+        };
+      }
+
+      // ── Kosten ────────────────────────────────────────────────────────────
+      // Mit Text, sonst greift die Textregel und es wird gar nichts gerauscht;
+      // die Messung waere dann eine Messung des Durchreichens.
+      const KOSTEN_WIEDERHOLUNGEN = 100;
+      function kosten() {
+        const gross = neuesCanvas(document, 1280, 720);
+        const gctx = gross.getContext('2d', { willReadFrequently: true });
+        zeichneText(gctx, 1280, 720);
+        gctx.getImageData(0, 0, 1280, 720);
+        let t0 = performance.now();
+        for (let i = 0; i < KOSTEN_WIEDERHOLUNGEN; i++) gctx.getImageData(0, 0, 1280, 720);
+        const getImageDataMs = performance.now() - t0;
+
+        const mittel = neuesCanvas(document, 640, 480);
+        const mctx = mittel.getContext('2d');
+        zeichneText(mctx, 640, 480);
+        mittel.toDataURL();
+        t0 = performance.now();
+        for (let i = 0; i < KOSTEN_WIEDERHOLUNGEN; i++) mittel.toDataURL();
+        const toDataURLMs = performance.now() - t0;
+        return {
+          wiederholungen: KOSTEN_WIEDERHOLUNGEN,
+          getImageData1280x720Ms: Math.round(getImageDataMs * 10) / 10,
+          toDataURL640x480Ms: Math.round(toDataURLMs * 10) / 10,
+        };
+      }
+
+      // ── WebGL wie FingerprintJS2 (das Skript auf Cover Your Tracks) ───────
+      // `getWebglFp` malt ein Dreieck, dessen Farbe aus den Texturkoordinaten
+      // kommt (gl_FragColor = vec4(varyinTexCoordinate, 0, 1)), also ein
+      // Verlauf, kein Reinfarbenfeld, und hasht `canvas.toDataURL()`. Das
+      // Canvas ist wie dort 300 x 150 (die Vorgabe, FP2 setzt keine Masse).
+      // FP2 ruft `enableVertexAttribArray(program.vertexPosArray)` mit einem
+      // Tippfehler auf (undefined → 0); hier steht das Attribut richtig, das
+      // Ergebnis ist dasselbe, weil das erste Attribut Index 0 hat.
+      //
+      // Gemessen wird dreierlei: der Hash von `toDataURL` (soll mit
+      // Erweiterung abweichen), `readPixels` an einer Stelle im Verlauf
+      // (soll BITGLEICH bleiben - Objekt-Picking ueber Farbcodes in three.js
+      // und Babylon liest genau so) und `readPixels` NACH dem Export, damit
+      // die Kopiestrecke der Erweiterung den Zeichenpuffer nicht anfasst.
+      const WEBGL_B = 300;
+      const WEBGL_H = 150;
+      // Ein Punkt nahe dem Schwerpunkt des Dreiecks: Clip (0.067, -0.143) →
+      // Pixel (160, 64) von unten. Farbe dort etwa (255, 218, 0, 255): R ist
+      // gesaettigt, G nicht - keine Reinfarbe, die Textregel gilt fuer WebGL
+      // nicht, das Rauschen traefe dieses Pixel also in der Kopie.
+      const WEBGL_PIXEL_X = 160;
+      const WEBGL_PIXEL_Y = 64;
+      function zeichneWebgl(c) {
+        const gl = c.getContext('webgl') || c.getContext('experimental-webgl');
+        if (!gl) return null;
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.enable(gl.DEPTH_TEST);
+        gl.depthFunc(gl.LEQUAL);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        const vShader = 'attribute vec2 attrVertex;varying vec2 varyinTexCoordinate;uniform vec2 uniformOffset;void main(){varyinTexCoordinate=attrVertex+uniformOffset;gl_Position=vec4(attrVertex,0,1);}';
+        const fShader = 'precision mediump float;varying vec2 varyinTexCoordinate;void main() {gl_FragColor=vec4(varyinTexCoordinate,0,1);}';
+        const puffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, puffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-0.2, -0.9, 0, 0.4, -0.26, 0, 0, 0.732134444, 0]), gl.STATIC_DRAW);
+        const programm = gl.createProgram();
+        const vs = gl.createShader(gl.VERTEX_SHADER);
+        gl.shaderSource(vs, vShader);
+        gl.compileShader(vs);
+        const fs = gl.createShader(gl.FRAGMENT_SHADER);
+        gl.shaderSource(fs, fShader);
+        gl.compileShader(fs);
+        gl.attachShader(programm, vs);
+        gl.attachShader(programm, fs);
+        gl.linkProgram(programm);
+        gl.useProgram(programm);
+        const attribut = gl.getAttribLocation(programm, 'attrVertex');
+        const versatz = gl.getUniformLocation(programm, 'uniformOffset');
+        gl.enableVertexAttribArray(attribut);
+        gl.vertexAttribPointer(attribut, 3, gl.FLOAT, false, 0, 0);
+        gl.uniform2f(versatz, 1, 1);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 3);
+        return gl;
+      }
+      function liesPixel(gl) {
+        const eins = new Uint8Array(4);
+        gl.readPixels(WEBGL_PIXEL_X, WEBGL_PIXEL_Y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, eins);
+        const alle = new Uint8Array(WEBGL_B * WEBGL_H * 4);
+        gl.readPixels(0, 0, WEBGL_B, WEBGL_H, gl.RGBA, gl.UNSIGNED_BYTE, alle);
+        return { pixel: Array.from(eins), alleHash: hashBytes(alle) };
+      }
+      async function webgl() {
+        const c = neuesCanvas(document, WEBGL_B, WEBGL_H);
+        const gl = zeichneWebgl(c);
+        if (!gl) return null;
+        const vorher = liesPixel(gl);
+        const hash = hashText(c.toDataURL());
+        const blob = await new Promise((f) => c.toBlob(f));
+        const toBlob = blob ? hashBytes(new Uint8Array(await blob.arrayBuffer())) : 'KEIN BLOB';
+        const nachher = liesPixel(gl);
+        return {
+          hash,
+          toBlob,
+          pixel: vorher.pixel,
+          pixelStelle: [WEBGL_PIXEL_X, WEBGL_PIXEL_Y],
+          readPixelsHash: vorher.alleHash,
+          readPixelsNachExportGleich: nachher.alleHash === vorher.alleHash,
+          kontexttyp: 'webgl',
+        };
+      }
+
+      // ── Plugins, serialisiert wie Cover Your Tracks ──────────────────────
+      // `identify_plugins` aus EFForg/panopticlick, static/fetch_whorls.js
+      // (Stand 05.09.2026), buchstabengetreu uebernommen: Nur so misst die
+      // Probe dieselbe Zeichenkette, die CYT zwischen seinen beiden Domains
+      // vergleicht. Der Rueckfall ueber PluginDetect entfaellt, weil
+      // `navigator.plugins` in jedem Browser mit Hauptwelt-Skript existiert.
+      function identifyPlugins() {
+        var plugins = '';
+        if (navigator.plugins) {
+          var np = navigator.plugins;
+          var plist = new Array();
+          for (var i = 0; i < np.length; i++) {
+            plist[i] = np[i].name + '; ';
+            plist[i] += np[i].description + '; ';
+            plist[i] += np[i].filename + ';';
+            for (var n = 0; n < np[i].length; n++) {
+              plist[i] += ' (' + np[i][n].description + '; ' + np[i][n].type + '; ' + np[i][n].suffixes + ')';
+            }
+            plist[i] += '. ';
+          }
+          plist.sort();
+          for (i = 0; i < np.length; i++) plugins += 'Plugin ' + i + ': ' + plist[i];
+        }
+        return plugins;
+      }
+
+      // Die Form der Liste, so wie Bibliotheken sie abgreifen: als Array,
+      // per for-of, per for-in, ueber Index, Namen, item() und namedItem().
+      // Die Probe kennt den erfundenen Namen nicht vorab; sie erkennt ihn als
+      // den Eintrag, den es im Grundlauf nicht gab, und als letzten Index.
+      // Alles davon muss auch OHNE Erweiterung stimmen (dann ist der letzte
+      // Eintrag ein echter), sonst misst die Zeile die Seite statt die Huelle.
+      function plugins() {
+        const np = navigator.plugins;
+        const nm = navigator.mimeTypes;
+        const aus = {};
+        aus.serialisiert = identifyPlugins();
+        aus.zweimalGleich = identifyPlugins() === aus.serialisiert;
+        aus.laenge = np.length;
+        aus.instanceofPluginArray = np instanceof PluginArray;
+        aus.toStringTag = Object.prototype.toString.call(np);
+        aus.arrayFromLaenge = Array.from(np).length;
+        let forOf = 0;
+        for (const p of np) if (p) forOf++;
+        aus.forOfAnzahl = forOf;
+        let forIn = 0;
+        for (const k in np) if (k !== undefined) forIn++;
+        aus.forInAnzahl = forIn;
+        aus.objectKeysAnzahl = Object.keys(np).length;
+        aus.namen = Array.from(np).map((p) => p.name);
+        const letzter = np.length ? np[np.length - 1] : null;
+        aus.letzter = letzter
+          ? {
+              name: letzter.name,
+              description: letzter.description,
+              filename: letzter.filename,
+              laenge: letzter.length,
+              mimeTyp: letzter[0] ? letzter[0].type : null,
+              suffixes: letzter[0] ? letzter[0].suffixes : null,
+              mimeBeschreibung: letzter[0] ? letzter[0].description : null,
+            }
+          : null;
+        aus.letzterUeberNamen = Boolean(letzter) && np[letzter.name] === letzter;
+        aus.letzterUeberNamedItem = Boolean(letzter) && np.namedItem(letzter.name) === letzter;
+        aus.letzterUeberItem = Boolean(letzter) && np.item(np.length - 1) === letzter;
+        aus.letzterIndexIn = Boolean(letzter) && String(np.length - 1) in np && letzter.name in np;
+        aus.letzterInstanceofPlugin = Boolean(letzter) && letzter instanceof Plugin;
+        aus.letzterToStringTag = letzter ? Object.prototype.toString.call(letzter) : null;
+        aus.letzterMimeInstanceofMimeType = Boolean(letzter && letzter[0]) && letzter[0] instanceof MimeType;
+        aus.letzterMimeUeberItem = Boolean(letzter && letzter[0]) && letzter.item(0) === letzter[0] && letzter.namedItem(letzter[0].type) === letzter[0];
+        aus.letzterMimeEnabledPlugin = Boolean(letzter && letzter[0]) && letzter[0].enabledPlugin === letzter;
+        aus.letzterIterierbar = Boolean(letzter) && Array.from(letzter).length === letzter.length;
+        // Ein Proxy ist kein Plattformobjekt; die native Methode auf ihm
+        // angewandt WUERDE „Illegal invocation" werfen. Die Erweiterung legt
+        // deshalb Huellen auf PluginArray.prototype, die den Proxy erkennen
+        // (GEMESSEN 05.09.2026: kein Fehler). Gemessen, nicht verlangt - die
+        // Probe berichtet es als INFO.
+        try {
+          PluginArray.prototype.item.call(np, 0);
+          aus.protoItemCall = 'kein Fehler';
+        } catch (e) {
+          aus.protoItemCall = e && e.name ? e.name : String(e);
+        }
+        /*
+         * Die drei Gleichheiten, die eine Gegenprobe am 05.09.2026 als
+         * Unterschied gemessen hat. Jede fand den erfundenen Eintrag ohne
+         * jedes Wissen ueber die Erweiterung: Es genuegte, die Eintraege
+         * derselben Liste miteinander zu vergleichen. Deshalb steht hier
+         * immer das ERSTE (echte) neben dem LETZTEN (erfundenen) Eintrag,
+         * und die Probe prueft auf Gleichheit, nicht auf einen festen Text.
+         */
+        function fehlerText(f) {
+          try {
+            f();
+            return 'kein Fehler';
+          } catch (e) {
+            return e && e.message ? e.message : String(e);
+          }
+        }
+        const ersterEchter = np.length > 1 ? np[0] : null;
+        aus.itemOhneArgument = {
+          echt: ersterEchter ? fehlerText(() => ersterEchter.item()) : null,
+          erfunden: letzter ? fehlerText(() => letzter.item()) : null,
+        };
+        aus.namedItemOhneArgument = {
+          echt: ersterEchter ? fehlerText(() => ersterEchter.namedItem()) : null,
+          erfunden: letzter ? fehlerText(() => letzter.namedItem()) : null,
+        };
+        // `new String(name)` ist ein Objekt, kein primitives String: Die
+        // Huelle muss es genau einmal umwandeln und dann finden.
+        aus.namedItemAlsObjekt = {
+          echt: Boolean(ersterEchter) && np.namedItem(new String(ersterEchter.name)) === ersterEchter,
+          erfunden: Boolean(letzter) && np.namedItem(new String(letzter.name)) === letzter,
+        };
+        // Kein Eintrag einer Plugin-Liste ist loeschbar; `delete` gibt fuer
+        // jeden Index `false`. Gaebe der neue Index `true`, waere er daran
+        // mit einer Zeile zu finden.
+        aus.deleteIndex = {
+          echt: np.length > 1 ? delete np[0] : null,
+          erfunden: delete np[np.length - 1],
+        };
+        const typ = letzter && letzter[0] ? letzter[0].type : null;
+        aus.mimeTypes = {
+          laenge: nm.length,
+          instanceofMimeTypeArray: nm instanceof MimeTypeArray,
+          toStringTag: Object.prototype.toString.call(nm),
+          arrayFromLaenge: Array.from(nm).length,
+          typen: Array.from(nm).map((m) => m.type),
+          letzterTypUeberNamen: Boolean(typ) && Boolean(nm[typ]) && nm[typ].type === typ,
+          letzterTypUeberNamedItem: Boolean(typ) && nm.namedItem(typ) === nm[typ],
+          enabledPluginName: typ && nm[typ] && nm[typ].enabledPlugin ? nm[typ].enabledPlugin.name : null,
+        };
+        return aus;
+      }
+
+      // ── Audio wie FingerprintJS ───────────────────────────────────────────
+      async function audioBuffer() {
+        const ctx = new OfflineAudioContext(1, 5000, 44100);
+        const osz = ctx.createOscillator();
+        osz.type = 'triangle';
+        osz.frequency.value = 10000;
+        const kompressor = ctx.createDynamicsCompressor();
+        kompressor.threshold.value = -50;
+        kompressor.knee.value = 40;
+        kompressor.ratio.value = 12;
+        kompressor.attack.value = 0;
+        kompressor.release.value = 0.25;
+        osz.connect(kompressor);
+        kompressor.connect(ctx.destination);
+        osz.start(0);
+        return ctx.startRendering();
+      }
+      function audioSumme(daten) {
+        let s = 0;
+        for (let i = 4500; i < 5000; i++) s += Math.abs(daten[i]);
+        return s;
+      }
+      function bitgleich(a, b) {
+        if (a.length !== b.length) return false;
+        const ua = new Uint32Array(a.buffer, a.byteOffset, a.length);
+        const ub = new Uint32Array(b.buffer, b.byteOffset, b.length);
+        for (let i = 0; i < ua.length; i++) if (ua[i] !== ub[i]) return false;
+        return true;
+      }
+      async function audio() {
+        const b1 = await audioBuffer();
+        const daten = b1.getChannelData(0);
+        const summe = audioSumme(daten);
+
+        // Beide Wege in beiden Reihenfolgen auf zwei gleichen Buffern. CreepJS
+        // vergleicht genau diese beiden; weichen sie ab, gilt Audio als
+        // manipuliert.
+        const bA = await audioBuffer();
+        const bB = await audioBuffer();
+        const aGet = new Float32Array(bA.getChannelData(0));
+        const aCopy = new Float32Array(bA.length);
+        bA.copyFromChannel(aCopy, 0);
+        const bCopy = new Float32Array(bB.length);
+        bB.copyFromChannel(bCopy, 0);
+        const bGet = new Float32Array(bB.getChannelData(0));
+        // Ein groesseres, wiederverwendetes Ziel darf hinter der Kopie nichts
+        // dazubekommen.
+        const gross = new Float32Array(bB.length + 64);
+        bB.copyFromChannel(gross, 0);
+        let hinterDerKopieNull = true;
+        for (let i = bB.length; i < gross.length; i++) if (gross[i] !== 0) hinterDerKopieNull = false;
+
+        return {
+          summe,
+          wegeBitgleich: bitgleich(aGet, aCopy) && bitgleich(bCopy, bGet) && bitgleich(aGet, bGet),
+          hinterDerKopieNull,
+        };
+      }
+
+      // ── Rahmen: blob:, data:, about:blank ─────────────────────────────────
+      // Der Zeichner wird als Quelltext in den Rahmen mitgegeben, damit dort
+      // dasselbe gemalt wird wie hier.
+      const RAHMEN_QUELLE =
+        hashText.toString() +
+        '\n' +
+        zeichneText.toString() +
+        '\n' +
+        zeichneGeometrieDarauf.toString() +
+        '\n' +
+        'function messeImRahmen(){var c=document.createElement("canvas");c.width=' +
+        B +
+        ';c.height=' +
+        H +
+        ';zeichneText(c.getContext("2d"),' +
+        B +
+        ',' +
+        H +
+        ');return hashText(c.toDataURL());}';
+
+      function rahmenHtml() {
+        // Die Skriptmarke wird hier zusammengesetzt, damit kein Waechter, der
+        // nach ihr greift, in dieser Datei anspringt; das Ergebnis ist ein
+        // gewoehnliches Dokument.
+        const s = '<' + 'script>';
+        const e = '<' + '/script>';
+        return (
+          '<!doctype html><html><body>' +
+          s +
+          RAHMEN_QUELLE +
+          '\nwindow.__messeImRahmen=messeImRahmen;' +
+          'window.addEventListener("message",function(ev){if(ev.data==="miss")parent.postMessage({rahmen:"data",hash:messeImRahmen()},"*");});' +
+          e +
+          '</body></html>'
+        );
+      }
+
+      function warteAufLaden(rahmen) {
+        return new Promise((fertig) => {
+          rahmen.addEventListener('load', () => fertig(), { once: true });
+          setTimeout(fertig, 3000);
+        });
+      }
+
+      async function blobRahmen() {
+        const url = URL.createObjectURL(new Blob([rahmenHtml()], { type: 'text/html' }));
+        const rahmen = document.createElement('iframe');
+        rahmen.style.display = 'none';
+        rahmen.src = url;
+        const geladen = warteAufLaden(rahmen);
+        document.body.appendChild(rahmen);
+        await geladen;
+        // Same-origin: gelesen wird direkt ueber contentWindow, mit dem
+        // Prototyp DES RAHMENS. Zweimal: einmal SOFORT nach `load`, einmal
+        // nach einer Wartezeit. Das Sitzungsereignis (Inhaltsskript →
+        // Hintergrund → CustomEvent) kommt asynchron; ein winziges
+        // Blob-Dokument ist geladen, bevor die Antwort da ist. Wer sofort
+        // liest, misst das Rennen, nicht die Erweiterung: Auf einer
+        // Ausnahmeseite rauscht der Rahmen dann noch fuer Millisekunden
+        // (GEMESSEN 05.09.2026). Massgeblich ist die zweite Lesung, die erste
+        // wird als INFO berichtet.
+        const lies = () => {
+          try {
+            return rahmen.contentWindow.__messeImRahmen();
+          } catch (e) {
+            return 'FEHLER ' + String(e);
+          }
+        };
+        try {
+          const sofort = lies();
+          await new Promise((f) => setTimeout(f, 800));
+          return { sofort, spaeter: lies() };
+        } finally {
+          rahmen.remove();
+          URL.revokeObjectURL(url);
+        }
+      }
+
+      async function dataRahmen() {
+        // Ein data:-Rahmen ist eine fremde Herkunft; contentWindow ist zu.
+        // Der Rahmen misst selbst und meldet per postMessage.
+        const rahmen = document.createElement('iframe');
+        rahmen.style.display = 'none';
+        rahmen.src = 'data:text/html;charset=utf-8,' + encodeURIComponent(rahmenHtml());
+        const geladen = warteAufLaden(rahmen);
+        document.body.appendChild(rahmen);
+        await geladen;
+        const antwort = new Promise((fertig) => {
+          const lauscher = (ev) => {
+            if (ev.data && ev.data.rahmen === 'data') {
+              window.removeEventListener('message', lauscher);
+              fertig(ev.data.hash);
+            }
+          };
+          window.addEventListener('message', lauscher);
+          setTimeout(() => fertig('KEINE ANTWORT'), 3000);
+        });
+        rahmen.contentWindow.postMessage('miss', '*');
+        const hash = await antwort;
+        rahmen.remove();
+        return hash;
+      }
+
+      async function aboutBlankRahmen() {
+        // Per Skript erzeugte about:blank-Rahmen bekommen das Skript der
+        // Erweiterung asynchron; gemessen wird nach einer Wartezeit, nicht
+        // synchron nach appendChild. Eine synchrone Lesung direkt danach
+        // ist noch nativ, und das steht so im Katalog.
+        const rahmen = document.createElement('iframe');
+        rahmen.style.display = 'none';
+        document.body.appendChild(rahmen);
+        await new Promise((f) => setTimeout(f, 800));
+        try {
+          const dok = rahmen.contentDocument;
+          const c = dok.createElement('canvas');
+          c.width = B;
+          c.height = H;
+          zeichneText(c.getContext('2d'), B, H);
+          return hashText(c.toDataURL());
+        } catch (e) {
+          return 'FEHLER ' + String(e);
+        } finally {
+          rahmen.remove();
+        }
+      }
+
+      // ── Die Messung ───────────────────────────────────────────────────────
+      window.__messe = async function messe(optionen) {
+        const o = optionen || {};
+        const ergebnis = {};
+
+        // Canvas
+        ergebnis.canvas = canvasHash(zeichneText);
+        ergebnis.canvasZweitesElement = canvasHash(zeichneText);
+        ergebnis.canvasOhneText = canvasHash(zeichneOhneText);
+        {
+          const c = neuesCanvas(document, B, H);
+          const ctx = c.getContext('2d');
+          zeichneText(ctx, B, H);
+          const a = ctx.getImageData(0, 0, B, H).data;
+          const b = ctx.getImageData(0, 0, B, H).data;
+          ergebnis.getImageDataZweimalGleich = hashBytes(a) === hashBytes(b);
+          ergebnis.getImageDataHash = hashBytes(a);
+          // Zwei Aufrufformen fuer denselben Bereich muessen dieselben Werte
+          // geben, sonst ist der Unterschied selbst ein Merkmal.
+          const teil = ctx.getImageData(10, 10, 50, 20).data;
+          const negativ = ctx.getImageData(60, 30, -50, -20).data;
+          ergebnis.negativeAusdehnungGleich = hashBytes(teil) === hashBytes(negativ);
+        }
+        // Dieselbe Referenz, vor dem Sitzungsereignis gesichert.
+        {
+          const c = neuesCanvas(document, B, H);
+          zeichneText(c.getContext('2d'), B, H);
+          ergebnis.canvasUeberGesicherteReferenz = hashText(window.__gesichert.toDataURL.call(c));
+        }
+        // Text NACH dem ersten Lesen: Die Textregel darf nicht zuruecksetzen.
+        {
+          const c = neuesCanvas(document, B, H);
+          const ctx = c.getContext('2d');
+          zeichneOhneText(ctx, B, H);
+          const vorher = hashText(c.toDataURL());
+          ctx.fillStyle = '#069';
+          ctx.font = '11pt "Times New Roman"';
+          ctx.fillText('Cwm', 2, 15);
+          c.width = B; // setzt den Inhalt zurueck, nicht das Textkennzeichen
+          zeichneOhneText(ctx, B, H);
+          ergebnis.canvasOhneTextVorText = vorher;
+          ergebnis.canvasNachBreitenZuweisung = hashText(c.toDataURL());
+        }
+        if (typeof OffscreenCanvas !== 'undefined') {
+          try {
+            const oc = new OffscreenCanvas(B, H);
+            const octx = oc.getContext('2d');
+            zeichneText(octx, B, H);
+            ergebnis.offscreenGetImageData = hashBytes(octx.getImageData(0, 0, B, H).data);
+            const blob = await oc.convertToBlob();
+            ergebnis.offscreenConvertToBlob = hashBytes(new Uint8Array(await blob.arrayBuffer()));
+          } catch (e) {
+            ergebnis.offscreenGetImageData = 'FEHLER ' + String(e);
+          }
+        }
+        {
+          const c = neuesCanvas(document, B, H);
+          zeichneText(c.getContext('2d'), B, H);
+          const blob = await new Promise((f) => c.toBlob(f));
+          ergebnis.toBlob = blob ? hashBytes(new Uint8Array(await blob.arrayBuffer())) : 'KEIN BLOB';
+        }
+        {
+          const r = await blobRahmen();
+          ergebnis.blobRahmenSofort = r.sofort;
+          ergebnis.blobRahmen = r.spaeter;
+        }
+        ergebnis.dataRahmen = await dataRahmen();
+        ergebnis.aboutBlankRahmen = await aboutBlankRahmen();
+
+        // WebGL wie FP2: zweimal, denn seit dem Nachtrag muss dieselbe
+        // Zeichnung auf derselben Seite denselben Hash geben.
+        try {
+          ergebnis.webgl = await webgl();
+          ergebnis.webglZweitesElement = await webgl();
+        } catch (e) {
+          ergebnis.webgl = null;
+          ergebnis.webglFehler = String(e);
+        }
+
+        // Audio
+        ergebnis.audio = await audio();
+
+        // Geraet
+        ergebnis.hardwareConcurrency = navigator.hardwareConcurrency;
+        ergebnis.deviceMemory = navigator.deviceMemory;
+        ergebnis.deviceMemoryImPrototyp = 'deviceMemory' in Navigator.prototype;
+
+        // Plugins wie CYT
+        try {
+          ergebnis.plugins = plugins();
+        } catch (e) {
+          ergebnis.plugins = null;
+          ergebnis.pluginsFehler = String(e);
+        }
+
+        // Tarnkappe
+        ergebnis.toString = toStringTexte();
+        ergebnis.luegendetektor = luegendetektor();
+        ergebnis.stack = stackAbzug();
+        ergebnis.fremderRealm = await fremderRealm();
+
+        // Bruchfaelle aus den Gegenproben vom 05.09.2026
+        ergebnis.phaser = {
+          arial26: phaserMetrik('normal 400 26px Arial'),
+          times48: phaserMetrik('normal 400 48px "Times New Roman"'),
+          verdana40: phaserMetrik('bold 40px Verdana'),
+        };
+        ergebnis.valueOf = valueOfZaehlung();
+        ergebnis.audioPuffer = audioPuffer();
+        ergebnis.faelschung = window.__faelschung;
+
+        if (!o.ohneBruchprobe) ergebnis.bruch = bruchprobe();
+        if (!o.ohneKosten) {
+          ergebnis.kosten = kosten();
+          ergebnis.audioKosten = await audioKosten();
+        }
+
+        const anzeige = { ...ergebnis };
+        if (anzeige.bruch) anzeige.bruch = { ...anzeige.bruch, ersteLesungBase64: '(' + anzeige.bruch.ersteLesungBase64.length + ' Zeichen)' };
+        document.getElementById('ausgabe').textContent = JSON.stringify(anzeige, null, 2);
+        return ergebnis;
+      };
+    </script>
+  </body>
+</html>

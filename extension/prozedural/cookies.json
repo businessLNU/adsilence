@@ -1,0 +1,307 @@
+{
+"aainflight.com":[
+{"wahl":"div[class*=\"_toastContainer_\"]","text":"We care about your privacy"}
+],
+"alohaprofile.com":[
+{"wahl":".md\\:right-\\[40px\\]","text":"By continuing to use our site"}
+],
+"animoto.com":[
+{"wahl":".z-cover.bg-surface-neutral","text":"We use tracking to help us"}
+],
+"app.filen.io":[
+{"wahl":".z-50","text":"This site uses cookies"}
+],
+"app.privacy.com":[
+{"wahl":".banner","text":"We care about your privacy."}
+],
+"app.prolific.com":[
+{"wahl":".orejime-Root","text":"We collect and process your personal information"}
+],
+"arionbanki.is":[
+{"wahl":".MuiSnackbar-anchorOriginBottomLeft","text":"Við notum kökur"}
+],
+"bc.co":[
+{"wahl":".fixed","text":"cookies"}
+],
+"bcgame.lu":[
+{"wahl":".bottom-16.fixed","text":"We use cookies"}
+],
+"beaumontenterprise.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"betsson.com":[
+{"wahl":".cdk-overlay-pane","text":"We use cookies"}
+],
+"bing.com":[
+{"wahl":".b_hPanel","text":"Terms of Use"}
+],
+"bitbucket.org":[
+{"wahl":"[role=\"dialog\"]","text":"/cookie/i"}
+],
+"blog.smithsecurity.biz":[
+{"wahl":".fixed","text":"cookies"}
+],
+"boomlify.com":[
+{"wahl":"div > div","text":"We use cookies to improve your experience."}
+],
+"canva.com":[
+{"wahl":"[role=\"dialog\"]","text":"/cookie/i"}
+],
+"capcut.com":[
+{"wahl":".box-PQtsNf","text":"Privacy Policy"},
+{"wahl":".box-beCrD2","text":"cookies"}
+],
+"chat.mistral.ai":[
+{"wahl":"[role=\"dialog\"]","text":"/cookie/i"}
+],
+"chatgpt.com":[
+{"wahl":".md\\:px-\\[60px\\]","text":"By messaging ChatGPT"}
+],
+"chron.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"coopmobile.ch":[
+{"wahl":".top-0.z-9999.fixed.bg-opacity-30","text":"Website Cookies"}
+],
+"crazymaplestudios.com":[
+{"wahl":".fixed","text":"Cookie"}
+],
+"ctpost.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"cun.edu.co":[
+{"wahl":".dialog-lightbox-message","text":"/Cookies/i"}
+],
+"daily.dev":[
+{"wahl":".bottom-0.fixed","text":"This site uses cookies"}
+],
+"datahive.ai":[
+{"wahl":".fixed","text":"cookies"}
+],
+"diatribe.org":[
+{"wahl":".fixed","text":"cookies"}
+],
+"eda.ru":[
+{"wahl":".ejn6mx64.emotion-8zds09","text":"cookies"}
+],
+"elle.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"elledecor.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"esquire.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"etherpad.org":[
+{"wahl":"[role=\"dialog\"]","text":"This page uses"}
+],
+"ev-mallorca.com":[
+{"wahl":".bottom-0.fixed","text":"This website uses cookies"}
+],
+"expressnews.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"fairwinds.org":[
+{"wahl":".bg-white.flex-col.flex.fixed","text":"Your Privacy is Important to Us"}
+],
+"goodhousekeeping.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"greenwichtime.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"harpersbazaar.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"history.com":[
+{"wahl":"[data-sentry-component=\"Box\"]","text":"Legal Terms and Privacy"}
+],
+"hm-news.co.il":[
+{"wahl":"[data-elementor-type=\"popup\"]","text":"Cookies"}
+],
+"hml.co.il":[
+{"wahl":"[data-elementor-type=\"popup\"]","text":"עוגיות"}
+],
+"honeygain.com":[
+{"wahl":".Wrapper--1lbmq00","text":"This website uses cookies"}
+],
+"housebeautiful.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"houstonchronicle.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"interestingengineering.com":[
+{"wahl":".t-max-w-96","text":"Sign up for free"}
+],
+"join.chat":[
+{"wahl":".dialog-lightbox-message","text":"/Cookies/i"}
+],
+"kick.com":[
+{"wahl":".z-modal","text":"You are in control of cookies used"}
+],
+"lmtonline.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"manisteenews.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"memefi.club":[
+{"wahl":".MuiStack-root","text":"Personalised ads"}
+],
+"menshealth.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"michigansthumb.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"middletownpress.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"milkinkstudio.com":[
+{"wahl":".dialog-lightbox-message","text":"/Cookies/i"}
+],
+"mixcloud.com":[
+{"wahl":"[style^=\"--x-backgroundColor\"] > [class]","text":"Cookies"}
+],
+"mrt.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"myjournalcourier.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"myplainview.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"mysanantonio.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"naimix.info":[
+{"wahl":"body > div > div","text":"cookies"}
+],
+"netfiber.net.il":[
+{"wahl":".elementor-popup-modal","text":"cookies"}
+],
+"news.abs-cbn.com":[
+{"wahl":".MuiBox-root","text":"Welcome,"}
+],
+"nhregister.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"noon.com":[
+{"wahl":"._wrapper_nlm9m_28","text":"/We use cookies|نستخدم ملفات تعريف/"}
+],
+"ourmidland.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"payermax.com":[
+{"wahl":".dialog","text":"Cookies on PayerMax Website"}
+],
+"planeteclipse.com":[
+{"wahl":".notification","text":"We use only essential cookies"}
+],
+"play.google.com":[
+{"wahl":".gb_g","text":"cookie"}
+],
+"popularmechanics.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"prevention.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"privatekeys.pw":[
+{"wahl":".toast","text":"We use cookies"}
+],
+"redbookmag.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"registercitizen.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"repocket.com":[
+{"wahl":".max-w-sm.z-10","text":"We use third-party cookies"}
+],
+"revolut.com":[
+{"wahl":"div[role=\"dialog\"]","text":"/Cookies|cookies/"}
+],
+"rimon.net.il":[
+{"wahl":".elementor-popup-modal","text":"cookies"}
+],
+"roadandtrack.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"runnersworld.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"sams.com.mx":[
+{"wahl":"section[role=\"banner\"]","text":"Aviso de Cookies"}
+],
+"sberdevices.ru":[
+{"wahl":"div[data-testid=\"snackbar\"]","text":"cookie"}
+],
+"seventeen.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"sfchronicle.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"sfgate.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"sniffies.com":[
+{"wahl":".footer","text":"By using our platform"}
+],
+"spectracities.com":[
+{"wahl":".elementor-popup-modal","text":"cookies"}
+],
+"stamfordadvocate.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"stations.vesselfinder.com":[
+{"wahl":".main-footer","text":"This website uses cookies"}
+],
+"t3.chat":[
+{"wahl":".justify-center.flex","text":"Make sure you agree"}
+],
+"theintelligencer.com":[
+{"wahl":".bg-white.b-gray600.tpa","text":"We use technologies that provide information"}
+],
+"tinder.com":[
+{"wahl":".C\\(\\$c-ds-text-secondary\\)","text":"We value your privacy."}
+],
+"townandcountrymag.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"twitch.tv":[
+{"wahl":".hLgTAv","text":"Terms of Sale"}
+],
+"ura.news":[
+{"wahl":".gR.t","text":"Сайт использует cookie."}
+],
+"v1.yaoilib.net":[
+{"wahl":".ey_ez","text":"cookie"}
+],
+"veranda.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"walmart.ca":[
+{"wahl":".bottom-0.nav-clickable-padded","text":"Your data"}
+],
+"wolframalpha.com":[
+{"wahl":"section","text":"This website uses cookies"}
+],
+"womansday.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"womenshealthmag.com":[
+{"wahl":".e91i7z92.css-c9oklo","text":"We use technologies that provide information"}
+],
+"worklouder.cc":[
+{"wahl":".dialog-lightbox-message","text":"/Cookies/i"}
+],
+"x.com":[
+{"wahl":".css-175oi2r.r-12vffkv[style^=\"position: absolute; bottom: 0px; width: 100%;\"]","text":"data protection"},
+{"wahl":".css-175oi2r[data-testid=\"BottomBar\"]","text":"Did someone say"}
+]
+}

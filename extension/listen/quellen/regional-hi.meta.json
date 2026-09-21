@@ -1,0 +1,15 @@
+{
+  "id": "regional-hi",
+  "name": "IndianList",
+  "url": "https://easylist-downloads.adblockplus.org/indianlist.txt",
+  "geholtAm": "2026-09-03T19:21:42.134Z",
+  "bytes": 644849,
+  "zeilen": 10518,
+  "sha256": "afba0cd68e82eea4c0df4bae4cd6b16cd370393b403df33e689dbdb6806aa83b",
+  "titel": "IndianList",
+  "version": "202609031912",
+  "zuletztGeaendert": "03 Sep 2026 19:12 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "\"949ba4081246e552b9ee956d7052728d:1788463086.577981\"",
+  "ausDatei": null
+}

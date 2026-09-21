@@ -1,0 +1,15 @@
+{
+  "id": "ublock-schadsoftware",
+  "name": "uBlock filters - Badware risks",
+  "url": "https://ublockorigin.github.io/uAssets/filters/badware.txt",
+  "geholtAm": "2026-09-03T19:21:36.679Z",
+  "bytes": 257565,
+  "zeilen": 6487,
+  "sha256": "197afa872496b98f1d413a0554b020565552643fa418982c493fe228c53b0154",
+  "titel": "uBlock₀ filters – Badware risks",
+  "version": null,
+  "zuletztGeaendert": "Thu, 03 Sep 2026 09:57:53 +0000",
+  "lizenz": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+  "etag": "W/\"6a99be2e-3ee1d\"",
+  "ausDatei": null
+}

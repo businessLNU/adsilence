@@ -1,0 +1,15 @@
+{
+  "id": "basis",
+  "name": "EasyList",
+  "url": "https://easylist.to/easylist/easylist.txt",
+  "geholtAm": "2026-09-03T19:21:36.175Z",
+  "bytes": 2125928,
+  "zeilen": 81200,
+  "sha256": "ab14f713faa3a787241e79edc184520dc4570b29796f7a169f9177af6e7d149b",
+  "titel": "EasyList",
+  "version": "202609031913",
+  "zuletztGeaendert": "03 Sep 2026 19:13 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "W/\"6a99c6f0-207068\"",
+  "ausDatei": null
+}

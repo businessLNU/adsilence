@@ -1,0 +1,726 @@
+/**
+ * Grundgestaltung fuer beide Seiten. Farben aus `tokens.css`, Bewegung aus
+ * `bewegung.css`; hier stehen Schrift, Rueckstellung, Fokus und die Klassen
+ * der kleinen Bauteile. Kein Hex-Wert in dieser Datei.
+ */
+@import './tokens.css';
+@import './bewegung.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--schrift);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  background: var(--marke-grund);
+  color: var(--marke-text);
+}
+
+body {
+  margin: 0;
+  background: var(--marke-grund);
+  color: var(--marke-text);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+h1 {
+  font-size: 20px;
+}
+h2 {
+  font-size: 16px;
+}
+h3 {
+  font-size: 14px;
+}
+
+a {
+  color: var(--marke-akzent-text);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+
+/* Ein Fokusrahmen fuer alles, nur bei Tastatur. */
+:focus-visible {
+  outline: 2px solid var(--marke-bis);
+  outline-offset: 2px;
+  border-radius: var(--radius-klein);
+}
+
+.schwach {
+  color: var(--marke-schwach);
+}
+.klein {
+  font-size: 12px;
+}
+.zahl {
+  font-variant-numeric: tabular-nums;
+}
+.mono {
+  font-family: var(--schrift-mono);
+  font-variant-numeric: tabular-nums;
+}
+.nur-lesen {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ── Karte ───────────────────────────────────────────────────────────── */
+.karte {
+  background: var(--marke-flaeche);
+  border-radius: var(--radius-karte);
+  box-shadow: var(--schatten-karte);
+  padding: var(--abstand-4);
+}
+.karte--eng {
+  padding: var(--abstand-3) var(--abstand-4);
+}
+
+/* ── Knopf ───────────────────────────────────────────────────────────── */
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--abstand-2);
+  min-height: 36px;
+  padding: 0 var(--abstand-4);
+  border: 0;
+  border-radius: var(--radius-knopf);
+  font-weight: 500;
+  white-space: nowrap;
+  background: transparent;
+  color: var(--marke-text);
+  -webkit-user-select: none;
+  user-select: none;
+}
+.knopf--klein {
+  min-height: 30px;
+  padding: 0 var(--abstand-3);
+  font-size: 13px;
+}
+.knopf--breit {
+  width: 100%;
+}
+.knopf--primaer {
+  background: linear-gradient(135deg, var(--marke-von), var(--marke-bis));
+  color: var(--marke-akzent-schrift);
+  box-shadow: var(--schatten-knopf);
+}
+.knopf--sekundaer {
+  background: var(--marke-feld);
+  color: var(--marke-text);
+  box-shadow: inset 0 0 0 1px var(--marke-linie);
+}
+.knopf--leise {
+  color: var(--marke-akzent-text);
+}
+.knopf--gefahr {
+  color: var(--marke-fehler-text);
+}
+.knopf:disabled {
+  opacity: 0.5;
+}
+.knopf--symbol {
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  color: var(--marke-schwach);
+}
+
+/* ── Schalter ────────────────────────────────────────────────────────── */
+.schalter {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  flex-shrink: 0;
+}
+.schalter__bahn {
+  position: relative;
+  display: block;
+  width: 44px;
+  height: 26px;
+  border-radius: 13px;
+  background: var(--marke-linie-stark);
+}
+.schalter__knopf {
+  position: absolute;
+  top: 3px;
+  inset-inline-start: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--marke-flaeche);
+  box-shadow: 0 1px 2px rgba(20, 24, 31, 0.2);
+}
+.schalter[aria-checked='true'] .schalter__bahn {
+  background: var(--marke-von);
+}
+.schalter[aria-checked='true'] .schalter__knopf {
+  transform: translateX(18px);
+}
+[dir='rtl'] .schalter[aria-checked='true'] .schalter__knopf {
+  transform: translateX(-18px);
+}
+.schalter--gross .schalter__bahn {
+  width: 60px;
+  height: 34px;
+  border-radius: 17px;
+}
+.schalter--gross .schalter__knopf {
+  width: 28px;
+  height: 28px;
+}
+.schalter--gross[aria-checked='true'] .schalter__knopf {
+  transform: translateX(26px);
+}
+[dir='rtl'] .schalter--gross[aria-checked='true'] .schalter__knopf {
+  transform: translateX(-26px);
+}
+.schalter:disabled {
+  opacity: 0.45;
+}
+
+/* Zeile „Beschriftung links, Schalter rechts" */
+.schalterzeile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-3);
+  width: 100%;
+  text-align: start;
+}
+.schalterzeile__text {
+  min-width: 0;
+  flex: 1;
+}
+.schalterzeile__titel {
+  font-weight: 500;
+}
+
+/* ── Feld ────────────────────────────────────────────────────────────── */
+.feld {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-2);
+}
+.feld__label {
+  font-weight: 500;
+  font-size: 13px;
+}
+.feld__eingabe {
+  width: 100%;
+  min-height: 36px;
+  padding: var(--abstand-2) var(--abstand-3);
+  border: 1px solid var(--marke-linie);
+  border-radius: var(--radius-feld);
+  background: var(--marke-feld);
+  color: var(--marke-text);
+}
+.feld__eingabe::placeholder {
+  color: var(--marke-platzhalter);
+}
+.feld__eingabe:focus {
+  outline: 2px solid var(--marke-bis);
+  outline-offset: 0;
+  border-color: transparent;
+}
+.feld__eingabe[aria-invalid='true'] {
+  border-color: var(--marke-fehler);
+}
+textarea.feld__eingabe {
+  min-height: 160px;
+  resize: vertical;
+  font-family: var(--schrift-mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+select.feld__eingabe {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-inline-end: var(--abstand-8);
+  background-image: linear-gradient(45deg, transparent 50%, var(--marke-schwach) 50%),
+    linear-gradient(135deg, var(--marke-schwach) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 55%,
+    calc(100% - 13px) 55%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+}
+[dir='rtl'] select.feld__eingabe {
+  background-position:
+    18px 55%,
+    13px 55%;
+}
+.feld__hinweis {
+  font-size: 12px;
+  color: var(--marke-schwach);
+}
+.feld__fehler {
+  font-size: 12px;
+  color: var(--marke-fehler-text);
+}
+
+/* Haken */
+.haken {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--abstand-2);
+  cursor: pointer;
+}
+.haken input {
+  margin: 3px 0 0;
+  width: 16px;
+  height: 16px;
+  accent-color: var(--marke-von);
+  flex-shrink: 0;
+}
+/*
+ * Der fehlende Haken, nachdem jemand „Premium holen" gedrueckt hat.
+ *
+ * Die ganze Zeile bekommt einen roten Rahmen und roten Text, nicht nur das
+ * Kaestchen: Ein 16 Pixel grosses Kaestchen in Rot uebersieht man in einem
+ * Fenster, in dem der Blick gerade auf dem Knopf lag.
+ *
+ * `--marke-fehler` und keine eigene Farbe: Rot heisst hier dasselbe wie
+ * ueberall sonst - „so geht es nicht weiter".
+ */
+.haken--fehlt {
+  margin: calc(var(--abstand-2) * -1);
+  padding: var(--abstand-2);
+  border-radius: var(--radius-klein);
+  border: 1px solid var(--marke-fehler);
+  background: color-mix(in srgb, var(--marke-fehler) 7%, transparent);
+  color: var(--marke-fehler);
+}
+.haken--fehlt input {
+  accent-color: var(--marke-fehler);
+  outline: 2px solid var(--marke-fehler);
+  outline-offset: 2px;
+}
+
+/* ── Hinweiszeilen ───────────────────────────────────────────────────── */
+.hinweis {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--abstand-2);
+  padding: var(--abstand-2) var(--abstand-3);
+  border-radius: var(--radius-feld);
+  font-size: 13px;
+}
+.hinweis--fehler {
+  background: var(--marke-fehler-flaeche);
+  color: var(--marke-fehler-text);
+}
+.hinweis--warn {
+  background: var(--marke-akzent-flaeche);
+  color: var(--marke-warn-text);
+}
+.hinweis--gut {
+  background: var(--marke-akzent-flaeche);
+  color: var(--marke-gut-text);
+}
+.hinweis--neutral {
+  background: var(--marke-feld);
+  color: var(--marke-schwach);
+}
+
+/* ── Skeleton ────────────────────────────────────────────────────────── */
+.skeleton {
+  display: block;
+  background: var(--marke-feld);
+  border-radius: var(--radius-klein);
+}
+
+/* ── Dialog ──────────────────────────────────────────────────────────── */
+.dialog {
+  width: min(100% - 32px, 400px);
+  max-height: calc(100vh - 32px);
+  /*
+   * Mittig, ausgeschrieben.
+   *
+   * Ein `showModal()`-Dialog steht durch `margin: auto` im Blatt des Browsers
+   * ohnehin in der Mitte — aber nur, solange kein Vorfahre einen eigenen
+   * Bezugsrahmen aufmacht (`transform`, `filter`, `contain`) und solange das
+   * Blatt es so haelt. Hier steht es, damit es nicht davon abhaengt.
+   */
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-karte);
+  background: var(--marke-flaeche);
+  color: var(--marke-text);
+  box-shadow: var(--schatten-dialog);
+  overflow: hidden;
+}
+.dialog__inhalt {
+  padding: var(--abstand-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-4);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+.dialog__kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--abstand-3);
+}
+.dialog__fuss {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--abstand-2);
+}
+
+/**
+ * Das Kauffenster ist breiter als ein Meldungsdialog - aber nur, wo Platz
+ * ist. Im Popup (360 px) greift `100% - 32px` und es bleibt beim Fenster;
+ * auf der Optionsseite werden daraus 560 px, in denen Preis, Merkmale und
+ * Zustimmung nebeneinander atmen koennen.
+ */
+.dialog--breit {
+  width: min(100% - 32px, 560px);
+  /*
+   * Der orange Schweif.
+   *
+   * Vier Lagen statt einer: eine harte Kante am Rand, dann drei Wolken, die
+   * nach aussen weicher und schwaecher werden. EINE grosse Unschaerfe ergaebe
+   * einen grauen Hof — die Farbe verduennt sich auf der ganzen Strecke
+   * gleichmaessig und ist am Rand schon blass. Die letzte Lage ist der
+   * gewohnte Tiefenschatten; ohne ihn schwebt das Fenster nicht mehr, es
+   * leuchtet nur.
+   */
+  border: 2px solid var(--marke-von);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--marke-von) 40%, transparent),
+    0 0 24px color-mix(in srgb, var(--marke-bis) 55%, transparent),
+    0 0 64px color-mix(in srgb, var(--marke-von) 45%, transparent),
+    0 0 130px color-mix(in srgb, var(--marke-von) 30%, transparent),
+    0 40px 90px -30px color-mix(in srgb, var(--marke-text) 30%, transparent);
+}
+
+/*
+ * Das Kauffenster traegt die Form der Tarifkarte auf der Website: Betrag
+ * gross, Zahlweise klein darunter, Merkmale mit eingekreistem Haken, der
+ * Knopf breit und in der Marke. Nur die Farbe ist eine andere - dort gruen,
+ * hier das Orange dieser Erweiterung.
+ *
+ * Alles hier haengt an `.dialog--breit` und nicht an `.kauf`: Ein
+ * Meldungsdialog soll weiter aussehen wie ein Meldungsdialog.
+ */
+.dialog--breit .kauf__preis {
+  display: block;
+  text-align: center;
+}
+.dialog--breit .kauf__preis strong {
+  font-size: 40px;
+}
+.dialog--breit .kauf__je {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--marke-akzent-text);
+  /*
+   * Abstand zum Betrag. Der Basisblock ist ein Flex mit `gap`, dieser hier ist
+   * `display: block` - da bleibt zwischen Betrag und Einheit nur das
+   * Leerzeichen aus dem Markup, und „2,08 €pro Monat" klebte aneinander.
+   */
+  margin-inline-start: 10px;
+}
+/*
+ * Der Jahresbetrag steht UNTER dem Monatspreis, nicht daneben: In der Vorlage
+ * ist es die kleine Zeile „bei jaehrlicher Zahlung", und sie erklaert den
+ * Betrag darueber. Neben ihm gelesen sind es zwei Preise.
+ */
+.dialog--breit .kauf__gesamt {
+  display: block;
+  margin-top: 4px;
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+/*
+ * Die GEWAEHLTE Zahlweise liegt in der Marke, nicht auf Weiss.
+ *
+ * Weiss auf hellgrauer Mulde sagt „hier steht etwas", Orange sagt „das ist
+ * deine Wahl" - dieselbe Farbe wie der Kaufknopf darunter, und damit dieselbe
+ * Aussage. Die nicht gewaehlte Seite bleibt unveraendert; zwei gefaerbte
+ * Haelften waeren keine Wahl mehr, sondern zwei Knoepfe.
+ *
+ * Die Schrift darauf ist DUNKEL (`--marke-akzent-schrift`), nicht weiss: Auf
+ * diesem Orange steht Weiss bei 3,6:1, der dunkle Ton bei 5,4:1 - die
+ * Begruendung steht ausfuehrlich in `tokens.css`.
+ */
+.dialog--breit .kauf__zahlweise button[aria-pressed='true'] {
+  background: linear-gradient(135deg, var(--marke-von), var(--marke-bis));
+  color: var(--marke-akzent-schrift);
+  box-shadow: var(--schatten-knopf);
+}
+.dialog--breit .kauf__zahlweise button[aria-pressed='true'] .kauf__sparen {
+  color: var(--marke-akzent-schrift);
+  opacity: 0.8;
+}
+
+.dialog--breit .kauf__merkmale {
+  gap: 10px;
+}
+.dialog--breit .kauf__merkmale li {
+  align-items: center;
+  gap: 10px;
+}
+.dialog--breit .kauf__merkmale li::before {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid color-mix(in srgb, var(--marke-von) 45%, transparent);
+  border-radius: 999px;
+  background: var(--marke-akzent-flaeche);
+  color: var(--marke-akzent-text);
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* ── Kauffenster ─────────────────────────────────────────────────────── */
+.kauf {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-4);
+}
+.kauf__einleitung {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--marke-schwach);
+}
+
+/**
+ * Die Zahlweise als ein Paar Schalter in einer Mulde - dieselbe Form wie auf
+ * der Website (`.zahlweise` in `demo/src/stil.css`), damit jemand, der dort
+ * schon gewaehlt hat, hier nichts Neues lernen muss.
+ */
+.kauf__zahlweise {
+  display: inline-flex;
+  /*
+   * Mittig, nicht linksbuendig.
+   *
+   * Die Mulde ist das einzige Bedienelement zwischen Einleitung und Betrag.
+   * Links angeschlagen sitzt sie unter dem Text und liest sich wie dessen
+   * Fortsetzung; in der Mitte steht sie fuer sich - eine Entscheidung, die
+   * getroffen werden will. `.kauf` ist eine Flex-Spalte, also entscheidet
+   * `align-self` und nicht `margin: auto`.
+   */
+  align-self: center;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--marke-text) 6%, transparent);
+}
+.kauf__zahlweise button {
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--marke-schwach);
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.kauf__zahlweise button[aria-pressed='true'] {
+  color: var(--marke-text);
+  background: var(--marke-flaeche);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--marke-text) 10%, transparent);
+}
+.kauf__zahlweise button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.kauf__sparen {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--marke-akzent-text);
+}
+
+/* Der Betrag ist das, wonach gesucht wird - also das Groesste im Fenster. */
+.kauf__preis {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/**
+ * Die Testphase als Pille, direkt unter dem Preis und mittig.
+ *
+ * VOLL im Markenverlauf, wie der Hauptknopf und das Schloss an einer
+ * Premium-Zeile. Sie ist ausdruecklich NICHT rot: Rot heisst in dieser
+ * Oberflaeche „schiefgegangen" (`--marke-fehler` an der fehlenden Hakenzeile
+ * zwei Zeilen tiefer im selben Fenster). Eine rote Pille und ein roter
+ * Fehlerrahmen im selben Blickfeld waeren zwei Bedeutungen fuer eine Farbe.
+ *
+ * Die Schrift ist `--marke-akzent-schrift` und nicht Weiss - auf diesem
+ * Orange steht Weiss bei 3,6:1, der dunkle Ton bei 5,4:1 (Begruendung an den
+ * Marken in `tokens.css`).
+ *
+ * `width: fit-content` mit `margin-inline: auto` statt `text-align: center`:
+ * Die Pille soll so breit sein wie ihr Text, nicht wie das Fenster.
+ */
+.kauf__testphase {
+  width: fit-content;
+  margin: 10px auto 0;
+  padding: 7px 16px;
+  border-radius: var(--radius-knopf);
+  background: linear-gradient(135deg, var(--marke-von), var(--marke-bis));
+  color: var(--marke-akzent-schrift);
+  box-shadow: var(--schatten-knopf);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: center;
+}
+.kauf__preis strong {
+  font-size: 34px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.kauf__je {
+  font-size: 13.5px;
+  color: var(--marke-schwach);
+}
+.kauf__gesamt {
+  font-size: 12.5px;
+  color: var(--marke-schwach);
+  padding-inline-start: 8px;
+  border-inline-start: 1px solid var(--marke-linie);
+}
+
+.kauf__merkmale {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+  font-size: 13.5px;
+}
+.kauf__merkmale li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+.kauf__merkmale li::before {
+  content: '✓';
+  color: var(--marke-gut-text);
+  font-weight: 700;
+}
+
+/* ── Beschreibungsliste (Vorschau der Meldung, Kontodaten) ───────────── */
+.paare {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--abstand-1) var(--abstand-4);
+  margin: 0;
+  font-size: 13px;
+}
+.paare dt {
+  color: var(--marke-schwach);
+}
+.paare dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* ── Zeilenknopf: ganze Zeile drueckbar, ohne Knopfoptik ─────────────── */
+.zeilenknopf {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--abstand-3);
+  padding: var(--abstand-2) var(--abstand-3);
+  border: 0;
+  border-radius: var(--radius-feld);
+  background: transparent;
+  text-align: start;
+}
+
+.stapel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--abstand-3);
+}
+.reihe {
+  display: flex;
+  align-items: center;
+  gap: var(--abstand-2);
+}
+.wachsend {
+  flex: 1;
+  min-width: 0;
+}
+.abschneiden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/**
+ * Der Fuss des Popups mit nur EINEM Knopf.
+ *
+ * `.fuss` verteilt zwei Knoepfe an die Raender (`space-between`). Bleibt nur
+ * einer uebrig, klebt er dadurch links und sieht aus, als fehle rechts etwas.
+ */
+/*
+ * Zwei Klassen im Selektor, nicht eine: `.fuss` traegt `space-between` und
+ * steht in derselben Datei weiter oben. Bei gleicher Spezifitaet gewinnt die
+ * spaetere Regel - das waere hier zufaellig die richtige, aber nur solange
+ * niemand die Reihenfolge aendert. `.fuss.fuss--mittig` gewinnt aus einem
+ * Grund, den man lesen kann.
+ */
+.fuss.fuss--mittig {
+  justify-content: center;
+}

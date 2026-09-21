@@ -1,0 +1,15 @@
+{
+  "id": "privatsphaere",
+  "name": "EasyPrivacy",
+  "url": "https://easylist.to/easylist/easyprivacy.txt",
+  "geholtAm": "2026-09-03T19:21:36.395Z",
+  "bytes": 1500892,
+  "zeilen": 56790,
+  "sha256": "18c6f1ab0ddcc6b4809f558f09bc3e8a75b8d7456f24b35162f36ecbccd06cc7",
+  "titel": "EasyPrivacy",
+  "version": "202609031913",
+  "zuletztGeaendert": "03 Sep 2026 19:13 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "W/\"6a99c6f0-16e6dc\"",
+  "ausDatei": null
+}

@@ -1,0 +1,34 @@
+dist/
+node_modules/
+.env
+*.zip
+*.tsbuildinfo
+.DS_Store
+
+# Erzeugt aus `i18n/*.json` von `scripts/locales.mjs`, das `scripts/build.mjs`
+# bei jedem Bauen selbst anstoesst. Nur `extName` und `extDescription` stehen darin;
+# der Rest der Texte wird gebuendelt. Eine eingecheckte Kopie liefe frueher
+# oder spaeter der Quelle hinterher.
+_locales/
+.probe-profil/
+dist/safari-xcode/
+
+# Der Vergleichslauf laedt fremde Erweiterungen und legt sie hier ab.
+# Sie gehoeren nicht ins Repo: fremdes Gut, dreissig Megabyte, und beim
+# naechsten Lauf ohnehin neu geholt.
+.vergleich/
+vergleich/
+
+# Die Fingerabdruck-Probe legt je Lauf Bericht und Bildschirmfotos ab.
+# Messwerte gehoeren mit Datum in den Katalog, nicht als Rohdaten ins Repo.
+.fingerabdruck/
+
+# Dasselbe fuer die Optionsprobe: Bildschirmfotos je Lauf und ihr Profil.
+# Ein eingecheckter Screenshot waere ein Vergleichsbild, das bei jeder
+# Schriftaktualisierung des Systems umfaellt und danach blind nachgezogen wird.
+.probe-optionen/
+
+# Die Wand-Probe gegen echte Seiten: Bildschirmfotos, Bericht und Profile.
+.probe-wand/
+# Jedes Browserprofil einer Probe, auch die einmaligen aus einer Vorfuehrung.
+.probe-profil*/

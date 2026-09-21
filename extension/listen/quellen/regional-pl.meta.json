@@ -1,0 +1,15 @@
+{
+  "id": "regional-pl",
+  "name": "EasyList Polish",
+  "url": "https://easylist-downloads.adblockplus.org/easylistpolish.txt",
+  "geholtAm": "2026-09-03T19:21:39.692Z",
+  "bytes": 192687,
+  "zeilen": 3334,
+  "sha256": "1b2c5769d7e948b61dcee6c2cf440636688ea22e7aa8752e4ea6e5f85b0adf41",
+  "titel": "EasyList Polish",
+  "version": "202609031912",
+  "zuletztGeaendert": "03 Sep 2026 19:12 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "\"e5970ec8f61108238ad8fb5bb33653bd:1788463085.394627\"",
+  "ausDatei": null
+}

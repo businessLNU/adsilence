@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>AdSilence</title>
+    <style>
+      @media (prefers-color-scheme: dark) {
+        #erstesBild { color: #e6e9ef; }
+        #erstesBild div[style*="background"] { background: #22262e !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wurzel">
+      <!--
+        Das erste Bild, noch ohne JavaScript.
+
+        Chrome oeffnet das Fenster, laedt 22 kB Skript und 38 kB Stil, dann
+        malt React. Bis dahin war das Fenster leer, und ein leeres Fenster
+        liest sich als „kaputt" - der Nutzer klickt weiter. Diese paar Zeilen
+        zeichnen den Rahmen, den er gleich sowieso sieht: Kopfzeile mit Marke,
+        darunter die Karte. React ersetzt sie beim Einhaengen.
+
+        Bewusst mit eigenen Farben statt der Themenvariablen: Die stehen erst,
+        wenn der Stil geladen ist - und genau darauf soll hier niemand warten.
+      -->
+      <div id="erstesBild" style="width:360px;padding:14px 16px;font:14px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif;color:#14181f">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+          <img src="../icons/icon-32.png" alt="" width="22" height="22" style="border-radius:6px" />
+          <strong style="font-size:15px;letter-spacing:-0.01em">AdSilence</strong>
+        </div>
+        <div style="height:96px;border-radius:14px;background:#f1f3f7"></div>
+      </div>
+    </div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

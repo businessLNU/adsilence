@@ -1,0 +1,202 @@
+/**
+ * Bewegung. Alles, was sich in der Oberflaeche bewegt, steht hier.
+ *
+ * Grundsaetze (aus dem Entwurf uebernommen, nicht verhandelbar):
+ * - Nur `transform` und `opacity` werden animiert. Nie Hoehe, Breite, Rand.
+ * - Ein- und Austritt mit ease-out; die eingebauten Kurven sind zu schwach.
+ * - Nichts dauert laenger als 300 ms. Austritt schneller als Eintritt.
+ * - Das Popup selbst blendet NICHT ein. Es wird hundertmal am Tag geoeffnet;
+ *   jede Animation dort waere hundertmal Wartezeit.
+ * - Zaehler wechseln ohne Animation: die Zahl ist Information, kein Schmuck.
+ * - Hover nur bei echtem Zeiger, sonst bleibt der Zustand auf Touch haengen.
+ * - Bei `prefers-reduced-motion` bleibt nur Opazitaet uebrig.
+ */
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dauer-druck: 160ms;
+  --dauer-schalter: 200ms;
+  --dauer-dialog: 200ms;
+  --dauer-dialog-zu: 140ms;
+  --dauer-eintritt: 200ms;
+  --stagger: 40ms;
+}
+
+/* Knoepfe und alles Drueckbare: sofortige Rueckmeldung, leicht kleiner. */
+.drueckbar {
+  transition: transform var(--dauer-druck) var(--ease-out);
+}
+.drueckbar:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Der Schalter: Knopf gleitet, Bahn wechselt die Farbe. */
+.schalter__bahn {
+  transition: background-color var(--dauer-schalter) ease;
+}
+.schalter__knopf {
+  transition: transform var(--dauer-schalter) var(--ease-out);
+}
+
+/* Dialoge: von 0.96 auf 1, nie von 0. Backdrop blendet mit. */
+.dialog {
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity var(--dauer-dialog-zu) var(--ease-out),
+    transform var(--dauer-dialog-zu) var(--ease-out);
+}
+.dialog[data-offen='1'] {
+  opacity: 1;
+  transform: scale(1);
+  transition-duration: var(--dauer-dialog);
+}
+.dialog::backdrop {
+  background: rgba(14, 17, 22, 0);
+  transition: background-color var(--dauer-dialog-zu) ease;
+}
+.dialog[data-offen='1']::backdrop {
+  background: rgba(14, 17, 22, 0.4);
+  transition-duration: var(--dauer-dialog);
+}
+
+/* Listen der Optionsseite: Eintraege treten gestaffelt ein, hoechstens acht. */
+@keyframes eintreten {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.stagger > * {
+  animation: eintreten var(--dauer-eintritt) var(--ease-out) both;
+  animation-delay: calc(min(var(--i, 0), 7) * var(--stagger));
+}
+
+/* Skeleton: nur Opazitaet pulst. Ein Schimmer wuerde Farbe animieren. */
+@keyframes skeleton-puls {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+.skeleton {
+  animation: skeleton-puls 1.4s ease-in-out infinite;
+}
+
+/* Sanfter Wechsel zwischen zwei Inhalten derselben Stelle (z. B. Knopf wird
+   zur Wahl). Nur Opazitaet, 160 ms, damit es nicht nach Warten aussieht. */
+.wechsel {
+  animation: wechsel var(--dauer-druck) var(--ease-out) both;
+}
+@keyframes wechsel {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hover nur bei Maus. Auf Touch bleibt der Zustand sonst nach dem Tippen. */
+@media (hover: hover) and (pointer: fine) {
+  .knopf--primaer:hover:not(:disabled) {
+    filter: brightness(1.06);
+  }
+  .knopf--sekundaer:hover:not(:disabled),
+  .knopf--leise:hover:not(:disabled) {
+    background: var(--marke-akzent-flaeche);
+  }
+  .knopf--gefahr:hover:not(:disabled) {
+    background: var(--marke-fehler-flaeche);
+  }
+  .zeilenknopf:hover {
+    background: var(--marke-feld);
+  }
+  .nav__eintrag:hover:not([aria-current='page']) {
+    background: var(--marke-akzent-flaeche);
+  }
+}
+
+/*
+ * Der Tipp am „i": blendet ein und kommt dabei 3 px herunter. Er VERSCHIEBT
+ * nichts - er liegt absolut ueber der Zeile, die Zeile bleibt, wo sie ist.
+ */
+.tipp__text {
+  transform: translateY(3px);
+  transition:
+    opacity var(--dauer-eintritt) var(--ease-out),
+    transform var(--dauer-eintritt) var(--ease-out);
+}
+.tipp__knopf:focus-visible ~ .tipp__text {
+  transform: translateY(0);
+}
+@media (hover: hover) {
+  .tipp:hover .tipp__text {
+    transform: translateY(0);
+  }
+}
+
+/*
+ * Der fehlende Haken meldet sich einmal kurz. 200 ms, nur `transform`, zwei
+ * Ausschlaege von 3 Pixeln - genug, damit das Auge hinspringt, zu wenig, um
+ * als Spielerei zu wirken. Er laeuft EINMAL beim Farbwechsel und nicht in
+ * einer Schleife: Was dauernd wackelt, wird zur Tapete.
+ */
+@keyframes hakenRuettelt {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+.haken--fehlt {
+  animation: hakenRuettelt 200ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haken--fehlt {
+    animation: none;
+  }
+  .drueckbar,
+  .drueckbar:active:not(:disabled) {
+    transition: none;
+    transform: none;
+  }
+  .schalter__knopf {
+    transition: none;
+  }
+  /* Es bleibt die Opazitaet - der Weg nach unten faellt weg. */
+  .tipp__text,
+  .tipp__knopf:focus-visible ~ .tipp__text {
+    transform: none;
+    transition: opacity var(--dauer-eintritt) ease;
+  }
+  .dialog,
+  .dialog[data-offen='1'] {
+    transform: none;
+    transition: opacity var(--dauer-dialog) ease;
+  }
+  .stagger > * {
+    animation: none;
+  }
+  .skeleton {
+    animation: none;
+    opacity: 0.8;
+  }
+  .wechsel {
+    animation: none;
+  }
+}

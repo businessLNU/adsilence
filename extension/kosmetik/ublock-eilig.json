@@ -1,0 +1,44 @@
+{
+"generisch":[
+"div[style^=\"height:    250px; width:    300px;\"]",
+"div[style^=\"width:    160px; height:    600px; margin: 0px auto; min-width: 160px; min-height: 600px;\"]",
+"div[style^=\"width:    300px; height:    250px;\"]",
+"img[height=\"   250\"][width=\"   300\"]",
+"img[height=\"   90\"][width=\"   728\"]",
+"ins[style$=\"height:    90px; width:    728px;\"]",
+"amp-img[height=\"   120\"]",
+"amp-img[width=\"   300\"]",
+"amp-img[width=\"   336\"]",
+"div[id][class][style^=\"display\"][style*=\"hidden\"][style*=\"width:   \"]",
+"ins[id][style*=\"--gn-ov-ad-height\"]"
+],
+"spezifisch":{
+"aternos.org":["#placement-takeover"],
+"bing.com":["ol#b_results > li.b_algo:has(> .b_title > h2 > a[id][ads])","ol#b_results > li:has(> :is(.b_tpcn, .b_title, h2) a[href^=\"https://www.bing.com/aclk?\"])"],
+"gecmisi.com.tr":[".ad-container"],
+"igorslab.de":[".herald-main-content > .row > .herald-module:not([data-col]):has(> .herald-txt-module div[id*=\"-\"][class] > div[id*=\"-\"][class*=\"target\"] a[href][rel=\"noopener\"] img)","div.widget[class*=\"-widget\"][id*=\"-widget-\"]","a[aria-label*=\"Banner\"]",".herald-sidebar-right > .widget:not([id*=\"widget\"])","#content ~ .herald-slide",".herald-sticky","#extras > #single-sticky + div[class]:not([id]):has(a[href][target=\"_blank\"] img)",".entry-content > #skio-article-bar ~ div[id][class]:not([class*=\"igorslab\"]):has(a[href][target=\"_blank\"] img)","a[target*=\"-\"]:has(img[src^=\"blob:\"])",".herald-above-footer"],
+"myanimelist.net":["a.ga-click[data-ga-click-type=\"hia\"]","div[id$=\"_NXU_wrap\"], div[id$=\"_NXU_TITLE_wrap\"]"],
+"nontonx.com":["#rules-nontonx"],
+"royalroad.com":[".dKKumhSnWiFq75vPUVtmTanQ:has(a[href^=\"https://www.royalroad.com/a/r?campaign=\"]:not([href*=\"&url=https%3A%2F%2Fwww.royalroad.com\"]))"],
+"streamcash.to":["div[id]:has(button[onclick*=\"location.reload()\"])"],
+"twitch.tv":[".stream-display-ad__wrapper + div > div[style^=\"position:\"] > div[class^=\"Layout-sc-\"]:has(video[src^=\"https://m.media-amazon.com\"])",".chat-shell > div[class^=\"Layout-sc-\"]  > div[style^=\"transition:\"]:has(video[src^=\"https://m.media-amazon.com\"])"],
+"vook.vc":[".note-main-spnsr a:not([href*=\"vook.vc\"])",".note-right-spnsr",".note-sp-spnsr"],
+"web.facebook.com":["div[role=\"complementary\"] a[rel=\"nofollow noreferrer external\"][attributionsrc^=\"/privacy_sandbox/comet/register/\"][attributionsrc*=\"?eid=\"]","div[role=\"complementary\"] div[data-visualcompletion=\"ignore-dynamic\"] a[href*=\"fbclid\"][href*=\"utm_medium\"][href*=\"utm_source\"][href*=\"utm_id\"][href*=\"utm_content\"][href*=\"utm_term\"][href*=\"utm_campaign\"]","div[role=\"complementary\"] div[data-visualcompletion=\"ignore-dynamic\"] a[rel=\"nofollow noreferrer noopener\"][target=\"rhcad2\"]","div[role=\"complementary\"] div[data-visualcompletion=\"ignore-dynamic\"] a[rel=\"nofollow noreferrer tag\"][aria-labelledby^=\"_R_\"]","div[role=\"complementary\"] a[attributionsrc][href^=\"http\"][target=\"_blank\"][role=\"link\"][rel*=\"noreferrer\"]:has(img[src])"],
+"www.facebook.com":["div[role=\"complementary\"] a[rel=\"nofollow noreferrer external\"][attributionsrc^=\"/privacy_sandbox/comet/register/\"][attributionsrc*=\"?eid=\"]","div[role=\"complementary\"] div[data-visualcompletion=\"ignore-dynamic\"] a[href*=\"fbclid\"][href*=\"utm_medium\"][href*=\"utm_source\"][href*=\"utm_id\"][href*=\"utm_content\"][href*=\"utm_term\"][href*=\"utm_campaign\"]","div[role=\"complementary\"] div[data-visualcompletion=\"ignore-dynamic\"] a[rel=\"nofollow noreferrer noopener\"][target=\"rhcad2\"]","div[role=\"complementary\"] div[data-visualcompletion=\"ignore-dynamic\"] a[rel=\"nofollow noreferrer tag\"][aria-labelledby^=\"_R_\"]","div[role=\"complementary\"] a[attributionsrc][href^=\"http\"][target=\"_blank\"][role=\"link\"][rel*=\"noreferrer\"]:has(img[src])"]
+},
+"ausnahmen":{
+"bing.com":["div[style^=\"height:    250px; width:    300px;\"]","div[style^=\"width:    160px; height:    600px; margin: 0px auto; min-width: 160px; min-height: 600px;\"]","div[style^=\"width:    300px; height:    250px;\"]","img[height=\"   250\"][width=\"   300\"]","img[height=\"   90\"][width=\"   728\"]","ins[style$=\"height:    90px; width:    728px;\"]","amp-img[height=\"   120\"]","amp-img[width=\"   300\"]","amp-img[width=\"   336\"]","div[id][class][style^=\"display\"][style*=\"hidden\"][style*=\"width:   \"]","ins[id][style*=\"--gn-ov-ad-height\"]"],
+"bus-location.1507t.xyz":[".ad-area:not(.text-ad)"],
+"dogdrip.net":["div[style^=\"height:    250px; width:    300px;\"]","div[style^=\"width:    160px; height:    600px; margin: 0px auto; min-width: 160px; min-height: 600px;\"]","div[style^=\"width:    300px; height:    250px;\"]","img[height=\"   250\"][width=\"   300\"]","img[height=\"   90\"][width=\"   728\"]","ins[style$=\"height:    90px; width:    728px;\"]","amp-img[height=\"   120\"]","amp-img[width=\"   300\"]","amp-img[width=\"   336\"]","div[id][class][style^=\"display\"][style*=\"hidden\"][style*=\"width:   \"]","ins[id][style*=\"--gn-ov-ad-height\"]"],
+"e24.no":["div[id^=\"sp_message_container_\"]"],
+"flipkart.com":["div[data-id][style]:has([width][height][fill])"],
+"minmote.no":["div[id^=\"sp_message_container_\"]"],
+"smsonline.cloud":["div[style^=\"height:    250px; width:    300px;\"]","div[style^=\"width:    160px; height:    600px; margin: 0px auto; min-width: 160px; min-height: 600px;\"]","div[style^=\"width:    300px; height:    250px;\"]","img[height=\"   250\"][width=\"   300\"]","img[height=\"   90\"][width=\"   728\"]","ins[style$=\"height:    90px; width:    728px;\"]","amp-img[height=\"   120\"]","amp-img[width=\"   300\"]","amp-img[width=\"   336\"]","div[id][class][style^=\"display\"][style*=\"hidden\"][style*=\"width:   \"]","ins[id][style*=\"--gn-ov-ad-height\"]"],
+"sugoren.com":[".widget"],
+"tek.no":["div[id^=\"sp_message_container_\"]"],
+"veev.to":[".avb-active"],
+"vg.no":["div[id^=\"sp_message_container_\"]"],
+"vook.vc":["[class*=\"-spnsr\"]"],
+"youtube.com":["#player-ads"]
+}
+}

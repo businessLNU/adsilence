@@ -1,0 +1,15 @@
+{
+  "id": "regional-zh",
+  "name": "EasyList China",
+  "url": "https://easylist-downloads.adblockplus.org/easylistchina.txt",
+  "geholtAm": "2026-09-03T19:21:39.067Z",
+  "bytes": 552466,
+  "zeilen": 19443,
+  "sha256": "b2fabb6d03b0e2703505b4f8d251951cadc03fc66f99a0fdd1648bf878a1fa4f",
+  "titel": "EasyList China",
+  "version": "202609031912",
+  "zuletztGeaendert": "03 Sep 2026 19:12 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "\"b2a07d7e43b6523da6b66d00ded6c142:1788463084.359506\"",
+  "ausDatei": null
+}

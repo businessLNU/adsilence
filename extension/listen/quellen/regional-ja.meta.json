@@ -1,0 +1,15 @@
+{
+  "id": "regional-ja",
+  "name": "ABP Japanese filters",
+  "url": "https://raw.githubusercontent.com/k2jp/abp-japanese-filters/master/abpjf.txt",
+  "geholtAm": "2026-09-03T19:21:40.035Z",
+  "bytes": 279679,
+  "zeilen": 12517,
+  "sha256": "94d7e1bf08bc635773f7c41300598beaefc53f5f2053f28a24ebdba7de621d0e",
+  "titel": "ABP Japanese filters (ONLY FOR Japanese and experienced users: READ Support Policy)",
+  "version": "202105262051",
+  "zuletztGeaendert": "2021-05-26 20:51 JST(UTC+0900)",
+  "lizenz": null,
+  "etag": "W/\"780478538e4647b5bf2eea311ed7740c87816a2801ee57f64ae3a8df1fe8c1f8\"",
+  "ausDatei": null
+}

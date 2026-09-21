@@ -1,0 +1,15 @@
+{
+  "id": "regional-es",
+  "name": "EasyList Spanish",
+  "url": "https://easylist-downloads.adblockplus.org/easylistspanish.txt",
+  "geholtAm": "2026-09-03T19:21:38.507Z",
+  "bytes": 128057,
+  "zeilen": 2716,
+  "sha256": "1988a773031c91129ddf07800bee5695ea8836087214594c2cced8371796a8d2",
+  "titel": "EasyList Spanish",
+  "version": "202609031912",
+  "zuletztGeaendert": "03 Sep 2026 19:12 UTC",
+  "lizenz": "https://easylist.to/pages/licence.html",
+  "etag": "\"c47e9bd6289e4eabd5b87c08e6e9c1d5:1788463085.726475\"",
+  "ausDatei": null
+}

@@ -1,0 +1,199 @@
+/**
+ * Die Farben und Masse der Oberflaeche. Die EINZIGE Stelle mit Hex-Werten.
+ *
+ * Dieselben Namen wie `frontend/theme.css` des Backends (`--marke-*`), damit
+ * ein Baustein von dort ohne Umbenennung hier laeuft. Die Werte sind die von
+ * AdSilence: kaltes Grau als Grund, ein einziger Akzent (Kobalt), und die
+ * Bedeutungsfarben gut/warn/fehler, die sich mit der Marke NIE aendern.
+ *
+ * Zwei Schemata: hell ist der Grundfall, dunkel greift ueber
+ * `prefers-color-scheme` und laesst sich mit `data-thema="hell|dunkel"` am
+ * `<html>` in beide Richtungen erzwingen. Jede Farbe steht deshalb an drei
+ * Stellen; keine hat ihre einzige Definition in einem Medienblock.
+ *
+ * Kontrast (WCAG AA, 4.5:1 fuer Fliesstext) ist fuer jede Schrift-auf-Grund-
+ * Kombination gerechnet: schwach auf Flaeche 5.8:1 hell / 7.1:1 dunkel,
+ * Knopfschrift auf Kobalt 5.3:1. Die Bedeutungsfarben selbst (#22c55e,
+ * #ef4444) reichen als Schrift auf hellem Grund NICHT (2.2:1 bzw. 3.7:1);
+ * deshalb gibt es je eine `-text`-Stufe fuer Saetze und die reine Farbe nur
+ * fuer Flaechen, Punkte und Rahmen.
+ *
+ * Eckenradius, EINE Skala: Karten 12 px, Knoepfe 10 px, Felder 8 px. Kleine
+ * Marken (Schalterknopf, Skeleton-Zeile) sind rund bzw. 6 px. Sonst nichts.
+ */
+
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  src: url('./schriften/schibsted-grotesk.woff2') format('woff2-variations');
+  font-weight: 400 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Plex Mono';
+  src: url('./schriften/plex-mono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* Flaechen — dieselben Werte wie `demo/src/stil.css`. */
+  --marke-grund: #f3f4f7;
+  --marke-flaeche: #ffffff;
+  --marke-feld: #ebedf2;
+  --marke-linie: rgba(16, 19, 27, 0.08);
+  --marke-linie-stark: rgba(16, 19, 27, 0.16);
+
+  /* Schrift */
+  --marke-text: #10131b;
+  --marke-schwach: #565d6e;
+  --marke-platzhalter: #868d9c;
+
+  /*
+   * Der eine Akzent. Verlauf nur auf dem Hauptknopf, sonst `von`.
+   *
+   * Diese Werte stehen hier als Zahl und werden von Hand nachgezogen: Eine
+   * Erweiterung sieht die `.env` des Backends nicht — sie rendert ihr Popup,
+   * bevor irgendein Netzaufruf stattgefunden hat, und darf ohne Server
+   * genauso aussehen wie mit. Wer `BRAND_GRADIENT_FROM/TO` umstellt, stellt
+   * die beiden hier mit um; sonst ist die Kachel im Browser orange und das
+   * Popup dahinter blau.
+   *
+   * `--marke-akzent-schrift` ist DUNKEL und nicht weiss: Auf diesem Orange
+   * steht Weiss bei 3,6:1 und ist auf einem hellen Bildschirm kaum zu lesen,
+   * der dunkle Ton bei 5,4:1. Bei einer dunklen Marke gehoert hier wieder
+   * `#ffffff` hin — die Regel ist der Kontrast, nicht der Wert.
+   */
+  --marke-von: #e65909;
+  --marke-bis: #f6821f;
+  --marke-akzent-schrift: #1a0702;
+  /*
+   * Die Marke ALS SCHRIFT auf hellem Grund — eine eigene, dunklere Stufe.
+   *
+   * `--marke-von` selbst taugt dafuer nicht: Das Kobalt davor stand auf dem
+   * hellen Grund bei 4,98:1, dieses Orange bei 3,29:1. GEMESSEN im Popup, wo
+   * „Seite kaputt melden" nach dem Farbwechsel blass und schwer lesbar
+   * dastand. Der dunklere Ton steht bei 5,36:1 und ist dieselbe Farbe, nur
+   * tiefer — die Marke bleibt erkennbar.
+   *
+   * Dasselbe Muster wie `--marke-gut-text` neben `--marke-gut`: Flaeche und
+   * Schrift brauchen verschiedene Helligkeiten derselben Bedeutung.
+   */
+  --marke-akzent-text: #b03f06;
+  --marke-akzent-flaeche: rgba(230, 89, 9, 0.1);
+  --marke-akzent-flaeche-stark: rgba(230, 89, 9, 0.18);
+
+  /* Bedeutung: gruen heisst „geklappt", gelb „Achtung", rot „schiefgegangen". */
+  --marke-gut: #22c55e;
+  --marke-gut-schrift: #06230f;
+  --marke-gut-text: #15803d;
+  --marke-warn: #eab308;
+  --marke-warn-text: #a16207;
+  --marke-fehler: #ef4444;
+  --marke-fehler-text: #b91c1c;
+  --marke-fehler-flaeche: rgba(239, 68, 68, 0.1);
+
+  /* Schatten sind zum Grund hin getoent, nie reines Schwarz. */
+  --schatten-karte:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 1px 2px rgba(16, 19, 27, 0.04),
+    0 24px 60px -24px rgba(16, 19, 27, 0.22);
+  --schatten-dialog:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 2px 4px rgba(16, 19, 27, 0.05),
+    0 40px 90px -30px rgba(16, 19, 27, 0.3);
+  --schatten-knopf: 0 1px 2px rgba(16, 19, 27, 0.08);
+
+  /* Radiusskala */
+  --radius-karte: 20px;
+  --radius-knopf: 999px;
+  --radius-feld: 12px;
+  --radius-klein: 8px;
+  /* Doppelrand wie auf der Website: eine Fassung, darin der Kern. */
+  --radius-schale: 26px;
+  --wand: 6px;
+
+  /*
+   * Dieselbe Schrift wie die Website — aber aus dem PAKET, nicht aus dem Netz.
+   *
+   * Ein `<link>` auf einen Schriftdienst ginge hier gar nicht: Die
+   * Inhaltssicherheitsregeln einer Erweiterung verbieten fremde Herkunft, und
+   * ein Popup, das erst auf eine Netzantwort wartet, oeffnet sichtbar spaeter.
+   * Die Datei liegt deshalb daneben und wird mitgeliefert (rund 48 kB).
+   *
+   * Der Systemstapel bleibt als Rueckfall dahinter: Faellt die Datei einmal
+   * aus, steht dort eine Schrift statt keiner.
+   */
+  --schrift:
+    'Schibsted Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --schrift-mono: 'Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Abstaende, Vierer-Raster */
+  --abstand-1: 4px;
+  --abstand-2: 8px;
+  --abstand-3: 12px;
+  --abstand-4: 16px;
+  --abstand-5: 20px;
+  --abstand-6: 24px;
+  --abstand-8: 32px;
+
+  /* Ebenen. Nur zwei, mehr braucht die Erweiterung nicht. */
+  --ebene-kopf: 10;
+  --ebene-dialog: 100;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-thema='hell']) {
+    --marke-grund: #0e1116;
+    --marke-flaeche: #151a22;
+    --marke-feld: #10141b;
+    --marke-linie: rgba(255, 255, 255, 0.08);
+    --marke-linie-stark: rgba(255, 255, 255, 0.16);
+    --marke-text: #eef1f5;
+    --marke-schwach: #9aa3b2;
+    --marke-platzhalter: #6b7483;
+    /* Auf dunklem Grund traegt das satte Orange der hellen Fassung nicht -
+       es faellt gegen den dunklen Grund ab statt sich abzuheben. Deshalb hier
+       eine HELLERE Stufe als Akzent, und `akzent-text` noch eine Spur heller:
+       Schrift braucht mehr Abstand zum Grund als eine Flaeche. */
+    --marke-von: #ff9245;
+    --marke-bis: #ffab6d;
+    --marke-akzent-schrift: #0e1116;
+    --marke-akzent-text: #ffa864;
+    --marke-akzent-flaeche: rgba(255, 146, 69, 0.18);
+    --marke-akzent-flaeche-stark: rgba(255, 146, 69, 0.28);
+    --marke-gut-text: #4ade80;
+    --marke-warn-text: #facc15;
+    --marke-fehler-text: #f87171;
+    --marke-fehler-flaeche: rgba(239, 68, 68, 0.14);
+    /* Kein Innenglanz auf dunklem Grund: Eine helle Linie an der Oberkante
+       liest sich dort als Kratzer, nicht als Lichtkante. */
+    --schatten-karte: 0 1px 2px rgba(0, 0, 0, 0.3), 0 24px 60px -24px rgba(0, 0, 0, 0.6);
+    --schatten-dialog: 0 2px 4px rgba(0, 0, 0, 0.4), 0 40px 90px -30px rgba(0, 0, 0, 0.7);
+    --schatten-knopf: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+}
+
+:root[data-thema='dunkel'] {
+  --marke-grund: #0e1116;
+  --marke-flaeche: #151a22;
+  --marke-feld: #10141b;
+  --marke-linie: rgba(255, 255, 255, 0.08);
+  --marke-linie-stark: rgba(255, 255, 255, 0.16);
+  --marke-text: #eef1f5;
+  --marke-schwach: #9aa3b2;
+  --marke-platzhalter: #6b7483;
+  /* Wie im Medienblock darueber: heller Akzent auf dunklem Grund. */
+  --marke-von: #ff9245;
+  --marke-bis: #ffab6d;
+  --marke-akzent-schrift: #0e1116;
+  --marke-akzent-text: #ffa864;
+  --marke-akzent-flaeche: rgba(255, 146, 69, 0.18);
+  --marke-akzent-flaeche-stark: rgba(255, 146, 69, 0.28);
+  --marke-gut-text: #4ade80;
+  --marke-warn-text: #facc15;
+  --marke-fehler-text: #f87171;
+  --marke-fehler-flaeche: rgba(239, 68, 68, 0.14);
+  --schatten-karte: 0 1px 2px rgba(0, 0, 0, 0.3), 0 24px 60px -24px rgba(0, 0, 0, 0.6);
+  --schatten-dialog: 0 2px 4px rgba(0, 0, 0, 0.4), 0 40px 90px -30px rgba(0, 0, 0, 0.7);
+  --schatten-knopf: 0 1px 2px rgba(0, 0, 0, 0.35);
+}

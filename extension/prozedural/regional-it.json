@@ -1,0 +1,11 @@
+{
+"giornaledibrescia.it":[
+{"wahl":".grid.divide-gray-20.lg\\:divide-none","text":"SPONSORIZZATO"}
+],
+"mediaworld.it":[
+{"wahl":"[data-test=\"mms-router-link\"]","text":"Sponsorizzati"}
+],
+"milanofinanza.it":[
+{"wahl":".col-xs-12.col-md-6.col-lg-4.mb-4","text":"Contenuto Pubblicitario"}
+]
+}

@@ -1,0 +1,23 @@
+{
+"ademocut.com":[
+{"wahl":".so-panel","text":"Sponsorlar"}
+],
+"donanimhaber.com":[
+{"wahl":".oge-ad","text":"Reklam"}
+],
+"ehliyettestleri.com":[
+{"wahl":"[id^=\"custom_html-\"]","text":"Sponsorlu Bağlantılar"}
+],
+"gazeteoku.tv":[
+{"wahl":".col-lg-5","text":"Reklamlar"}
+],
+"memurlar.net":[
+{"wahl":".item","text":"Sponsorlu İçerik"}
+],
+"okultanitimi.net":[
+{"wahl":".col-xl-6","text":"REKLAM"}
+],
+"testlericoz.com":[
+{"wahl":"[id^=\"custom_html-\"]","text":"Sponsorlu Bağlantılar"}
+]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "regional-ru",
+  "name": "RU AdList",
+  "url": "https://easylist-downloads.adblockplus.org/advblock.txt",
+  "geholtAm": "2026-09-03T19:21:39.520Z",
+  "bytes": 1098014,
+  "zeilen": 27476,
+  "sha256": "119299e02a33a28602d1f98d9dbf1f66d98b2e3c38858313c5f91cb06cf0058e",
+  "titel": "RU, UA, UZ, KZ",
+  "version": "202609031912",
+  "zuletztGeaendert": "03 Sep 2026 19:12 UTC",
+  "lizenz": null,
+  "etag": "\"54f256eb36da631968dcb53736066006:1788463088.05034\"",
+  "ausDatei": null
+}

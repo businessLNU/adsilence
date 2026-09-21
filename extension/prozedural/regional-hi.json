@@ -1,0 +1,110 @@
+{
+"bangla.24livenewspaper.com":[
+{"wahl":".advertisement","text":"advertisement"}
+],
+"bangla.newsnextbd.com":[
+{"wahl":".custom-container > .row > div","text":"ADvaterices"}
+],
+"betulsamachar.com":[
+{"wahl":".gb-container","text":"Advertisement"}
+],
+"bharatiyadigitalnews.in":[
+{"wahl":"center","text":"Advertisement"}
+],
+"channelmahalaxmi.com":[
+{"wahl":"h2.widgettitle","text":"Advertisment"}
+],
+"chatonay71news.com":[
+{"wahl":".widget_recent_entries","text":"ads"}
+],
+"countrynewstoday.com":[
+{"wahl":".td-block-title > span","text":"Advertisement"}
+],
+"dainikstatesmannews.com":[
+{"wahl":"p","text":"Advertisement"}
+],
+"deshkikhabar.in":[
+{"wahl":"span","text":"Advertisement"}
+],
+"dhinasari.com":[
+{"wahl":".tdm-descr","text":"Advertisement"}
+],
+"dtvbangla.com":[
+{"wahl":"p","text":"Advertisement"}
+],
+"gujaratdarpan.com":[
+{"wahl":"h6","text":"Paid Advertisement"}
+],
+"hindifiber.com":[
+{"wahl":".gb-container","text":"Advertisement"}
+],
+"ibmnews24.com":[
+{"wahl":"p","text":"Advertisement"}
+],
+"indiannewsservice.net":[
+{"wahl":".sidebar h2","text":"Advertisement"}
+],
+"indocanadiantimes.com":[
+{"wahl":".block-title span","text":"Sponsored Ads"}
+],
+"jalauntimessite.wordpress.com":[
+{"wahl":".widget-title","text":"Advertisment"}
+],
+"jankarido.com":[
+{"wahl":".gb-container","text":"Advertisement"}
+],
+"jujhartimes.in":[
+{"wahl":".p-3 > h4","text":"Ads"}
+],
+"meranews.com":[
+{"wahl":"p","text":"Advertisement"}
+],
+"myagdikali.com":[
+{"wahl":".site-main > div","text":"Advertisement"}
+],
+"nation9network.com":[
+{"wahl":".gb-container","text":"Advertisement"}
+],
+"naya-alo.com":[
+{"wahl":".textwidget","text":".adsbygoogle"}
+],
+"neplays.com":[
+{"wahl":".widget--title .h4","text":"Advertisement"}
+],
+"news11.live":[
+{"wahl":".align_cent","text":"Advertise"}
+],
+"newsuniversal.in":[
+{"wahl":".inside-right-sidebar > div > .gb-container","text":"Advertisement"}
+],
+"rajdhanidaily.com":[
+{"wahl":".elementor-widget-wrap p","text":"Ads"}
+],
+"socialsamvad.com":[
+{"wahl":".gb-container","text":"Advertisement"}
+],
+"suprovatsydney.com.au":[
+{"wahl":".box_header","text":"Advertising"}
+],
+"thannambikkai.org":[
+{"wahl":"h2","text":"Advertisement"}
+],
+"theonlinepost.in":[
+{"wahl":".inside-right-sidebar > .gb-container","text":"Advertisement"}
+],
+"topbihar.com":[
+{"wahl":"figure[class*=\"gb-block-image-ad\"] + .gb-container","text":"Advertisement"}
+],
+"tutyonline.net":[
+{"wahl":".sub_new b","text":"Ads"}
+],
+"tv20news.in":[
+{"wahl":"p","text":"Advertisement"}
+],
+"visionnewsservice.in":[
+{"wahl":".sidebar-widget > h2","text":"Advertisement"}
+],
+"yugvartanews.com":[
+{"wahl":"center","text":"ADVERTISEMENT"}
+]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "cookies",
+  "name": "EasyList Cookie",
+  "url": "https://secure.fanboy.co.nz/fanboy-cookiemonster.txt",
+  "geholtAm": "2026-09-03T19:21:37.402Z",
+  "bytes": 891024,
+  "zeilen": 25961,
+  "sha256": "07479e19fdeba24c7a79c0715ea030f26dc884f22f48cf324df112143448a938",
+  "titel": "Easylist Cookie List",
+  "version": null,
+  "zuletztGeaendert": "2026-09-03 18:00 UTC",
+  "lizenz": "http://creativecommons.org/licenses/by/3.0/",
+  "etag": "\"6a99b5a8-499a4\"",
+  "ausDatei": null
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ublock-reparatur",
+  "name": "uBlock filters - Unbreak",
+  "url": "https://ublockorigin.github.io/uAssets/filters/unbreak.txt",
+  "geholtAm": "2026-09-03T19:21:36.788Z",
+  "bytes": 278710,
+  "zeilen": 6053,
+  "sha256": "3ae03a894fc0de824c79586ec8aaebc77d348e703c6c943e8ceb90e2abcecee0",
+  "titel": "uBlock filters – Unbreak",
+  "version": null,
+  "zuletztGeaendert": "Mon, 31 Aug 2026 16:42:49 +0000",
+  "lizenz": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+  "etag": "W/\"6a99be2e-440b6\"",
+  "ausDatei": null
+}

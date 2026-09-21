@@ -1,0 +1,15 @@
+{
+  "id": "ublock-privatsphaere",
+  "name": "uBlock filters - Privacy",
+  "url": "https://ublockorigin.github.io/uAssets/filters/privacy.txt",
+  "geholtAm": "2026-09-03T19:21:36.619Z",
+  "bytes": 182044,
+  "zeilen": 3322,
+  "sha256": "ee43a588694c66c5482b1db87dc5dc8f3c471f16bd5c2ce5f06ce6ee1a943a5d",
+  "titel": "uBlock filters – Privacy",
+  "version": null,
+  "zuletztGeaendert": "Thu, 03 Sep 2026 18:36:05 +0000",
+  "lizenz": "https://github.com/uBlockOrigin/uAssets/blob/master/LICENSE",
+  "etag": "W/\"6a99be2e-2c71c\"",
+  "ausDatei": null
+}
