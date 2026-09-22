@@ -23,6 +23,7 @@ import {
 } from '../../oberflaeche/laufzeit.ts';
 import { istUeberfaellig } from '../../hintergrund/listenpflege.ts';
 import { BROWSER, LISTENPFLEGE_VERALTET_MS } from '../../gemeinsam/konstanten.ts';
+import { WERKZEUGE } from '../../gemeinsam/cookies.ts';
 
 /**
  * Der Name einer Liste.
@@ -510,7 +511,13 @@ export function Filterlisten({ zustand }: { zustand: Zustand }) {
               {t('optionen.einstellungen.cookies')}
             </label>
             <div className="liste__nebentext">
-              {t('optionen.einstellungen.cookiesText')}
+              {/*
+                Die Zahl kommt aus der Liste selbst, nicht aus dem Satz.
+                GEMESSEN am 22.09.2026: Dort stand 17, tatsaechlich sind es 16
+                — eine Zahl, die jemand von Hand nachziehen muss, ist frueher
+                oder spaeter falsch. Jetzt kann sie das nicht mehr sein.
+              */}
+              {t('optionen.einstellungen.cookiesText', { anzahl: WERKZEUGE.length })}
             </div>
             {/*
               Der Hinweis steht NUR bei „Immer ablehnen" — bei den anderen

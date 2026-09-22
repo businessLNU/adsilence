@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "Warnung vor gefälschten Seiten",
   "optionen.einstellungen.warnungText": "Meldet Adressen, die einer bekannten Marke täuschend ähnlich sehen.",
   "optionen.einstellungen.cookies": "Cookie-Fenster beantworten",
-  "optionen.einstellungen.cookiesText": "Klickt den Knopf für dich, bei 17 bekannten Einwilligungswerkzeugen.",
+  "optionen.einstellungen.cookiesText": "Klickt den Knopf für dich, bei {anzahl} bekannten Einwilligungswerkzeugen.",
   "optionen.einstellungen.cookiesAus": "Aus",
   "optionen.einstellungen.cookiesAblehnen": "Immer ablehnen",
   "optionen.einstellungen.cookiesAnnehmen": "Immer annehmen",

@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "가짜 사이트 경고",
   "optionen.einstellungen.warnungText": "잘 알려진 브랜드와 혼동될 만큼 비슷한 주소를 알려줍니다.",
   "optionen.einstellungen.cookies": "쿠키 창에 응답",
-  "optionen.einstellungen.cookiesText": "알려진 동의 도구 17종에서 버튼을 대신 누릅니다.",
+  "optionen.einstellungen.cookiesText": "알려진 동의 도구 {anzahl}종에서 대신 버튼을 눌러 줍니다.",
   "optionen.einstellungen.cookiesAus": "끔",
   "optionen.einstellungen.cookiesAblehnen": "항상 거부",
   "optionen.einstellungen.cookiesAnnehmen": "항상 수락",

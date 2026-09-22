@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "Avviso sui siti falsi",
   "optionen.einstellungen.warnungText": "Segnala indirizzi che somigliano in modo ingannevole a un marchio noto.",
   "optionen.einstellungen.cookies": "Rispondere alle finestre dei cookie",
-  "optionen.einstellungen.cookiesText": "Preme il pulsante al posto tuo, su 17 strumenti di consenso noti.",
+  "optionen.einstellungen.cookiesText": "Preme il pulsante al posto tuo, su {anzahl} strumenti di consenso noti.",
   "optionen.einstellungen.cookiesAus": "Spento",
   "optionen.einstellungen.cookiesAblehnen": "Rifiuta sempre",
   "optionen.einstellungen.cookiesAnnehmen": "Accetta sempre",

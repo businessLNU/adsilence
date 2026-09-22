@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "Waarschuwing voor nepsites",
   "optionen.einstellungen.warnungText": "Meldt adressen die bedrieglijk veel op een bekend merk lijken.",
   "optionen.einstellungen.cookies": "Cookiemeldingen beantwoorden",
-  "optionen.einstellungen.cookiesText": "Klikt de knop voor je, bij 17 bekende toestemmingstools.",
+  "optionen.einstellungen.cookiesText": "Klikt de knop voor je, bij {anzahl} bekende toestemmingstools.",
   "optionen.einstellungen.cookiesAus": "Uit",
   "optionen.einstellungen.cookiesAblehnen": "Altijd weigeren",
   "optionen.einstellungen.cookiesAnnehmen": "Altijd accepteren",

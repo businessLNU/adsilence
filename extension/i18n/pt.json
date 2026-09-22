@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "Aviso sobre sites falsos",
   "optionen.einstellungen.warnungText": "Assinala endereços muito parecidos com uma marca conhecida.",
   "optionen.einstellungen.cookies": "Responder às janelas de cookies",
-  "optionen.einstellungen.cookiesText": "Clica no botão por ti, em 17 ferramentas de consentimento conhecidas.",
+  "optionen.einstellungen.cookiesText": "Carrega no botão por ti, em {anzahl} ferramentas de consentimento conhecidas.",
   "optionen.einstellungen.cookiesAus": "Desligado",
   "optionen.einstellungen.cookiesAblehnen": "Recusar sempre",
   "optionen.einstellungen.cookiesAnnehmen": "Aceitar sempre",

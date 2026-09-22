@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "偽サイトの警告",
   "optionen.einstellungen.warnungText": "よく知られた企業とまぎらわしいアドレスを知らせます。",
   "optionen.einstellungen.cookies": "Cookie の確認に答える",
-  "optionen.einstellungen.cookiesText": "既知の同意ツール 17 種で、ボタンを代わりに押します。",
+  "optionen.einstellungen.cookiesText": "{anzahl} 種類の既知の同意ツールで、あなたの代わりにボタンを押します。",
   "optionen.einstellungen.cookiesAus": "オフ",
   "optionen.einstellungen.cookiesAblehnen": "常に拒否",
   "optionen.einstellungen.cookiesAnnehmen": "常に許可",

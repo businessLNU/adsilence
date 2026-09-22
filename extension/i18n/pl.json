@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "Ostrzeżenie o fałszywych stronach",
   "optionen.einstellungen.warnungText": "Zgłasza adresy łudząco podobne do znanej marki.",
   "optionen.einstellungen.cookies": "Odpowiadanie na okna cookie",
-  "optionen.einstellungen.cookiesText": "Klika przycisk za ciebie, w 17 znanych narzędziach zgody.",
+  "optionen.einstellungen.cookiesText": "Klika przycisk za ciebie, w {anzahl} znanych narzędziach zgody.",
   "optionen.einstellungen.cookiesAus": "Wyłączone",
   "optionen.einstellungen.cookiesAblehnen": "Zawsze odrzucaj",
   "optionen.einstellungen.cookiesAnnehmen": "Zawsze akceptuj",

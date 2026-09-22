@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "Warn about fake sites",
   "optionen.einstellungen.warnungText": "Flags addresses that look deceptively like a well-known brand.",
   "optionen.einstellungen.cookies": "Answer cookie dialogs",
-  "optionen.einstellungen.cookiesText": "Clicks the button for you, on 17 known consent tools.",
+  "optionen.einstellungen.cookiesText": "Clicks the button for you, on {anzahl} known consent tools.",
   "optionen.einstellungen.cookiesAus": "Off",
   "optionen.einstellungen.cookiesAblehnen": "Always reject",
   "optionen.einstellungen.cookiesAnnehmen": "Always accept",

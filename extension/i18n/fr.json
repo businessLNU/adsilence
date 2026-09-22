@@ -176,7 +176,7 @@
   "optionen.einstellungen.warnung": "Alerte sur les faux sites",
   "optionen.einstellungen.warnungText": "Signale les adresses qui ressemblent à s'y méprendre à une marque connue.",
   "optionen.einstellungen.cookies": "Répondre aux fenêtres de cookies",
-  "optionen.einstellungen.cookiesText": "Clique le bouton à ta place, sur 17 outils de consentement connus.",
+  "optionen.einstellungen.cookiesText": "Clique sur le bouton à votre place, sur {anzahl} outils de consentement connus.",
   "optionen.einstellungen.cookiesAus": "Désactivé",
   "optionen.einstellungen.cookiesAblehnen": "Toujours refuser",
   "optionen.einstellungen.cookiesAnnehmen": "Toujours accepter",
