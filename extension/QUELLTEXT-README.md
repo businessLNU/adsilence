@@ -11,7 +11,7 @@ submitted `.zip` exactly.
 | Operating system | Linux or macOS. Any distribution; nothing distribution-specific is used. Windows works under WSL — one npm script sets an environment variable inline, which `cmd.exe` does not support. |
 | Node.js | **22 or newer** (declared in `extension/package.json`, `engines.node`). Built and verified with 25.9.0. Install from <https://nodejs.org/en/download> or via `nvm install 22`. |
 | npm | **10 or newer**, ships with Node. Verified with 11.12.1. |
-| Network | Not required. Everything the build reads is in this archive. |
+| Network | Needed once for `npm ci`, which fetches the versions pinned in `package-lock.json` from the npm registry. Nothing else reaches out: the filter lists are in this archive, and no build step downloads anything. |
 | Disk | About 400 MB for `node_modules` and the build output. |
 
 No compiler, no Python, no native modules.
