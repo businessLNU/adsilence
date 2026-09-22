@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import type React from 'react';
 import type { Einstellungen as EinstellungenForm, ListenEintrag, Zustand } from '../../gemeinsam/typen.ts';
 import { Hinweis, fehlerText } from '../../oberflaeche/Hinweis.tsx';
-import { preisseite } from '../../oberflaeche/PremiumWahl.tsx';
+import { KAUFWEG_ERLAUBT, preisseite } from '../../oberflaeche/PremiumWahl.tsx';
 import { Schalter } from '../../oberflaeche/Schalter.tsx';
 import { Info, Schloss } from '../../oberflaeche/Symbole.tsx';
 import { formatiereDatum, formatiereZahl, hatText, t } from '../../oberflaeche/i18n.ts';
@@ -129,6 +129,16 @@ function SchalterAttrappe() {
  */
 function kaufProps(gesperrt: boolean) {
   if (!gesperrt) return { className: 'liste__zeile' };
+  /*
+   * Im Safari-Bau bleibt die Zeile gesperrt, aber sie fuehrt nirgendwohin:
+   * kein `role="button"`, kein Klick, kein Tabstopp. Der Grund steht an
+   * `KAUFWEG_ERLAUBT` in `oberflaeche/PremiumWahl.tsx` — Richtlinie 3.1.1.
+   *
+   * Eine Zeile, die aussieht wie ein Knopf und keiner ist, waere fuer eine
+   * Vorleseanwendung eine Sackgasse; deshalb faellt die ganze Rolle weg und
+   * nicht nur der Klick.
+   */
+  if (!KAUFWEG_ERLAUBT) return { className: 'liste__zeile liste__zeile--gesperrt' };
   const oeffne = () => void oeffneTab(preisseite());
   return {
     className: 'liste__zeile liste__zeile--kauf',

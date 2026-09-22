@@ -39,7 +39,27 @@ export function preisseite(): string {
   return `${basis}/preise?lang=${encodeURIComponent(sprache())}&von=erweiterung`;
 }
 
+/**
+ * Darf diese Fassung ueberhaupt zum Kauf auffordern?
+ *
+ * ── Warum Safari hier anders ist ──────────────────────────────────────────
+ * Richtlinie 3.1.1 der App-Store-Pruefung verbietet Knoepfe, Links und
+ * Aufforderungen, die zu einem ANDEREN Kaufweg als dem In-App-Kauf fuehren,
+ * wenn die Funktion in der App freigeschaltet wird. Ein Knopf „Premium
+ * holen", der die eigene Preisseite oeffnet, ist genau das — und der
+ * haeufigste Ablehnungsgrund ueberhaupt.
+ *
+ * Erlaubt bleibt das ANMELDEN mit einem anderswo gekauften Konto. Verboten
+ * ist nur, den Kauf in der App zu bewerben oder zu verlinken. Deshalb faellt
+ * hier der Knopf weg und nicht die Kontoverwaltung.
+ *
+ * Bei Chrome und Firefox ist derselbe Knopf voellig normal; die Unterscheidung
+ * gehoert also an das ZIEL und nicht in eine Einstellung.
+ */
+export const KAUFWEG_ERLAUBT = UMGEBUNG.browser !== 'safari';
+
 export function PremiumWahl({ breit }: { onFehler?: (code: string) => void; breit?: boolean }) {
+  if (!KAUFWEG_ERLAUBT) return null;
   return (
     <Knopf art="primaer" breit={breit} onClick={() => void oeffneTab(preisseite())}>
       {t('gemeinsam.premiumHolen')}
