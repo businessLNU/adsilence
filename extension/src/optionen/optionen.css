@@ -98,6 +98,16 @@
   font-size: 12px;
   color: var(--marke-schwach);
 }
+/*
+ * Eine Einschraenkung, kein Fehler: derselbe Nebentext, nur abgesetzt.
+ * Bewusst NICHT rot — es ist nichts kaputt, die Seite bietet nur nichts an,
+ * was sich anklicken liesse.
+ */
+.liste__einschraenkung {
+  margin-block-start: 4px;
+  padding-inline-start: 8px;
+  border-inline-start: 2px solid var(--marke-schwach);
+}
 
 /**
  * Das „i" hinter einem Namen und der Text, den es zeigt.

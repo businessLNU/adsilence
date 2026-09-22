@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "オフ",
   "optionen.einstellungen.cookiesAblehnen": "常に拒否",
   "optionen.einstellungen.cookiesAnnehmen": "常に許可",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "サイトが拒否ボタンを用意している場合のみ動きます。二段目でしか聞かないサイトでは、その画面は残ります。",
   "optionen.einstellungen.pflege": "リストを毎日更新",
   "optionen.einstellungen.pflegeText": "1日1回更新します（新しい偽サイトなど）。",
   "optionen.einstellungen.pflegeStand": "最終実行 {datum}：新しい規則 {anzahl} 件。",

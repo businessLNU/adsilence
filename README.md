@@ -1,6 +1,6 @@
 # AdSilence — Quelltext der Erweiterung
 
-Der vollstaendige Quelltext der AdSilence-Browsererweiterung, Version 1.0.1,
+Der vollstaendige Quelltext der AdSilence-Browsererweiterung, Version 1.0.2,
 unter der **GNU GPL v3 oder spaeter** (siehe `extension/LICENSE`).
 
 ## Selber bauen

@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "끔",
   "optionen.einstellungen.cookiesAblehnen": "항상 거부",
   "optionen.einstellungen.cookiesAnnehmen": "항상 수락",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "사이트가 거부 버튼을 제공하는 경우에만 동작합니다. 두 번째 단계에서만 묻는 사이트에서는 창이 그대로 남습니다.",
   "optionen.einstellungen.pflege": "목록 매일 업데이트",
   "optionen.einstellungen.pflegeText": "하루 1회 업데이트합니다(새로운 가짜 사이트 등).",
   "optionen.einstellungen.pflegeStand": "마지막 실행 {datum}: 새 규칙 {anzahl}개.",

@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Off",
   "optionen.einstellungen.cookiesAblehnen": "Always reject",
   "optionen.einstellungen.cookiesAnnehmen": "Always accept",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Only where the site offers a reject button. Some ask again on a second layer, and there the dialog stays.",
   "optionen.einstellungen.pflege": "Update lists daily",
   "optionen.einstellungen.pflegeText": "Updates once a day (new fake sites etc.)",
   "optionen.einstellungen.pflegeStand": "Last run {datum}: {anzahl} new rules.",

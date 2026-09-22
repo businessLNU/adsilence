@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Désactivé",
   "optionen.einstellungen.cookiesAblehnen": "Toujours refuser",
   "optionen.einstellungen.cookiesAnnehmen": "Toujours accepter",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Uniquement là où le site propose un bouton de refus. Certains ne le proposent qu'au second niveau : la fenêtre y reste.",
   "optionen.einstellungen.pflege": "Mettre à jour les listes chaque jour",
   "optionen.einstellungen.pflegeText": "Met à jour 1 fois par jour (nouveaux sites frauduleux, etc.)",
   "optionen.einstellungen.pflegeStand": "Dernière fois {datum} : {anzahl} nouvelles règles.",

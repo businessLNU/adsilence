@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Wyłączone",
   "optionen.einstellungen.cookiesAblehnen": "Zawsze odrzucaj",
   "optionen.einstellungen.cookiesAnnehmen": "Zawsze akceptuj",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Tylko tam, gdzie strona udostępnia przycisk odrzucenia. Niektóre pytają dopiero na drugim poziomie; tam okno zostaje.",
   "optionen.einstellungen.pflege": "Codzienne aktualizowanie list",
   "optionen.einstellungen.pflegeText": "Aktualizuje 1x dziennie (nowe fałszywe strony itp.)",
   "optionen.einstellungen.pflegeStand": "Ostatnio {datum}: {anzahl} nowych reguł.",

@@ -15,6 +15,28 @@
  * abgeschaltet - ein Beobachter, der stundenlang jede Aenderung einer Seite
  * durchsieht, ist genau die Sorte Erweiterung, die Rechner langsam macht.
  *
+ * ── Warum es in JEDEM Rahmen laeuft ───────────────────────────────────────
+ * Einwilligungswerkzeuge rendern ihren Dialog haeufig in einem eigenen
+ * Iframe unter fremder Adresse. Das Skript lief bis zum 21.09.2026 mit
+ * `all_frames: false` und kam dort nie an.
+ *
+ * GEMESSEN an vier Seiten mit Sourcepoint (spiegel.de, heise.de, welt.de,
+ * faz.net): Das Fenster blieb in allen vier Faellen stehen, waehrend
+ * OneTrust auf otto.de im Hauptdokument sauber beantwortet wurde. Vier von
+ * fuenf sichtbaren Fenstern scheiterten also an dieser einen Zeile.
+ *
+ * Der Preis, ehrlich beziffert: Das Skript laeuft jetzt auch in Werberahmen
+ * und Einbettungen, und es hoert dort NICHT sofort auf. Jeder Rahmen fragt
+ * einmal den Hintergrund und haelt danach zwoelf Sekunden lang einen
+ * Beobachter und einen 250-ms-Takt (siehe `starte()` unten) — auf einer Seite
+ * mit dreissig Rahmen also dreissig davon. Jeder einzelne ist billig: ein
+ * `querySelector` auf einem winzigen Rahmen-DOM, und danach ist Ruhe.
+ *
+ * `match_about_blank: false` haelt wenigstens die leeren Rahmen draussen.
+ * Wer das weiter senken will, faengt bei der Frist in Unterrahmen an — ein
+ * Einwilligungsfenster, das nach zwoelf Sekunden noch nicht da ist, kommt
+ * nicht mehr.
+ *
  * ── Was NICHT passiert ─────────────────────────────────────────────────────
  * Es wird nie nach Knopfbeschriftungen gesucht. Nur wenn die Kennung eines
  * BEKANNTEN Werkzeugs auf der Seite steht, wird ueberhaupt geklickt, und dann

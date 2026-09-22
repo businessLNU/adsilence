@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Desligado",
   "optionen.einstellungen.cookiesAblehnen": "Recusar sempre",
   "optionen.einstellungen.cookiesAnnehmen": "Aceitar sempre",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Só onde o site oferece um botão de recusa. Alguns só perguntam numa segunda camada; aí a janela fica.",
   "optionen.einstellungen.pflege": "Atualizar listas diariamente",
   "optionen.einstellungen.pflegeText": "Atualiza 1x por dia (novos sites falsos, etc.)",
   "optionen.einstellungen.pflegeStand": "Última vez {datum}: {anzahl} novas regras.",

@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Spento",
   "optionen.einstellungen.cookiesAblehnen": "Rifiuta sempre",
   "optionen.einstellungen.cookiesAnnehmen": "Accetta sempre",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Solo dove il sito offre un pulsante di rifiuto. Alcuni lo mettono in un secondo livello: lì la finestra resta.",
   "optionen.einstellungen.pflege": "Aggiornare le liste ogni giorno",
   "optionen.einstellungen.pflegeText": "Aggiorna 1 volta al giorno (nuovi siti falsi ecc.)",
   "optionen.einstellungen.pflegeStand": "Ultima volta {datum}: {anzahl} nuove regole.",

@@ -37,9 +37,13 @@ const server = createServer((req, res) => {
   res.end(`<!doctype html><html><head><meta charset="utf-8"><title>nichts</title></head><body>${SEITEN[pfad] ?? '<p>leer</p>'}</body></html>`);
 });
 const port = await new Promise((f) => server.listen(0, '127.0.0.1', () => f(server.address().port)));
-const CHROME = `${process.env.HOME}/Library/Caches/ms-playwright/chromium-1223/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing`;
+// Welcher Chrome? Der von Playwright, wenn nichts gesagt wird. Hier stand ein
+// fest verdrahteter Pfad in ein macOS-Benutzerverzeichnis — die Probe lief
+// damit auf genau einem Rechner und sonst nirgends, auch nicht in der CI.
+const CHROME = process.env.CHROME_PFAD || undefined;
 const browser = await chromium.launchPersistentContext('', {
-  executablePath: CHROME, headless: false,
+  ...(CHROME ? { executablePath: CHROME } : {}),
+  headless: process.env.KOPFLOS !== 'nein',
   ignoreDefaultArgs: ['--disable-extensions','--disable-component-extensions-with-background-pages'],
   args: [`--disable-extensions-except=${ERW}`, `--load-extension=${ERW}`, '--no-first-run','--no-default-browser-check'],
 });

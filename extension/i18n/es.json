@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Desactivado",
   "optionen.einstellungen.cookiesAblehnen": "Rechazar siempre",
   "optionen.einstellungen.cookiesAnnehmen": "Aceptar siempre",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Solo donde la web ofrece un botón de rechazo. Algunas preguntan en una segunda capa: ahí el aviso se queda.",
   "optionen.einstellungen.pflege": "Actualizar listas a diario",
   "optionen.einstellungen.pflegeText": "Actualiza 1 vez al día (nuevas páginas falsas, etc.)",
   "optionen.einstellungen.pflegeStand": "Última vez {datum}: {anzahl} reglas nuevas.",

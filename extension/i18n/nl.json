@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Uit",
   "optionen.einstellungen.cookiesAblehnen": "Altijd weigeren",
   "optionen.einstellungen.cookiesAnnehmen": "Altijd accepteren",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Alleen waar de site een weigerknop aanbiedt. Sommige vragen pas op een tweede laag; daar blijft het venster staan.",
   "optionen.einstellungen.pflege": "Lijsten dagelijks updaten",
   "optionen.einstellungen.pflegeText": "Werkt 1x per dag bij (nieuwe nepsites enz.)",
   "optionen.einstellungen.pflegeStand": "Laatst {datum}: {anzahl} nieuwe regels.",

@@ -512,6 +512,22 @@ export function Filterlisten({ zustand }: { zustand: Zustand }) {
             <div className="liste__nebentext">
               {t('optionen.einstellungen.cookiesText')}
             </div>
+            {/*
+              Der Hinweis steht NUR bei „Immer ablehnen" — bei den anderen
+              beiden waere er falsch.
+
+              GEMESSEN am 21.09.2026 an vier Sourcepoint-Seiten (spiegel.de,
+              heise.de, welt.de, faz.net): Auf der ersten Ebene gibt es dort
+              kein „Alle ablehnen"; `.sp_choice_type_13` kommt null mal vor.
+              Die Erweiterung tat daraufhin korrekt nichts — und genau das ist
+              der schlechteste Zustand, solange niemand es sagt: Der Nutzer
+              hat „ablehnen" eingestellt und glaubt, es werde abgelehnt.
+            */}
+            {premium && e?.cookieAntwort === 'ablehnen' ? (
+              <div className="liste__nebentext liste__einschraenkung">
+                {t('optionen.einstellungen.cookiesAblehnenHinweis')}
+              </div>
+            ) : null}
           </div>
           {!premium ? (
             <span className="liste__schloss" title={t('gemeinsam.premium')}>

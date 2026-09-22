@@ -180,6 +180,7 @@
   "optionen.einstellungen.cookiesAus": "Aus",
   "optionen.einstellungen.cookiesAblehnen": "Immer ablehnen",
   "optionen.einstellungen.cookiesAnnehmen": "Immer annehmen",
+  "optionen.einstellungen.cookiesAblehnenHinweis": "Nur dort, wo die Seite einen Ablehnen-Knopf anbietet. Manche fragen erst in einer zweiten Ebene; dort bleibt das Fenster stehen.",
   "optionen.einstellungen.pflege": "Listen täglich updaten",
   "optionen.einstellungen.pflegeText": "Updatet 1x am Tag (neue gefälschte Seiten usw.)",
   "optionen.einstellungen.pflegeStand": "Zuletzt {datum}: {anzahl} neue Regeln.",
