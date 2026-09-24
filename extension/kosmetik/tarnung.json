@@ -1,7 +1,9 @@
 {
-"generisch":[],
+"generisch":[
+".fq-container.ads"
+],
 "spezifisch":{
-"sport.de":[".fq-container.ads",".fanq-container"]
+"sport.de":[".fanq-container"]
 },
 "ausnahmen":{}
 }

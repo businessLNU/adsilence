@@ -125,7 +125,13 @@ vidmoly.biz##+js(acs, document.createElement, x-adb-root)
 ! Rahmen, den die Seite `hs-socialmedia-container` nennt, und der Rahmen
 ! existiert auf dieser Seite nur fuer dieses Widget.
 !
-! Auf anderen Seiten greift nichts davon: beide Regeln haengen an sport.de,
-! und die erste zusaetzlich am Werbemodus.
-sport.de##.fq-container.ads
+! Die erste Regel haengt ABSICHTLICH an keiner Domain. Die Klassen setzt FanQ
+! selbst, und `ads` heisst dort „Werbemodus" - das ist ueberall dieselbe
+! Aussage. Waere sie an sport.de gebunden, faenge dieselbe Meldung auf der
+! naechsten Seite wieder bei null an. Zwei Klassen zusammen sind eng genug,
+! dass sie nichts Fremdes treffen.
+!
+! Die zweite bleibt an sport.de: Sie raeumt den ganzen Rahmen weg, und das ist
+! nur dort gemessen.
+##.fq-container.ads
 sport.de##.fanq-container

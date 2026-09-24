@@ -1,7 +1,7 @@
 {
   "basis": {
     "name": "EasyList",
-    "gebautAm": "2026-09-24T15:08:45.421Z",
+    "gebautAm": "2026-09-24T15:13:56.341Z",
     "quelleVom": "2026-09-03T19:21:36.175Z",
     "quellVersion": "202609031913",
     "budget": 20000,
@@ -39,7 +39,7 @@
   },
   "privatsphaere": {
     "name": "EasyPrivacy",
-    "gebautAm": "2026-09-24T15:08:46.007Z",
+    "gebautAm": "2026-09-24T15:13:56.943Z",
     "quelleVom": "2026-09-03T19:21:36.395Z",
     "quellVersion": "202609031913",
     "budget": 8000,
@@ -76,7 +76,7 @@
   },
   "laestig": {
     "name": "Fanboy's Annoyances",
-    "gebautAm": "2026-09-24T15:08:47.376Z",
+    "gebautAm": "2026-09-24T15:13:58.444Z",
     "quelleVom": "2026-09-03T19:21:37.633Z",
     "quellVersion": "202609031800",
     "budget": 9000,
@@ -109,7 +109,7 @@
   },
   "cookies": {
     "name": "EasyList Cookie",
-    "gebautAm": "2026-09-24T15:08:46.744Z",
+    "gebautAm": "2026-09-24T15:13:57.717Z",
     "quelleVom": "2026-09-03T19:21:37.402Z",
     "quellVersion": null,
     "budget": 8000,
@@ -139,7 +139,7 @@
   },
   "regional-de": {
     "name": "EasyList Germany",
-    "gebautAm": "2026-09-24T15:08:47.471Z",
+    "gebautAm": "2026-09-24T15:13:58.567Z",
     "quelleVom": "2026-09-03T19:21:37.791Z",
     "quellVersion": "202609031749",
     "budget": 5000,
@@ -175,7 +175,7 @@
   },
   "ublock": {
     "name": "uBlock filters",
-    "gebautAm": "2026-09-24T15:08:46.155Z",
+    "gebautAm": "2026-09-24T15:13:57.079Z",
     "quelleVom": "2026-09-03T19:21:36.569Z",
     "quellVersion": null,
     "budget": 4000,
@@ -222,7 +222,7 @@
   },
   "ublock-privatsphaere": {
     "name": "uBlock filters - Privacy",
-    "gebautAm": "2026-09-24T15:08:46.185Z",
+    "gebautAm": "2026-09-24T15:13:57.118Z",
     "quelleVom": "2026-09-03T19:21:36.619Z",
     "quellVersion": null,
     "budget": 3000,
@@ -272,7 +272,7 @@
   },
   "ublock-schadsoftware": {
     "name": "uBlock filters - Badware risks",
-    "gebautAm": "2026-09-24T15:08:46.225Z",
+    "gebautAm": "2026-09-24T15:13:57.181Z",
     "quelleVom": "2026-09-03T19:21:36.679Z",
     "quellVersion": null,
     "budget": 2000,
@@ -314,7 +314,7 @@
   },
   "ublock-eilig": {
     "name": "uBlock filters - Quick fixes",
-    "gebautAm": "2026-09-24T15:08:46.362Z",
+    "gebautAm": "2026-09-24T15:13:57.308Z",
     "quelleVom": "2026-09-03T19:21:36.732Z",
     "quellVersion": null,
     "budget": 2000,
@@ -357,7 +357,7 @@
   },
   "ublock-reparatur": {
     "name": "uBlock filters - Unbreak",
-    "gebautAm": "2026-09-24T15:08:46.433Z",
+    "gebautAm": "2026-09-24T15:13:57.375Z",
     "quelleVom": "2026-09-03T19:21:36.788Z",
     "quellVersion": null,
     "budget": 2000,
@@ -404,7 +404,7 @@
   },
   "regional-fr": {
     "name": "Liste FR",
-    "gebautAm": "2026-09-24T15:08:47.607Z",
+    "gebautAm": "2026-09-24T15:13:58.701Z",
     "quelleVom": "2026-09-03T19:21:38.077Z",
     "quellVersion": "202609031912",
     "budget": 6000,
@@ -439,7 +439,7 @@
   },
   "regional-it": {
     "name": "EasyList Italy",
-    "gebautAm": "2026-09-24T15:08:47.648Z",
+    "gebautAm": "2026-09-24T15:13:58.742Z",
     "quelleVom": "2026-09-03T19:21:38.197Z",
     "quellVersion": "202609031912",
     "budget": 4000,
@@ -468,7 +468,7 @@
   },
   "regional-nl": {
     "name": "EasyList Dutch",
-    "gebautAm": "2026-09-24T15:08:47.671Z",
+    "gebautAm": "2026-09-24T15:13:58.758Z",
     "quelleVom": "2026-09-03T19:21:38.352Z",
     "quellVersion": "202609031912",
     "budget": 3000,
@@ -500,7 +500,7 @@
   },
   "regional-es": {
     "name": "EasyList Spanish",
-    "gebautAm": "2026-09-24T15:08:47.711Z",
+    "gebautAm": "2026-09-24T15:13:58.782Z",
     "quelleVom": "2026-09-03T19:21:38.507Z",
     "quellVersion": "202609031912",
     "budget": 3000,
@@ -533,7 +533,7 @@
   },
   "regional-zh": {
     "name": "EasyList China",
-    "gebautAm": "2026-09-24T15:08:47.970Z",
+    "gebautAm": "2026-09-24T15:13:58.997Z",
     "quelleVom": "2026-09-03T19:21:39.067Z",
     "quellVersion": "202609031912",
     "budget": 8000,
@@ -567,7 +567,7 @@
   },
   "regional-ru": {
     "name": "RU AdList",
-    "gebautAm": "2026-09-24T15:08:48.307Z",
+    "gebautAm": "2026-09-24T15:13:59.325Z",
     "quelleVom": "2026-09-03T19:21:39.520Z",
     "quellVersion": "202609031912",
     "budget": 8000,
@@ -606,7 +606,7 @@
   },
   "regional-pl": {
     "name": "EasyList Polish",
-    "gebautAm": "2026-09-24T15:08:48.354Z",
+    "gebautAm": "2026-09-24T15:13:59.368Z",
     "quelleVom": "2026-09-03T19:21:39.692Z",
     "quellVersion": "202609031912",
     "budget": 3000,
@@ -637,7 +637,7 @@
   },
   "regional-pt": {
     "name": "EasyList Portuguese",
-    "gebautAm": "2026-09-24T15:08:48.372Z",
+    "gebautAm": "2026-09-24T15:13:59.383Z",
     "quelleVom": "2026-09-03T19:21:39.848Z",
     "quellVersion": "202609031912",
     "budget": 3000,
@@ -667,7 +667,7 @@
   },
   "regional-ja": {
     "name": "ABP Japanese filters",
-    "gebautAm": "2026-09-24T15:08:48.506Z",
+    "gebautAm": "2026-09-24T15:13:59.527Z",
     "quelleVom": "2026-09-03T19:21:40.035Z",
     "quellVersion": "202105262051",
     "budget": 6000,
@@ -698,7 +698,7 @@
   },
   "regional-ko": {
     "name": "YousList",
-    "gebautAm": "2026-09-24T15:08:48.572Z",
+    "gebautAm": "2026-09-24T15:13:59.599Z",
     "quelleVom": "2026-09-03T19:21:40.080Z",
     "quellVersion": "20260818",
     "budget": 4000,
@@ -725,7 +725,7 @@
   },
   "regional-tr": {
     "name": "Turkish Filters",
-    "gebautAm": "2026-09-24T15:08:48.583Z",
+    "gebautAm": "2026-09-24T15:13:59.607Z",
     "quelleVom": "2026-09-03T19:21:40.465Z",
     "quellVersion": "202609031912",
     "budget": 2000,
@@ -755,7 +755,7 @@
   },
   "regional-vi": {
     "name": "ABPVN List",
-    "gebautAm": "2026-09-24T15:08:48.596Z",
+    "gebautAm": "2026-09-24T15:13:59.621Z",
     "quelleVom": "2026-09-03T19:21:40.504Z",
     "quellVersion": "20260904021441880",
     "budget": 2000,
@@ -788,7 +788,7 @@
   },
   "regional-id": {
     "name": "ABPindo",
-    "gebautAm": "2026-09-24T15:08:48.701Z",
+    "gebautAm": "2026-09-24T15:13:59.710Z",
     "quelleVom": "2026-09-03T19:21:40.552Z",
     "quellVersion": "202609012231",
     "budget": 5000,
@@ -826,7 +826,7 @@
   },
   "regional-ar": {
     "name": "Liste AR",
-    "gebautAm": "2026-09-24T15:08:48.722Z",
+    "gebautAm": "2026-09-24T15:13:59.733Z",
     "quelleVom": "2026-09-03T19:21:40.856Z",
     "quellVersion": "202609031912",
     "budget": 2000,
@@ -856,7 +856,7 @@
   },
   "regional-sv": {
     "name": "Frellwits Swedish Filter",
-    "gebautAm": "2026-09-24T15:08:48.775Z",
+    "gebautAm": "2026-09-24T15:13:59.795Z",
     "quelleVom": "2026-09-03T19:21:40.916Z",
     "quellVersion": null,
     "budget": 3000,
@@ -895,7 +895,7 @@
   },
   "regional-fa": {
     "name": "Adblock Iran",
-    "gebautAm": "2026-09-24T15:08:48.792Z",
+    "gebautAm": "2026-09-24T15:13:59.813Z",
     "quelleVom": "2026-09-03T19:21:41.117Z",
     "quellVersion": "182",
     "budget": 2000,
@@ -924,7 +924,7 @@
   },
   "regional-hi": {
     "name": "IndianList",
-    "gebautAm": "2026-09-24T15:08:48.927Z",
+    "gebautAm": "2026-09-24T15:13:59.962Z",
     "quelleVom": "2026-09-03T19:21:42.134Z",
     "quellVersion": "202609031912",
     "budget": 5000,
@@ -977,8 +977,8 @@
   },
   "tarnung": {
     "name": "AdSilence Tarnung",
-    "gebautAm": "2026-09-24T15:08:46.042Z",
-    "quelleVom": "2026-09-24T15:08:43.820Z",
+    "gebautAm": "2026-09-24T15:13:56.977Z",
+    "quelleVom": "2026-09-24T15:13:54.410Z",
     "quellVersion": null,
     "budget": 200,
     "gelesen": 8,
@@ -992,8 +992,8 @@
       "4": 2
     },
     "dnrRegex": 0,
-    "kosmetikGenerisch": 0,
-    "kosmetikSpezifisch": 2,
+    "kosmetikGenerisch": 1,
+    "kosmetikSpezifisch": 1,
     "kosmetikAusnahmen": 0,
     "scriptlets": 1,
     "popupHosts": 0,
@@ -1002,7 +1002,7 @@
   },
   "hosts": {
     "name": "Peter Lowe's List",
-    "gebautAm": "2026-09-24T15:08:46.039Z",
+    "gebautAm": "2026-09-24T15:13:56.974Z",
     "quelleVom": "2026-09-03T22:35:55.144Z",
     "quellVersion": null,
     "budget": 4500,
@@ -1027,7 +1027,7 @@
   },
   "urlhaus": {
     "name": "Online Malicious URL Blocklist",
-    "gebautAm": "2026-09-24T15:08:46.348Z",
+    "gebautAm": "2026-09-24T15:13:57.295Z",
     "quelleVom": "2026-09-09T13:45:17.017Z",
     "quellVersion": null,
     "budget": 3200,
@@ -1055,7 +1055,7 @@
   },
   "heimnetz": {
     "name": "Block Outsider Intrusion into LAN",
-    "gebautAm": "2026-09-24T15:08:46.354Z",
+    "gebautAm": "2026-09-24T15:13:57.300Z",
     "quelleVom": "2026-09-04T00:17:33.457Z",
     "quellVersion": null,
     "budget": 200,
@@ -1082,7 +1082,7 @@
   },
   "antiadblock": {
     "name": "Adblock Warning Removal List",
-    "gebautAm": "2026-09-24T15:08:46.457Z",
+    "gebautAm": "2026-09-24T15:13:57.401Z",
     "quelleVom": "2026-09-08T14:46:33.153Z",
     "quellVersion": "202609081432",
     "budget": 1000,
