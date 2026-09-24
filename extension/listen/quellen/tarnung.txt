@@ -92,3 +92,40 @@ vidmoly.biz##+js(acs, document.createElement, x-adb-root)
 ! fehl. Gilt fuer alle Seiten, nicht nur fuer eine - der Griff ist ueberall
 ! derselbe (gemessen am 09.09.2026 an vidmoly.biz).
 ||googleads.g.doubleclick.net/pagead/id$xmlhttprequest,redirect=nooptext
+
+! ---------------------------------------------------------------------------
+! Der FanQ-Werbeplatz auf sport.de
+! ---------------------------------------------------------------------------
+! Gemessen am 24.09.2026 an
+! sport.de/news/ne17179048/tennis-legende-zieht-den-hut-vor-zverev-…
+!
+! Auf dieser Seite wird praktisch ALLES geblockt, was Werbung ausspielt: gpt.js
+! und googletagmanager, emsservice.de (Molten) und adalliance.io, yieldlab,
+! adnxs, gumgum, dspx.tv, orbidder.otto.de, amazon-adsystem, Criteo, dazu
+! permutive, doubleverify und Nielsen - alle mit ERR_BLOCKED_BY_CLIENT. Kein
+! einziges Werbe-iframe war danach im Dokument.
+!
+! Sichtbar blieb genau ein Block: 714x500, geladen von widget.fanq.net, mit
+! den Klassen `fq-container st-sportde ads adsmode_4`. Die Klassen stammen vom
+! Widget selbst - es laeuft hier in seinem Werbemodus. `fanq` kommt in KEINER
+! unserer 32 Listen vor (geprueft: der einzige Treffer ist
+! `jdfanqhqkgfhfk.com` in EasyList, eine andere Domain).
+!
+! Zwei Regeln, und die zweite ist eine Entscheidung, keine Messung:
+!
+! Die erste trifft nur ein Element, das SELBST `ads` traegt. Sie allein
+! genuegte aber nicht - gemessen blieb dann ein LEERER Rahmen von 714x500
+! stehen (`#fanq-widget` im `.fanq-container`). Eine leere Werbeflaeche ist
+! fuer den Leser dasselbe Aergernis wie eine volle; genau diese Kaesten waren
+! der Anlass der Meldung.
+!
+! Deshalb faellt auf sport.de der ganze Block. Das kostet moeglicherweise
+! etwas: Laeuft in dem Widget neben der Werbung auch eine Umfrage, ist sie mit
+! weg. Der Preis ist bewusst gewaehlt - hier steht ein Werbeplatz in einem
+! Rahmen, den die Seite `hs-socialmedia-container` nennt, und der Rahmen
+! existiert auf dieser Seite nur fuer dieses Widget.
+!
+! Auf anderen Seiten greift nichts davon: beide Regeln haengen an sport.de,
+! und die erste zusaetzlich am Werbemodus.
+sport.de##.fq-container.ads
+sport.de##.fanq-container
