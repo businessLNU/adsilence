@@ -1,6 +1,18 @@
 {
+"abhijith.page":[
+{"name":"remove-node-text","args":["script","api.dataunlocker.com"]}
+],
+"accuretawealth.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
+"adaptive.marketing":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
 "adhs-zentrum.de":[
 {"name":"no-xhr-if","args":["method:POST body:/\"track\"|adblock/"]}
+],
+"adria.gg":[
+{"name":"remove-node-text","args":["script","api.dataunlocker.com"]}
 ],
 "aikatu.jp":[
 {"name":"no-setTimeout-if","args":["error-report.com"]}
@@ -18,6 +30,9 @@
 "bentasker.co.uk":[
 {"name":"no-xhr-if","args":["method:POST url:pfanalytics.bentasker.co.uk"]}
 ],
+"bitdomain.biz":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
 "blog.cloudflare.com":[
 {"name":"no-fetch-if","args":["method:POST body:zaraz"]}
 ],
@@ -26,10 +41,14 @@
 {"name":"set-constant","args":["google_tag_manager","undefined"]}
 ],
 "brandbrief.co.kr":[
-{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]}
+{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]},
+{"name":"remove-node-text","args":["script","KCgpPT57bGV0IGU"]}
 ],
 "brillen.de":[
-{"name":"abort-current-script","args":["document.createElement","'script'"]}
+{"name":"abort-current-script","args":["document.createElement","script"]}
+],
+"camberlion.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
 ],
 "civitai.com":[
 {"name":"no-fetch-if","args":["faro.civitai.com"]}
@@ -37,11 +56,23 @@
 "cnet.com":[
 {"name":"set-constant","args":["Object.prototype.updateModifiedCommerceUrl","noopFunc"]}
 ],
+"comicleaks.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
+"controlconceptsusa.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
+"convertcase.net":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
 "cool-style.com.tw":[
 {"name":"no-setTimeout-if","args":["error-report.com"]}
 ],
 "coursera.org":[
 {"name":"no-fetch-if","args":["eventing"]}
+],
+"creatordrop.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
 ],
 "dailydot.com":[
 {"name":"no-fetch-if","args":["url:/undefined method:POST"]}
@@ -51,7 +82,8 @@
 ],
 "dataunlocker.com":[
 {"name":"set-constant","args":["_hjSettings","undefined"]},
-{"name":"set-constant","args":["google_tag_manager","undefined"]}
+{"name":"set-constant","args":["google_tag_manager","undefined"]},
+{"name":"remove-node-text","args":["script","/^Function\\(\\\"/"]}
 ],
 "discord.com":[
 {"name":"no-xhr-if","args":["discord.com/api/v9/science"]}
@@ -62,6 +94,12 @@
 "docs.google.com":[
 {"name":"no-xhr-if","args":["method:POST url:/logImpressions"]}
 ],
+"dramabeans.com":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
+"dropgame.jp":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
 "endbasic.dev":[
 {"name":"no-xhr-if","args":["method:POST"]}
 ],
@@ -71,17 +109,35 @@
 "f6s.com":[
 {"name":"prevent-addEventListener","args":["","redirect"]}
 ],
+"farmersjournal.ie":[
+{"name":"remove-node-text","args":["script","/detect|FingerprintJS/"]}
+],
 "fileditchfiles.me":[
 {"name":"no-fetch-if","args":["method:POST body:/pageview|engagement/"]}
 ],
 "fingerprint.com":[
 {"name":"no-xhr-if","args":["method:POST"]}
 ],
+"fjlaboratories.com":[
+{"name":"remove-node-text","args":["script","api.dataunlocker.com"]}
+],
+"fort-shop.kiev.ua":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
+"freelancer.taxmachine.be":[
+{"name":"remove-node-text","args":["script","api.dataunlocker.com"]}
+],
 "frogogo.ru":[
 {"name":"abort-on-property-write","args":["ADMITAD"]}
 ],
+"furucombo.app":[
+{"name":"remove-node-text","args":["script","/join\\(\\\"\\\"\\)/"]}
+],
 "heavyfetish.com":[
-{"name":"set-constant","args":["flashvars.event_reporting","''"]}
+{"name":"set-constant","args":["flashvars.event_reporting",""]}
+],
+"helpmonks.com":[
+{"name":"remove-node-text","args":["script","api.dataunlocker.com"]}
 ],
 "idnes.cz":[
 {"name":"prevent-addEventListener","args":["","/(ping|score)Url"]}
@@ -92,6 +148,12 @@
 "intellischool.id":[
 {"name":"no-xhr-if","args":["fingerprintjs-pro-react"]}
 ],
+"intercity.technology":[
+{"name":"remove-node-text","args":["script","api.dataunlocker.com"]}
+],
+"islamicfinder.org":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
 "jmmv.dev":[
 {"name":"no-xhr-if","args":["method:POST"]}
 ],
@@ -99,7 +161,7 @@
 {"name":"set-constant","args":["adthrive._components.start","noopFunc"]}
 ],
 "liberation.fr":[
-{"name":"abort-current-script","args":["document.createElement","'.js'"]}
+{"name":"abort-current-script","args":["document.createElement",".js"]}
 ],
 "lidovky.cz":[
 {"name":"prevent-addEventListener","args":["","/(ping|score)Url"]}
@@ -107,8 +169,12 @@
 "linklog.tiagorangel.com":[
 {"name":"set-constant","args":["data","true"]}
 ],
+"manta.com":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
 "meconomynews.com":[
-{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]}
+{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]},
+{"name":"remove-node-text","args":["script","KCgpPT57bGV0IGU"]}
 ],
 "mediamarkt.de":[
 {"name":"abort-on-property-write","args":["ftr__startScriptLoad"]}
@@ -117,7 +183,8 @@
 {"name":"no-xhr-if","args":["cmp.inmobi.com/geoip"]}
 ],
 "motorgraph.com":[
-{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]}
+{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]},
+{"name":"remove-node-text","args":["script","KCgpPT57bGV0IGU"]}
 ],
 "myanimelist.net":[
 {"name":"no-fetch-if","args":["method:POST body:/content_view|impression|page_view/"]}
@@ -132,14 +199,17 @@
 {"name":"no-xhr-if","args":["/VisitorAPI|AppMeasurement/"]},
 {"name":"set-constant","args":["Visitor","{}"]}
 ],
+"nookgaming.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
 "nypost.com":[
 {"name":"json-prune","args":["dataLayer.trackingId user.trackingId"]}
 ],
 "officedepot.fr":[
-{"name":"abort-current-script","args":["document.createElement","'.js'"]}
+{"name":"abort-current-script","args":["document.createElement",".js"]}
 ],
 "oui.sncf":[
-{"name":"abort-current-script","args":["document.createElement","'.js'"]}
+{"name":"abort-current-script","args":["document.createElement",".js"]}
 ],
 "pagesix.com":[
 {"name":"json-prune","args":["dataLayer.trackingId user.trackingId"]}
@@ -147,17 +217,35 @@
 "perplexity.ai":[
 {"name":"abort-on-stack-trace","args":["window.screen.height","setTimeout"]}
 ],
+"ping.gg":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
 "pooembed.eu":[
 {"name":"no-xhr-if","args":["body:pageview method:POST"]}
 ],
+"proboards.com":[
+{"name":"remove-node-text","args":["script","vglnk"]}
+],
+"ryaktive.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
 "search.brave.com":[
 {"name":"no-fetch-if","args":["body:browser"]}
+],
+"secure-signup.net":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
+"segops.madisonspecs.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
 ],
 "sfr.fr":[
 {"name":"abort-on-property-read","args":["_oEa"]}
 ],
 "smarturl.it":[
 {"name":"set-constant","args":["linkfire.tracking","{}"]}
+],
+"stresshelden-coaching.de":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
 ],
 "tacobell.com":[
 {"name":"set-constant","args":["bmak.js_post","false"]}
@@ -168,8 +256,18 @@
 "threads.net":[
 {"name":"json-prune","args":["require.0.3.0.__bbox.define.[].2.is_linkshim_supported"]}
 ],
+"tip.etip-staging.etip.io":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
+],
 "topstarnews.net":[
-{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]}
+{"name":"noeval","args":["/07c225f3\\.online|content-loader\\.com|css-load\\.com|html-load\\.com/"]},
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
+"tportal.hr":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
+],
+"tracktheta.com":[
+{"name":"remove-node-text","args":["script","/join\\(\\'\\'\\)/"]}
 ],
 "trendyol-milla.com":[
 {"name":"set-constant","args":["process","{}"]},
@@ -178,6 +276,9 @@
 "trendyol.com":[
 {"name":"set-constant","args":["process","{}"]},
 {"name":"set-constant","args":["process.env","{}"]}
+],
+"tvtropes.org":[
+{"name":"remove-node-text","args":["script","error-report.com"]}
 ],
 "tweakers.net":[
 {"name":"abort-on-stack-trace","args":["btoa","send"]}
@@ -191,11 +292,15 @@
 "webex.com":[
 {"name":"no-xhr-if","args":["svc.webex.com/metrics"]}
 ],
+"winclassic.net":[
+{"name":"remove-node-text","args":["script","vglnk"]}
+],
 "www.cloudflare.com":[
 {"name":"no-fetch-if","args":["method:POST body:zaraz"]}
 ],
 "www.google.com":[
-{"name":"prevent-addEventListener","args":["mouseover","b.src","elements","#search #rso div[data-rpos] > div[data-ved]"]}
+{"name":"prevent-addEventListener","args":["mouseover","b.src","elements","#search #rso div[data-rpos] > div[data-ved]"]},
+{"name":"trusted-replace-node-text","args":["script","this.gbar_=","window.addEventListener(\"mousemove\",(()=>{W_jd&&document.querySelectorAll(\"#search #rso div[data-rpos]\").forEach((t=>{let e=t.querySelector('div[data-hveid] span[jsaction^=\"trigger.\"] > a[href^=\"/goto?url=\"]');if(!e)return;let r=t.querySelector('div[id^=\"atritem-\"]')?.attributes?.jsdata?.value?.split?.(\";_;\")?.[1];r&&Object.getOwnPropertySymbols(W_jd[r]).map((t=>{let l=W_jd[r][t];if(\"object\"!=typeof l||null===l)return;let s=Object.values(l)?.[0]?.[32];if(s?.[3]?.[0]?.startsWith?.(\"http\"))e.setAttribute(\"href\",s[3][0]);else if(null!==s?.[3]){let t=Object.values(s?.[3]);t?.[0]?.[0]?.startsWith?.(\"http\")&&e.setAttribute(\"href\",t[0][0])}else null===s?.[3]&&s[11]?.[7]?.startsWith?.(\"http\")&&e.setAttribute(\"href\",s[11][7])}))}))}));this.gbar_="]}
 ],
 "www.reddit.com":[
 {"name":"json-prune","args":["data.*.elements.edges.[].node.outboundLink"]},

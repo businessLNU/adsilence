@@ -138,13 +138,21 @@ test('Hosts kommen sortiert, Eintraege in Listenreihenfolge', () => {
  * Datei erzeugt (Katalog 32, Regel 4), schreibt sie mit `JSON.stringify`
  * hinein. Geprueft wird deshalb: ein String, kein Steuerzeichen, kein
  * Zeilentrenner U+2028/U+2029, keine einsame Ersatzzeichen-Haelfte,
- * hoechstens 1000 Zeichen.
+ * hoechstens 8000 Zeichen.
  * Klammern, Schraegstriche und Anfuehrungszeichen sind erlaubt, weil sie
  * erlaubt sein MUESSEN; leer ist erlaubt, weil `aeld, , needle` in uBO
  * „jedes Ereignis" heisst und die Bibliothek genau so damit rechnet
  * (`args[0] ?? ''`). Die Laengengrenze ist ein Deckel gegen Unfug, kein
  * Mass: Das laengste echte Argument (`json-prune` mit neun Pfaden auf
- * art19.com) hat 296 Zeichen.
+ * art19.com) hatte 296 Zeichen.
+ *
+ * Angehoben von 1000 auf 8000 am 26.09.2026: Seit `trusted-replace-node-text`
+ * (`rpnt`) gebaut wird, bringen uBlocks EIGENE Listen Code-Einschuebe mit —
+ * 2.699 Zeichen fuer YouTubes Werbesperre, 4.763 fuer pvpoke-re.com. Die
+ * Einbettung per `JSON.stringify` ist von der Laenge unabhaengig sicher, und
+ * diese Scriptlets kommen nur aus vertrauenswuerdigen Listen
+ * (`brauchtVertrauen()`). Der Deckel bleibt, jetzt mit Luft ueber dem
+ * laengsten echten Wert.
  *
  * GEMESSEN am 03.09.2026, als dieser Test zum ersten Mal ueber ALLE Listen
  * aus `listen/quellen.json` lief statt ueber die ersten fuenf: Die
@@ -157,7 +165,7 @@ test('Hosts kommen sortiert, Eintraege in Listenreihenfolge', () => {
  * `passt()` in `bibliothek.ts` einen Regex baut. Die Regel stammte aus einer Zeit, in der noch niemand Argumente in
  * Code verkettet oder gemessen hatte; sie beschrieb eine Angst, kein Risiko.
  */
-const ARGUMENT_MAX = 1000;
+const ARGUMENT_MAX = 8000;
 /** Eine hohe Ersatzzeichen-Haelfte ohne ihre niedrige, oder umgekehrt. */
 const EINSAMES_ERSATZZEICHEN = /[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/;
 
@@ -179,9 +187,9 @@ function argumentTauglich(arg: string): boolean {
 }
 
 test('die Argumentform trifft, was sie treffen soll', () => {
-  const gut = ['', 'window.canRunAds', 'true', '0', 'ad-slot', '$ad', 'a'.repeat(1000), '{}', "''", '/^(mouseout|mouseleave)$/', '()', 'a b', "a'", 'a<b', 'a/b'];
+  const gut = ['', 'window.canRunAds', 'true', '0', 'ad-slot', '$ad', 'a'.repeat(8000), '{}', "''", '/^(mouseout|mouseleave)$/', '()', 'a b', "a'", 'a<b', 'a/b'];
   for (const g of gut) assert.equal(argumentTauglich(g), true, `${g} sollte tauglich sein`);
-  const schlecht = ['a'.repeat(1001), 'a\nb', 'a\u0000b', 'a\u2028b', 'a\ud800b'];
+  const schlecht = ['a'.repeat(8001), 'a\nb', 'a\u0000b', 'a\u2028b', 'a\ud800b'];
   for (const s of schlecht) assert.equal(argumentTauglich(s), false, `${JSON.stringify(s)} sollte untauglich sein`);
 });
 

@@ -146,7 +146,10 @@ for (const quelle of QUELLEN) {
   for (const [grund, n] of Object.entries(dnr.verworfen)) verworfen[grund] = (verworfen[grund] ?? 0) + n;
 
   const kosmetik = zuKosmetik(regeln, verworfen);
-  const scriptlets = zuScriptlets(regeln, verworfen);
+  // uBlocks eigene Listen und unsere: Nur sie duerfen Antworten umschreiben
+  // (`brauchtVertrauen()` in src/engine/scriptlets.ts).
+  const vertrauenswuerdig = quelle.eigen === true || quelle.id.startsWith('ublock');
+  const scriptlets = zuScriptlets(regeln, verworfen, { vertrauenswuerdig });
   const popups = zuPopupHosts(regeln, verworfen);
   const textregeln = zuTextregeln(regeln);
 

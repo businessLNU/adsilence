@@ -259,6 +259,29 @@ function leseScriptletArgumente(inhalt: string): string[] {
   let aktuell = '';
   for (let i = 0; i < inhalt.length; i += 1) {
     const zeichen = inhalt[i];
+    /*
+     * Ein Argument in Anfuehrungszeichen (' " `) gilt wortwoertlich, samt
+     * Kommas darin — so liest uBlock Origin seine Listen, und seine
+     * YouTube-Regeln sind so geschrieben: `'"adPlacements"'` meint den Text
+     * `"adPlacements"` MIT den doppelten Anfuehrungszeichen. Ohne diesen Zweig
+     * kam das Argument mit den aeusseren Hochkommas an und traf nie.
+     */
+    if (aktuell.trim() === '' && (zeichen === "'" || zeichen === '"' || zeichen === '`')) {
+      let ende = -1;
+      for (let j = i + 1; j < inhalt.length; j += 1) {
+        if (inhalt[j] !== zeichen) continue;
+        const danach = inhalt.slice(j + 1).match(/^\s*(,|$)/);
+        if (danach) { ende = j; break; }
+      }
+      if (ende !== -1) {
+        teile.push(inhalt.slice(i + 1, ende));
+        const rest = inhalt.slice(ende + 1).match(/^\s*(,|$)/)!;
+        i = ende + rest[0].length;
+        aktuell = '';
+        if (rest[1] === '') return teile;
+        continue;
+      }
+    }
     if (zeichen === '\\' && inhalt[i + 1] === ',') {
       aktuell += ',';
       i += 1;

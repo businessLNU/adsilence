@@ -52,6 +52,7 @@ export const GRUENDE = [
   'doppelt',
   /** Scriptlet ohne `domain`: würde auf jeder Seite laufen, das tun wir nicht */
   'scriptletOhneDomain',
+  'scriptletOhneVertrauen',
   /** `$redirect=<name>`, fuer den es keine Attrappe im Paket gibt. */
   'redirectUnbekannt',
   /** `@@…$redirect=…`: eine Ausnahme, die zugleich umleiten soll. */

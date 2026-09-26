@@ -78,6 +78,15 @@ const PAKETDATEI = /\bfetch\s*\(\s*api\.runtime\.getURL\s*\(/;
  */
 const SEITENKONTEXT = 'src/scriptlets/bibliothek.ts';
 const ABFANGEN = /=\s*w\.XMLHttpRequest\b/;
+/**
+ * Seit dem 26.09.2026 auch das ERSETZEN durch eine Unterklasse — genau diese
+ * eine Form. uBlocks `trusted-replace-xhr-response` und
+ * `json-prune-xhr-response` schreiben Antworten der Seite beim Lesen um
+ * (YouTubes Werbeplaetze); dafuer braucht es `class extends` der
+ * Seitenklasse. Eine eigene Anfrage entsteht dabei nicht: Die Klasse erbt nur
+ * `open` und die Lesefelder. `new XMLHttpRequest` bleibt verboten.
+ */
+const UMHUELLEN = /^\s*w\.XMLHttpRequest\s*=\s*class extends Basis\s*\{\s*$/;
 
 function dateien(ordner: string): string[] {
   const gefunden: string[] = [];
@@ -122,6 +131,7 @@ test('nur die zwei benannten Dateien sprechen mit dem Netz', () => {
         if (name === 'fetch(' && PAKETDATEI.test(text)) continue;
         // Die zweite: den XHR der Seite umhuellen, um ihn ausfallen zu lassen.
         if (name === 'XMLHttpRequest' && kurz === SEITENKONTEXT && ABFANGEN.test(text)) continue;
+        if (name === 'XMLHttpRequest' && kurz === SEITENKONTEXT && UMHUELLEN.test(text)) continue;
         treffer.push(`${kurz}:${nummer} ${name}: ${text.trim()}`);
       }
     }

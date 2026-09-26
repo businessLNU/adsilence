@@ -171,13 +171,32 @@ export function scriptletLoader(eintraege: ScriptletEintrag[]): void {
     };
   }
 
-  function loesche(obj: unknown, pfad: string): void {
+  /**
+   * Entfernt `pfad` aus `obj`. Gibt zurueck, ob sich etwas geaendert hat.
+   *
+   * `[]` heisst „jedes Element", `*` „jeder Schluessel", und `[-]` (uBlock
+   * Origin) heisst: das ELEMENT selbst aus dem Array nehmen, wenn der Rest des
+   * Pfads darin steht. YouTube-Regeln schreiben so
+   * `entries.[-].command.reelWatchEndpoint.adClientParams.isAd` — ein Kurzvideo,
+   * das Werbung ist, faellt als Ganzes aus der Liste. Bis zum 26.09.2026 las
+   * diese Funktion `[-]` als Feldnamen, und die Regel lief ins Leere.
+   */
+  function loesche(obj: unknown, pfad: string): boolean {
     const teile = pfad.split('.');
+    let geaendert = false;
     function ab(o: unknown, i: number): void {
       if (o === null || typeof o !== 'object') return;
       const name = teile[i]!;
+      if (name === '[-]' && Array.isArray(o)) {
+        const rest = teile.slice(i + 1).join('.');
+        for (let k = o.length - 1; k >= 0; k -= 1) {
+          if (rest === '' || hatPfad(o[k], rest)) { o.splice(k, 1); geaendert = true; }
+        }
+        return;
+      }
       if (i === teile.length - 1) {
-        if (name === '[]' && Array.isArray(o)) { o.length = 0; return; }
+        if (name === '[]' && Array.isArray(o)) { if (o.length) geaendert = true; o.length = 0; return; }
+        if (Object.prototype.hasOwnProperty.call(o, name)) geaendert = true;
         delete (o as Record<string, unknown>)[name];
         return;
       }
@@ -186,6 +205,7 @@ export function scriptletLoader(eintraege: ScriptletEintrag[]): void {
       ab((o as Record<string, unknown>)[name], i + 1);
     }
     ab(obj, 0);
+    return geaendert;
   }
 
   function hatPfad(obj: unknown, pfad: string): boolean {
@@ -331,6 +351,252 @@ export function scriptletLoader(eintraege: ScriptletEintrag[]): void {
   }
 
   // Die Scriptlets
+
+
+  /*
+   * ── Hilfen fuer die Scriptlets, die Antworten und Seitenskripte umschreiben ─
+   * Nachgebaut nach uBlock Origin (GPL-3.0). Keine DOM-Typen: Diese Datei wird
+   * auch fuer den Service Worker uebersetzt, und der kennt `Node` nicht.
+   */
+
+  /** Das unberuehrte `JSON.parse`, festgehalten beim ERSTEN Lauf auf der Seite. */
+  const PARSE_ROH: (t: string) => unknown = (() => {
+    const ablage = '__adsilenceJsonParse';
+    if (typeof w[ablage] !== 'function') w[ablage] = (w.JSON as { parse: (t: string) => unknown }).parse;
+    return w[ablage] as (t: string) => unknown;
+  })();
+
+  /** uBlocks `patternToRegex`: `/…/flags` als Ausdruck, sonst woertlich. */
+  function regexAus(text: string, flags?: string, ganz = false): RegExp {
+    if (text === '') return /^/;
+    const m = /^\/(.+)\/([gimsu]*)$/.exec(text);
+    if (m) {
+      try { return new RegExp(m[1]!, m[2] || undefined); } catch { return /^/; }
+    }
+    const woertlich = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(ganz ? '^' + woertlich + '$' : woertlich, flags);
+  }
+
+  /** Paare hinter den festen Argumenten: `propsToMatch, /player?, sedCount, 1`. */
+  function zusatz(rest: string[]): Record<string, string> {
+    const aus: Record<string, string> = {};
+    for (let i = 0; i + 1 < rest.length; i += 2) aus[rest[i]!] = rest[i + 1]!;
+    return aus;
+  }
+
+  /** Leeres `propsToMatch` heisst „jede Anfrage" (uBlock), nicht „keine". */
+  function trifftProps(props: string, werte: Record<string, string>): boolean {
+    if (props === '') return true;
+    return trifftAnfrage(eigenschaften(props), werte);
+  }
+
+  function fetchWerte(a: unknown[]): Record<string, string> {
+    const werte: Record<string, string> = { url: '', method: 'GET' };
+    const quelle = a[0];
+    const optionen = a[1] as { method?: unknown } | null | undefined;
+    if (quelle !== null && typeof quelle === 'object' && 'url' in (quelle as object)) {
+      werte['url'] = alsText((quelle as { url: unknown }).url);
+      const m = (quelle as { method?: unknown }).method;
+      if (m) werte['method'] = alsText(m);
+    } else {
+      werte['url'] = alsText(quelle);
+    }
+    if (optionen && typeof optionen === 'object' && optionen.method) werte['method'] = alsText(optionen.method);
+    return werte;
+  }
+
+  type AntwortArt = {
+    clone?: () => { text: () => Promise<string> };
+    status?: number; statusText?: string; headers?: unknown;
+    ok?: boolean; redirected?: boolean; type?: string; url?: string;
+  };
+
+  /** `fetch` so umhuellen, dass `aendere` den Text jeder passenden Antwort sieht. */
+  function umschreibeFetch(props: string, aendere: (text: string) => string | null): void {
+    const alt = w.fetch as ((...a: unknown[]) => Promise<unknown>) | undefined;
+    const Antwort = w.Response as (new (b: string, i: unknown) => object) | undefined;
+    if (typeof alt !== 'function' || typeof Antwort !== 'function') return;
+    w.fetch = new Proxy(alt, {
+      apply(f, dies, a: unknown[]) {
+        const versprochen = Reflect.apply(f, dies, a) as Promise<unknown>;
+        let werte: Record<string, string>;
+        try { werte = fetchWerte(a); } catch { return versprochen; }
+        if (!trifftProps(props, werte)) return versprochen;
+        return versprochen.then((vorher) => {
+          const v = vorher as AntwortArt;
+          if (!v || typeof v.clone !== 'function') return vorher;
+          let kopie: { text: () => Promise<string> };
+          try { kopie = v.clone(); } catch { return vorher; }
+          return kopie.text().then((text) => {
+            let neu: string | null = null;
+            try { neu = aendere(text); } catch { neu = null; }
+            if (neu === null) return vorher;
+            const n = new Antwort(neu, { status: v.status, statusText: v.statusText, headers: v.headers });
+            try {
+              Object.defineProperties(n, {
+                ok: { value: v.ok }, redirected: { value: v.redirected }, type: { value: v.type }, url: { value: v.url },
+              });
+            } catch { /* eingefroren */ }
+            return n;
+          }, () => vorher);
+        });
+      },
+    });
+  }
+
+  /**
+   * `XMLHttpRequest` so umhuellen, dass passende Antworten beim LESEN
+   * umgeschrieben werden. Ein Text geht an `aendereText`, ein fertig
+   * geparstes Objekt (`responseType = 'json'`) an `aendereObjekt`.
+   */
+  function umschreibeXhr(
+    props: string,
+    aendereText: (t: string) => string | null,
+    aendereObjekt?: (o: unknown) => boolean,
+  ): void {
+    const Basis = w.XMLHttpRequest as { new (): XMLHttpRequest; prototype: XMLHttpRequest } | undefined;
+    if (typeof Basis !== 'function') return;
+    type Merk = { laenge?: number; antwort?: unknown; fertig?: boolean };
+    const merk = new WeakMap<object, Merk>();
+    w.XMLHttpRequest = class extends Basis {
+      open(methode: string, adresse: string | URL, ...rest: unknown[]): void {
+        try {
+          if (trifftProps(props, { url: alsText(adresse), method: alsText(methode) })) merk.set(this, {});
+          else merk.delete(this);
+        } catch { /* ungewoehnliche Adresse */ }
+        (Basis.prototype.open as (...a: unknown[]) => void).call(this, methode, adresse, ...rest);
+      }
+      get response(): unknown {
+        const innen = super.response as unknown;
+        const eintrag = merk.get(this);
+        if (!eintrag) return innen;
+        const laenge = typeof innen === 'string' ? innen.length : undefined;
+        if (eintrag.laenge !== laenge) { eintrag.fertig = false; eintrag.laenge = laenge; }
+        if (eintrag.fertig) return eintrag.antwort;
+        let aus: unknown = innen;
+        try {
+          if (typeof innen === 'string') {
+            const neu = aendereText(innen);
+            if (neu !== null) aus = neu;
+          } else if (innen !== null && typeof innen === 'object' && aendereObjekt) {
+            aendereObjekt(innen);
+          }
+        } catch { /* Antwort bleibt, wie sie ist */ }
+        // Nur FERTIGE Antworten merken: solange geladen wird, waechst der Text.
+        if (this.readyState === 4) { eintrag.antwort = aus; eintrag.fertig = true; }
+        return aus;
+      }
+      get responseText(): string {
+        const r = this.response;
+        return typeof r === 'string' ? r : super.responseText;
+      }
+    };
+  }
+
+  /** JSON-Text beschneiden; `null`, wenn es nichts zu tun gab. */
+  function beschneideText(text: string, pfade: string[], pflicht: string[]): string | null {
+    const erstes = text.trimStart().charAt(0);
+    if (erstes !== '{' && erstes !== '[') return null;
+    let daten: unknown;
+    try { daten = PARSE_ROH(text); } catch { return null; }
+    if (pflicht.length && !pflicht.every((p) => hatPfad(daten, p))) return null;
+    let geaendert = false;
+    for (const p of pfade) if (loesche(daten, p)) geaendert = true;
+    return geaendert ? JSON.stringify(daten) : null;
+  }
+
+  type Knoten = { nodeName: string; textContent: unknown; content?: Knoten };
+  type Beobachtung = { addedNodes: ArrayLike<Knoten> };
+
+  /**
+   * uBlocks `replace-node-text`: Den Text passender Knoten (meist `script`)
+   * umschreiben, BEVOR der Browser ihn ausfuehrt — ueber einen
+   * MutationObserver ab `document_start`. Standardmaessig bis
+   * `DOMContentLoaded`; `stay` haelt ihn offen, `quitAfter` verlaengert.
+   */
+  function ersetzeKnotentext(knoten: string, musterText: string, ersatz: string, rest: string[]): void {
+    const doc = w.document as {
+      documentElement: Knoten | null; readyState: string; currentScript: unknown;
+      createTreeWalker: (wurzel: unknown, was: number) => { nextNode: () => Knoten | null };
+      addEventListener: (typ: string, f: () => void, o?: unknown) => void;
+    } | undefined;
+    if (!doc) return;
+    const knotenRe = regexAus(knoten, 'i', true);
+    const muster = regexAus(musterText, 'gms');
+    const extra = zusatz(rest);
+    const bedingung = extra['includes'] || extra['condition'];
+    const nur = bedingung ? regexAus(bedingung, 'ms') : null;
+    const ohne = extra['excludes'] ? regexAus(extra['excludes'], 'ms') : null;
+    let uebrig = extra['sedCount'] ? parseInt(extra['sedCount'], 10) : Number.MAX_SAFE_INTEGER;
+    if (isNaN(uebrig)) uebrig = Number.MAX_SAFE_INTEGER;
+    const bleibt = Boolean(extra['stay']);
+    const spaeter = extra['quitAfter'] ? parseInt(extra['quitAfter'], 10) || 0 : 0;
+
+    // Trusted Types: YouTube verlangt fuer `script.textContent` ein
+    // TrustedScript. uBlock legt dafuer eine eigene Richtlinie an; wir auch.
+    let alsSkript = (t: string): unknown => t;
+    try {
+      const tt = w.trustedTypes as {
+        getPropertyType?: (a: string, b: string) => string | null;
+        createPolicy: (n: string, r: { createScript: (t: string) => string }) => { createScript: (t: string) => unknown };
+      } | undefined;
+      if (tt && typeof tt.getPropertyType === 'function' && tt.getPropertyType('script', 'textContent') === 'TrustedScript') {
+        const richtlinie = tt.createPolicy('adsilence' + Math.random().toString(36).slice(2), { createScript: (t) => t });
+        alsSkript = (t) => richtlinie.createScript(t);
+      }
+    } catch { /* ohne Trusted Types */ }
+
+    const behandle = (n: Knoten): void => {
+      const vorher = alsText(n.textContent ?? '');
+      if (nur) { nur.lastIndex = 0; if (!nur.test(vorher)) return; }
+      if (ohne) { ohne.lastIndex = 0; if (ohne.test(vorher)) return; }
+      muster.lastIndex = 0;
+      if (!muster.test(vorher)) return;
+      muster.lastIndex = 0;
+      const nachher = musterText !== '' ? vorher.replace(muster, ersatz) : ersatz;
+      n.textContent = n.nodeName === 'SCRIPT' ? alsSkript(nachher) : nachher;
+      uebrig -= 1;
+    };
+    const baum = (wurzel: Knoten): void => {
+      const gang = doc.createTreeWalker(wurzel, 1 | 4);
+      const aktuell = doc.currentScript;
+      for (;;) {
+        const n = gang.nextNode();
+        if (n === null) break;
+        if (n === aktuell) continue;
+        if (knotenRe.test(n.nodeName)) behandle(n);
+        else if (n.nodeName === 'TEMPLATE' && n.content) baum(n.content);
+        else continue;
+        if (uebrig <= 0) break;
+      }
+    };
+    try { if (doc.documentElement) baum(doc.documentElement); } catch { /* weiter mit dem Beobachter */ }
+    if (uebrig <= 0 && !bleibt) return;
+
+    const Beobachter = w.MutationObserver as (new (cb: (l: Beobachtung[]) => void) => {
+      observe: (z: unknown, o: unknown) => void; disconnect: () => void; takeRecords: () => Beobachtung[];
+    }) | undefined;
+    if (typeof Beobachter !== 'function') return;
+    const verarbeite = (liste: Beobachtung[]): void => {
+      for (const m of liste) {
+        for (const n of Array.from(m.addedNodes)) {
+          if (knotenRe.test(n.nodeName)) behandle(n);
+          else if (n.nodeName === 'TEMPLATE' && n.content) baum(n.content);
+          else continue;
+          if (uebrig <= 0 && !bleibt) { beobachter.disconnect(); return; }
+        }
+      }
+    };
+    const beobachter = new Beobachter(verarbeite);
+    const halt = (): void => {
+      try { verarbeite(beobachter.takeRecords()); beobachter.disconnect(); } catch { /* schon zu */ }
+    };
+    beobachter.observe(doc, { childList: true, subtree: true });
+    if (bleibt) return;
+    const beiInteraktiv = (): void => { if (spaeter === 0) halt(); else globalThis.setTimeout(halt, spaeter); };
+    if (doc.readyState !== 'loading') beiInteraktiv();
+    else doc.addEventListener('DOMContentLoaded', beiInteraktiv, { once: true });
+  }
 
   const bibliothek: Record<string, (args: string[]) => void> = {
     'abort-on-property-read'(args) {
@@ -586,6 +852,143 @@ export function scriptletLoader(eintraege: ScriptletEintrag[]): void {
       else try { doc.addEventListener('DOMContentLoaded', starte, true); } catch { /* egal */ }
       if (!bleibt) globalThis.setTimeout(function () { try { beobachter.disconnect(); } catch { /* schon zu */ } }, 15000);
     },
+
+    /*
+     * ── Antworten umschreiben, BEVOR die Seite sie liest ────────────────────
+     *
+     * Nachgebaut nach uBlock Origin (GPL-3.0, wie AdSilence), weil YouTube
+     * seit 2025 genau darauf antwortet: Ein Blocker, der die Werbeanfragen
+     * abweist, die Werbeplaetze in der Player-Antwort aber stehen laesst, wird
+     * erkannt — „Werbeblocker sind auf YouTube nicht erlaubt". GEMESSEN am
+     * 26.09.2026: Die YouTube-Regeln aus uBlocks Schnellkorrekturen brauchten
+     * sieben Scriptlets, die es hier nicht gab; unser Paket liess sie beim Bau
+     * fallen. Diese hier kommen nur aus vertrauenswuerdigen Listen
+     * (`brauchtVertrauen()` in src/engine/scriptlets.ts).
+     */
+    'trusted-replace-fetch-response'(args) {
+      const roh = args[0] ?? '';
+      if (roh === '') return;
+      const muster = regexAus(roh === '*' ? '.*' : roh);
+      const ersatz = args[1] ?? '';
+      const props = args[2] ?? '';
+      const extra = zusatz(args.slice(3));
+      const nur = extra['includes'] ? regexAus(extra['includes']) : null;
+      umschreibeFetch(props, (text) => {
+        if (nur) { nur.lastIndex = 0; if (!nur.test(text)) return null; }
+        muster.lastIndex = 0;
+        const neu = text.replace(muster, ersatz);
+        return neu === text ? null : neu;
+      });
+    },
+    'trusted-replace-xhr-response'(args) {
+      const roh = args[0] ?? '';
+      if (roh === '') return;
+      const muster = regexAus(roh === '*' ? '.*' : roh);
+      const ersatz = args[1] ?? '';
+      const props = args[2] ?? '';
+      const extra = zusatz(args.slice(3));
+      const nur = extra['includes'] ? regexAus(extra['includes']) : null;
+      umschreibeXhr(props, (text) => {
+        if (nur) { nur.lastIndex = 0; if (!nur.test(text)) return null; }
+        muster.lastIndex = 0;
+        const neu = text.replace(muster, ersatz);
+        return neu === text ? null : neu;
+      });
+    },
+    'json-prune-fetch-response'(args) {
+      const pfade = (args[0] ?? '').split(/\s+/).filter(Boolean);
+      const pflicht = (args[1] ?? '').split(/\s+/).filter(Boolean);
+      const extra = zusatz(args.slice(2));
+      if (pfade.length === 0) return;
+      umschreibeFetch(extra['propsToMatch'] ?? '', (text) => beschneideText(text, pfade, pflicht));
+    },
+    'json-prune-xhr-response'(args) {
+      const pfade = (args[0] ?? '').split(/\s+/).filter(Boolean);
+      const pflicht = (args[1] ?? '').split(/\s+/).filter(Boolean);
+      const extra = zusatz(args.slice(2));
+      if (pfade.length === 0) return;
+      umschreibeXhr(extra['propsToMatch'] ?? '', (text) => beschneideText(text, pfade, pflicht), (obj) => {
+        if (pflicht.length && !pflicht.every((p) => hatPfad(obj, p))) return false;
+        let geaendert = false;
+        for (const p of pfade) if (loesche(obj, p)) geaendert = true;
+        return geaendert;
+      });
+    },
+    /*
+     * Die Umgehung ueber einen leeren Rahmen: Eine Seite haengt ein
+     * `about:blank`-iframe an und holt sich dort ein UNBERUEHRTES `fetch` oder
+     * `JSON.parse` — an allen Scriptlets oben vorbei. Nach dem Anhaengen
+     * bekommt der Rahmen deshalb unsere Fassung.
+     */
+    'trusted-prevent-dom-bypass'(args) {
+      const methode = args[0] ?? '';
+      const ziel = args[1] ?? '';
+      if (methode === '') return;
+      const kette = methode.split('.');
+      const name = kette.pop()!;
+      let traeger: unknown = w;
+      for (const glied of kette) traeger = traeger == null ? undefined : (traeger as Record<string, unknown>)[glied];
+      if (traeger == null) return;
+      const t = traeger as Record<string, unknown>;
+      const alt = t[name];
+      if (typeof alt !== 'function') return;
+      const Element = w.HTMLElement as (new () => unknown) | undefined;
+      t[name] = new Proxy(alt as (...a: unknown[]) => unknown, {
+        apply(f, dies, a: unknown[]) {
+          const ergebnis = Reflect.apply(f, dies, a);
+          for (const el of a) {
+            try {
+              if (!Element || !(el instanceof Element)) continue;
+              const fenster = (el as { contentWindow?: unknown }).contentWindow as Record<string, unknown> | null | undefined;
+              if (!fenster || alsText(fenster) !== '[object Window]') continue;
+              const adresse = (fenster['location'] as { href?: string }).href;
+              if (adresse !== 'about:blank' && adresse !== (w.location as { href?: string }).href) continue;
+              if (ziel === '') {
+                Object.defineProperty(el, 'contentWindow', { value: w });
+                continue;
+              }
+              const glieder = ziel.split('.');
+              const letztes = glieder.pop()!;
+              let ich: Record<string, unknown> = w;
+              let es: Record<string, unknown> = fenster;
+              for (const g of glieder) { ich = ich[g] as Record<string, unknown>; es = es[g] as Record<string, unknown>; }
+              es[letztes] = ich[letztes];
+            } catch { /* fremder Rahmen: nicht unsere Sache */ }
+          }
+          return ergebnis;
+        },
+      });
+    },
+    /*
+     * Timer beschleunigen: Wartet die Seite `verzoegerung` Millisekunden auf
+     * einen Rueckruf, der zum Muster passt, wird die Wartezeit mit `faktor`
+     * multipliziert (0,001 bis 50). uBlocks `nano-setTimeout-booster`.
+     */
+    'nano-setTimeout-booster'(args) {
+      const muster = regexAus(args[0] ?? '');
+      let verzoegerung = (args[1] ?? '') !== '*' ? parseInt(args[1] ?? '', 10) : -1;
+      if (isNaN(verzoegerung) || !isFinite(verzoegerung)) verzoegerung = 1000;
+      let faktor = parseFloat(args[2] ?? '');
+      faktor = !isNaN(faktor) && isFinite(faktor) ? Math.min(Math.max(faktor, 0.001), 50) : 0.05;
+      const alt = w.setTimeout as (...a: unknown[]) => unknown;
+      if (typeof alt !== 'function') return;
+      w.setTimeout = new Proxy(alt, {
+        apply(f, dies, a: unknown[]) {
+          try {
+            if ((verzoegerung === -1 || a[1] === verzoegerung) && muster.test(alsText(a[0]))) {
+              a[1] = (a[1] as number) * faktor;
+            }
+          } catch { /* unlesbarer Rueckruf */ }
+          return Reflect.apply(f, dies, a);
+        },
+      });
+    },
+    'remove-node-text'(args) {
+      ersetzeKnotentext(args[0] ?? '', '', '', ['includes', args[1] ?? '', ...args.slice(2)]);
+    },
+    'trusted-replace-node-text'(args) {
+      ersetzeKnotentext(args[0] ?? '', args[1] ?? '', args[2] ?? '', args.slice(3));
+    },
   };
 
   // Die Kuerzel aus uBlock Origin, damit Listen mit `##+js(aopr, ...)` gehen.
@@ -601,6 +1004,11 @@ export function scriptletLoader(eintraege: ScriptletEintrag[]): void {
     'prevent-xhr': 'no-xhr-if',
     'prevent-fetch': 'no-fetch-if',
     rc: 'remove-class',
+    'nano-stb': 'nano-setTimeout-booster',
+    rmnt: 'remove-node-text',
+    rpnt: 'trusted-replace-node-text',
+    'trusted-rpnt': 'trusted-replace-node-text',
+    'replace-node-text': 'trusted-replace-node-text',
   };
 
   for (const eintrag of eintraege) {
@@ -639,4 +1047,12 @@ export const BEKANNTE_SCRIPTLETS = [
   'no-xhr-if',
   'no-fetch-if',
   'remove-class',
+  'trusted-replace-fetch-response',
+  'trusted-replace-xhr-response',
+  'json-prune-fetch-response',
+  'json-prune-xhr-response',
+  'trusted-prevent-dom-bypass',
+  'nano-setTimeout-booster',
+  'remove-node-text',
+  'trusted-replace-node-text',
 ] as const;

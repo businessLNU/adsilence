@@ -25,6 +25,7 @@
 {"name":"abort-on-property-read","args":["defaultbackgroundimg"]}
 ],
 "4kfilme.de":[
+{"name":"remove-node-text","args":["script","realCookieBanner"]},
 {"name":"set-constant","args":["realCookieBanner","undefined"]}
 ],
 "5asec.pt":[
@@ -110,6 +111,9 @@
 {"name":"remove-class","args":["has-intro-popup","html","stay"]},
 {"name":"remove-class","args":["modal-in","html","stay"]},
 {"name":"remove-class","args":["show-intro-popup","html","stay"]}
+],
+"agilox.net":[
+{"name":"remove-node-text","args":["script","realCookieBanner"]}
 ],
 "agvillagecamarguais.com":[
 {"name":"remove-class","args":["unreadable-display","","stay"]}
@@ -966,6 +970,7 @@
 {"name":"set-constant","args":["realCookieBanner","undefined"]}
 ],
 "frixtender.de":[
+{"name":"remove-node-text","args":["script","realCookieBanner"]},
 {"name":"set-constant","args":["realCookieBanner","undefined"]}
 ],
 "frohreich.de":[
@@ -1239,6 +1244,9 @@
 ],
 "immobilien-skiba.de":[
 {"name":"set-constant","args":["realCookieBanner","undefined"]}
+],
+"immobilise.com":[
+{"name":"remove-node-text","args":["script","/cookie-policy"]}
 ],
 "imprimare3d.com":[
 {"name":"set-constant","args":["realCookieBanner","undefined"]}
@@ -1643,6 +1651,9 @@
 ],
 "milestone66.hu":[
 {"name":"set-constant","args":["cookie_alert_overlay","noopFunc"]}
+],
+"minaprotocol.com":[
+{"name":"remove-node-text","args":["script","realCookieBanner"]}
 ],
 "miriamkreativ.de":[
 {"name":"set-constant","args":["realCookieBanner","undefined"]}
@@ -2130,6 +2141,9 @@
 "rissland-kunststoffe.de":[
 {"name":"set-constant","args":["realCookieBanner","undefined"]}
 ],
+"rittmeisterdestille.de":[
+{"name":"remove-node-text","args":["script","realCookieBanner"]}
+],
 "rockpapershotgun.com":[
 {"name":"set-constant","args":["BrockmanAllowedCookies.functional","true"]},
 {"name":"set-constant","args":["BrockmanAllowedCookies.targeting","true"]}
@@ -2505,6 +2519,9 @@
 ],
 "thehill.com":[
 {"name":"prevent-addEventListener","args":["scroll"]}
+],
+"theintercept.com":[
+{"name":"remove-node-text","args":["script","userData_"]}
 ],
 "theintrinsicperspective.com":[
 {"name":"remove-class","args":["has-intro-popup","html","stay"]},

@@ -46,7 +46,23 @@ const KUERZEL: Record<string, ScriptletName> = {
   'prevent-fetch': 'no-fetch-if',
   rc: 'remove-class',
   'bab-defuser': 'nobab',
+  'nano-stb': 'nano-setTimeout-booster',
+  rmnt: 'remove-node-text',
+  rpnt: 'trusted-replace-node-text',
+  'trusted-rpnt': 'trusted-replace-node-text',
+  'replace-node-text': 'trusted-replace-node-text',
 };
+
+/**
+ * Scriptlets, die Netzwerkantworten oder Seitenskripte UMSCHREIBEN, nimmt uBlock
+ * Origin nur aus vertrauenswuerdigen Listen an (`requiresTrust`) — eine fremde
+ * Liste koennte damit jede Antwort jeder Seite veraendern. Dieselbe Grenze gilt
+ * hier: Nur Quellen mit `vertrauenswuerdig: true` (uBlocks eigene Listen und
+ * unsere) duerfen sie liefern, eigene Regeln aus dem Optionsfeld nicht.
+ */
+export function brauchtVertrauen(name: ScriptletName): boolean {
+  return name.startsWith('trusted-');
+}
 
 /** Langer Name für Name oder Kürzel, sonst null. `.js` am Ende ist egal. */
 export function scriptletName(name: string): ScriptletName | null {
@@ -66,7 +82,11 @@ function schluesselVon(s: Scriptlet): string {
  * zurück; `host#@#+js()` ohne Argumente nimmt alle für den Host zurück.
  * Reihenfolge je Host: wie in der Liste, ohne Doppelte.
  */
-export function zuScriptlets(regeln: Regel[], verworfen: Record<string, number> = {}): Record<string, Scriptlet[]> {
+export function zuScriptlets(
+  regeln: Regel[],
+  verworfen: Record<string, number> = {},
+  optionen: { vertrauenswuerdig?: boolean } = {},
+): Record<string, Scriptlet[]> {
   const jeHost = new Map<string, Eintrag[]>();
   const alleZurueck = new Set<string>();
   const einzelneZurueck = new Map<string, Set<string>>();
@@ -82,6 +102,10 @@ export function zuScriptlets(regeln: Regel[], verworfen: Record<string, number> 
     const name = scriptletName(regel.name);
     if (name === null) {
       zaehle(verworfen, { grund: 'scriptletUnbekannt' });
+      continue;
+    }
+    if (brauchtVertrauen(name) && optionen.vertrauenswuerdig !== true) {
+      zaehle(verworfen, { grund: 'scriptletOhneVertrauen' });
       continue;
     }
     const hosts = regel.domains.filter(hostGueltig);

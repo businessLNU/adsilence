@@ -21,17 +21,26 @@
 {"name":"abort-current-script","args":["fetch","_0x","/^data:/"]},
 {"name":"abort-on-property-write","args":["ai_front"]}
 ],
+"casabasics.es":[
+{"name":"remove-node-text","args":["script","String.fromCharCode"]}
+],
 "casteloforte.com.br":[
 {"name":"abort-current-script","args":["WebSocket","event.data"]}
 ],
 "centerfabril.com.br":[
 {"name":"abort-current-script","args":["WebSocket","event.data"]}
 ],
+"cizitensports.com":[
+{"name":"remove-node-text","args":["script","randomUUID"]}
+],
 "crimsonav.com":[
 {"name":"abort-current-script","args":["atob","new Function(atob("]}
 ],
 "forqueen.cz":[
 {"name":"abort-current-script","args":["WebSocket","event.data"]}
+],
+"gemfellowship.org":[
+{"name":"remove-node-text","args":["script","TextDecoder"]}
 ],
 "https-xhamster.com":[
 {"name":"abort-current-script","args":["fetch","_0x","/^data:/"]},
@@ -48,6 +57,9 @@
 ],
 "kitapsan.com.tr":[
 {"name":"abort-current-script","args":["WebSocket","event.data"]}
+],
+"longhall.consulting":[
+{"name":"remove-node-text","args":["script","/document\\.currentScript\\.remove|0x0/"]}
 ],
 "mebelinovdom.com":[
 {"name":"abort-current-script","args":["WebSocket","event.data"]}
