@@ -1,6 +1,6 @@
 # AdSilence — Free Open-Source Ad Blocker for Chrome & Firefox (Manifest V3)
 
-[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](extension/LICENSE)
+[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/aapplploeajcbogegjgnnfgapdjjmoin)
 [![Firefox Add-ons](https://img.shields.io/badge/Firefox-Add--ons-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/firefox/addon/adsilence/)
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-success)](#manifest-v3-ad-blocker-without-webrequest)
@@ -9,7 +9,7 @@
 
 Built for **Manifest V3** from day one: AdSilence does **not** request the `webRequest` permission. The browser applies the blocking rules itself through `declarativeNetRequest`, so your browsing history never passes through us. A privacy-first **uBlock Origin alternative for Chrome** after the Manifest V3 switch.
 
-This repository contains the complete source code of the browser extension under the **GNU GPL v3**.
+This repository contains the complete source code of the browser extension, version 1.0.3, under the **GNU GPL v3**.
 
 ## Features
 
@@ -34,7 +34,7 @@ This repository contains the complete source code of the browser extension under
 
 ## Measured, not claimed
 
-**100 of 100 points** on [adblock-tester.com](https://adblock-tester.com/) with factory settings (measured on 5 September 2026, version 1.0.0, median of three runs). Full method, all versions and how to repeat the ad blocker test yourself: [adsilence.net/en/adblocker-test](https://adsilence.net/en/adblocker-test)
+**100 of 100 points** on [adblock-tester.com](https://adblock-tester.com/) with factory settings (measured on 5 September 2026, version 1.0.0, median of 3 runs). Full method, all versions and how to repeat the ad blocker test yourself: [adsilence.net/en/adblocker-test](https://adsilence.net/en/adblocker-test)
 
 ## Install
 
@@ -100,7 +100,7 @@ The server behind adsilence.net (accounts, payment, list updates) is not part of
 
 - Website: [adsilence.net](https://adsilence.net)
 - Built releases: [adsilence-chromium](https://github.com/businessLNU/adsilence-chromium) · [adsilence-firefox](https://github.com/businessLNU/adsilence-firefox)
-- Licence: [GNU GPL v3 or later](extension/LICENSE)
+- Licence: [GNU GPL v3 or later](LICENSE)
 
 ---
 
