@@ -131,6 +131,19 @@ export type Marke = {
   name: string;
   /** Die echten registrierbaren Domains, klein geschrieben. */
   domains: string[];
+  /**
+   * Eigene Endungen der Marke (`google` fuer `gemini.google`). Unter einer
+   * solchen Marken-Endung vergibt die Vergabestelle Namen nur an die Marke
+   * selbst – jeder Host darunter gehoert ihr. Nur eintragen, was sicher ist.
+   */
+  tlds?: string[];
+  /**
+   * Ein Verbund vieler selbststaendiger Haeuser unter EINEM Namen (Sparkasse,
+   * Volksbank): Hunderte echte Adressen der Form `sparkasse-hannover.de` oder
+   * `berliner-volksbank.de`, die keine Liste je vollstaendig fuehrt. Siehe
+   * `verbundAdresse()`.
+   */
+  verbund?: boolean;
 };
 
 export type Verdacht = {
@@ -256,6 +269,88 @@ export function registrierbar(host: string): string {
   return ZWEITEILIGE_ENDUNGEN.has(letzteZwei) ? teile.slice(-3).join('.') : letzteZwei;
 }
 
+/**
+ * Endungen, unter denen eine Marke als Laenderadresse NICHT als echt gilt.
+ *
+ * `.tk`, `.ml`, `.ga`, `.cf` und `.gq` wurden jahrelang kostenlos und ohne
+ * Pruefung vergeben und sind die Endungen, unter denen am meisten
+ * nachgebaute Seiten standen. `paypal.tk` bleibt deshalb eine Warnung, auch
+ * wenn es formal eine Laenderadresse ist.
+ */
+const FREIE_LAENDERENDUNGEN = new Set(['tk', 'ml', 'ga', 'cf', 'gq']);
+
+/**
+ * Ist das die Laenderadresse der Marke – `google.fr`, `amazon.co.jp`,
+ * `paypal.me`?
+ *
+ * ── Warum die nicht einzeln in der Liste stehen ────────────────────────────
+ * GEMESSEN am 07.10.2026 mit der Markenliste im Paket: 69 von 83 echten
+ * Adressen der Marken bekamen die Warnung „Diese Adresse taeuscht" – darunter
+ * `google.fr`, `amazon.it`, `zalando.at`, `paypal.me` und `revolut.me`. Regel 4
+ * unten (der Markenname ist ein eigenes Label) traf jede Laenderadresse, die
+ * nicht von Hand eingetragen war, und grosse Marken haben Dutzende davon.
+ *
+ * Deshalb gilt: genau der Name einer echten Domain der Marke, dahinter eine
+ * zweibuchstabige Laenderendung (oder `co.uk`, `com.tr` …), ist die Marke.
+ * Was NICHT darunter faellt und weiter warnt: andere Endungen (`amazon.shop`),
+ * alles mit Zusatz (`amazon-kundenservice.de`), die frei vergebenen Endungen
+ * oben, und jede Aehnlichkeit statt Gleichheit (`paypaI.fr`, Regel 2).
+ */
+function laenderadresse(domain: string, marke: Marke): boolean {
+  const punkt = domain.indexOf('.');
+  if (punkt <= 0) return false;
+  const name = domain.slice(0, punkt);
+  const endung = domain.slice(punkt + 1);
+  const land = endung.split('.').pop()!;
+  const istLand = /^[a-z]{2}$/.test(endung) || ZWEITEILIGE_ENDUNGEN.has(endung);
+  if (!istLand || FREIE_LAENDERENDUNGEN.has(land)) return false;
+  return marke.domains.some((d) => d.split('.')[0] === name);
+}
+
+/**
+ * Woerter, die in einer echten Adresse eines Sparkassen- oder Volksbankhauses
+ * nicht vorkommen, in nachgebauten aber staendig: `sparkasse-sicherheit.de`,
+ * `volksbank-pushtan.de`, `sparkasse-login-portal.de`. Ganze Teile zwischen
+ * Bindestrichen bei den kurzen, Wortanfaenge bei den langen.
+ */
+const KOEDERTEILE = new Set([
+  'login', 'logon', 'signin', 'secure', 'security', 'konto', 'account', 'kunde', 'kunden',
+  'service', 'support', 'hilfe', 'online', 'banking', 'onlinebanking', 'tan', 'app', 'web',
+  'info', 'portal', 'center', 'check', 'update', 'verify', 'mobil', 'mobile', 'neu',
+]);
+const KOEDERANFAENGE = ['sicher', 'verifi', 'pushtan', 'legitim', 'bestaetig', 'freischalt', 'entsperr', 'gesperr', 'sperr', 'aktualis', 'pruef', 'authent', 'zugang'];
+
+/**
+ * Die Adresse eines einzelnen Hauses eines Verbunds: `sparkasse-hannover.de`,
+ * `berliner-sparkasse.de`, `volksbank-mittelhessen.de`.
+ *
+ * GEMESSEN am 07.10.2026: Jede dieser Adressen bekam die Warnung – also die
+ * echte Seite der eigenen Bank, der teuerste Fehler, den dieses Werkzeug
+ * machen kann (Kopf dieser Datei). Eine vollstaendige Liste der rund tausend
+ * Haeuser liegt nicht vor und waere morgen veraltet.
+ *
+ * Deshalb: nur unter `.de`, der Name des Verbunds vorn oder hinten als eigener
+ * Teil, und KEIN Koederwort im Rest. `sparkasse-sicherheit.de` und
+ * `volksbank-pushtan.de` warnen weiter, `sparkasse-hannover.com` auch.
+ * Der Preis, bewusst: Ein Faelscher, der einen Ortsnamen waehlt
+ * (`sparkasse-musterstadt.de`), faellt hier durch.
+ */
+function verbundAdresse(domain: string, marke: Marke): boolean {
+  if (!marke.verbund || !domain.endsWith('.de')) return false;
+  const label = domain.slice(0, -'.de'.length);
+  if (label.includes('.')) return false;
+  const teile = label.split('-');
+  if (teile.length < 2) return false;
+  const namen = marke.domains.map((d) => d.split('.')[0]!);
+  const vorn = namen.includes(teile[0]!);
+  const hinten = namen.includes(teile[teile.length - 1]!);
+  if (!vorn && !hinten) return false;
+  const rest = vorn ? teile.slice(1) : teile.slice(0, -1);
+  return rest.every(
+    (teil) => teil.length >= 2 && !KOEDERTEILE.has(teil) && !KOEDERANFAENGE.some((a) => teil.startsWith(a)),
+  );
+}
+
 /** Gehoert dieser Host der Marke, als Domain selbst oder als Unterdomain? */
 function gehoertZu(host: string, domain: string): boolean {
   return host === domain || host.endsWith(`.${domain}`);
@@ -325,13 +420,20 @@ export function pruefeHost(host: string, marken: readonly Marke[]): Verdacht | n
   const lesbar = entschluesseleHost(roh);
   const klein = lesbar.toLowerCase();
 
+  const domain = registrierbar(klein);
+  const tld = klein.slice(klein.lastIndexOf('.') + 1);
+
   for (const marke of marken) {
     // 1. Es IST die Marke: fertig, nie eine Warnung. Steht vor allem anderen,
     //    damit keine spaetere Regel die echte Seite treffen kann.
     if (marke.domains.some((d) => gehoertZu(klein, d))) return null;
+    // 1b. Ihre eigene Endung (`gemini.google`), ihre Laenderadresse
+    //     (`google.fr`, `paypal.me`) oder ein Haus ihres Verbunds
+    //     (`sparkasse-hannover.de`). Alle drei warnten bis zum 07.10.2026 als
+    //     „taeuschende Adresse".
+    if (marke.tlds?.includes(tld)) return null;
+    if (laenderadresse(domain, marke) || verbundAdresse(domain, marke)) return null;
   }
-
-  const domain = registrierbar(klein);
   // Aus der LESBAREN Form und nicht aus `klein`: `skelett()` schlaegt vor dem
   // Kleinschreiben nach, sonst faellt das grosse I durch.
   const domainSkelett = skelett(lesbar.slice(lesbar.length - domain.length));

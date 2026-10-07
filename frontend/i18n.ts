@@ -170,7 +170,10 @@ export async function ladeOberflaeche(
       if (typeof document === 'undefined') return;
       const wurzel = document.documentElement;
       for (const [name, wert] of Object.entries(thema)) {
-        if (typeof wert === 'string') wurzel.style.setProperty(`--marke-${name}`, wert);
+        // `knopfVon` → `--marke-knopf-von`, wie `alsCssName()` in
+        // `src/modules/theme/farben.ts` beim Ausliefern.
+        const css = name.replace(/[A-Z]/g, (z) => `-${z.toLowerCase()}`);
+        if (typeof wert === 'string') wurzel.style.setProperty(`--marke-${css}`, wert);
       }
       // Arabisch und Farsi laufen von rechts nach links. Ohne dies stünden
       // Felder, Haken und Pfeile spiegelverkehrt zum Text.
