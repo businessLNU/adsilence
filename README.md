@@ -9,7 +9,7 @@
 
 Built for **Manifest V3** from day one: AdSilence does **not** request the `webRequest` permission. The browser applies the blocking rules itself through `declarativeNetRequest`, so your browsing history never passes through us. A privacy-first **uBlock Origin alternative for Chrome** after the Manifest V3 switch.
 
-This repository contains the complete source code of the browser extension, version 1.0.3, under the **GNU GPL v3**.
+This repository contains the complete source code of the browser extension, version 1.0.4, under the **GNU GPL v3**.
 
 ## Features
 
